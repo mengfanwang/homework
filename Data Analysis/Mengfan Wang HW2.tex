@@ -1,0 +1,458 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows} %decision tree
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang} 
+	\title{Optimization Techniques Homework 1} 
+\begin{document}
+	\maketitle 
+	\paragraph{1}
+		\subparagraph{i} The contingency table of the parent is:
+		\begin{equation}
+		\begin{tabular}{|c|c|}
+			\hline
+			 C0&10\\ 
+			 \hline
+			 C1&10\\  
+			 \hline 
+			 \multicolumn{2}{|c|}{Gini = 0.5}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+		The Gini Index of the parent is $Gini(P) = 1 - \sum_j[p(j|t)^2] = 1- (10/20)^2 - (10/20)^2 = 0.5$. When the split was made on Gender, the corresponding table is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Gender}\\
+			\hline
+			& Male & Female\\ \hline
+			 C0&6&4\\ 
+			 \hline
+			 C1&4&6\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.48}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+
+		The Gini Index of Male is: $Gini(Male) = 1 - (6/10)^2-(4/10)^2 = 0.48$. 
+
+		The Gini Index of Female is: $Gini(Female) = 1 - (4/10)^2-(6/10)^2 = 0.48$.
+
+		The Gini Index of children is $Gini(Children) = (10/20)*0.48 + (10/20) *0.48 = 0.48$
+
+		\subparagraph{ii} When the split was made on CarType, there are four kinds of splits:
+
+		1)Multi-way split: The corresponding table is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			&\multicolumn{3}{c|}{CarType}\\
+			\hline
+			& Family & Sports & Luxury\\ \hline
+			 C0&1&8&1\\ 
+			 \hline
+			 C1&3&0&7\\  
+			 \hline 
+			 \multicolumn{4}{|c|}{Gini = 0.163}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+
+		The Gini Index of Family is:$1 - (1/4)^2 - (3/4)^2=0.375$.
+
+		The Gini Index of Sports is: $1 - (8/8)^2 - (0/8)^2=0$.
+
+		The Gini Index of Luxury is: $1 - (1/8)^2 - (7/8)^2=0.219$.
+
+		The Gini Index of children is $Gini(Children) = (4/20)*0.375+(8/20)*0+(8/20)*0.219 = 0.163$. \\[1ex]
+
+		2) Two-way split \{Sports, Luxury\} and \{Family\}: 
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{CarType}\\
+			\hline
+			& Family & {Sports, Luxury}\\ \hline
+			 C0&1&9\\ 
+			 \hline
+			 C1&3&7\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.469}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+
+		The Gini Index of Family is:$1 - (1/4)^2 - (3/4)^2=0.375$.
+
+		The Gini Index of Sports and Luxury is: $1 - (9/16)^2 - (7/16)^2 = 0.492$. 
+
+		The Gini Index of children is $Gini(Children) = (4/20)*0.375+(16/20)*0.492=0.469$. \\[1ex]
+
+		3) Two-way split \{Sports\} and \{Luxury, Family\}:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{CarType}\\
+			\hline
+			& Sports & {Family, Luxury}\\ \hline
+			 C0&8&2\\ 
+			 \hline
+			 C1&0&10\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.169}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+
+		The Gini Index of Sports is: $1 - (8/8)^2 - (0/8)^2=0$.
+
+		The Gini Index of Family and Luxury is: $1-(2/12)^2-(10/12)^2 = 0.278$.
+
+		The Gini Index of children is $Gini(Children) =(8/20)*0+(12/20)*0.278 = 0.169$. \\[1ex]
+
+
+		4) Two-way split \{Luxury\} and \{Sports, Family\}:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{CarType}\\
+			\hline
+			& Luxury & {Sports, Family}\\ \hline
+			 C0&1&9\\ 
+			 \hline
+			 C1&7&3\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.313}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+
+		The Gini Index of Luxury is: $1 - (1/8)^2 - (7/8)^2=0.219$.
+
+		The Gini Index of Sports and Family is: $1-(9/12)^2-(3/12)^2 = 0.375$.
+
+		The Gini Index of children is $Gini(Children) =(8/20)*0.219+(12/20)*0.375 = 0.313$.
+
+	\paragraph{2}
+		\subparagraph{1} For the first level, if the split was made on X, the count matrix is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{X}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&25&25\\ 
+			 \hline
+			 -&25&25\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.5}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+
+		The Gini index of X=1 is $Gini(X=1) = 1 -(25/50)^2 - (25/50)^2 = 0.5$.
+
+		The Gini index of X=0 is $Gini(X=0) = 1 -(25/50)^2 - (25/50)^2 = 0.5$.
+
+		The Gini index of children is $Gini(X) = (50/100)*0.5 +(50/100)*0.5 = 0.5$.\\[1ex]
+
+		If the split was made on Y, the count matrix is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Y}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&30&20\\ 
+			 \hline
+			 -&20&30\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.48}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+
+		The Gini index of Y=1 is $Gini(Y=1) = 1 -(30/50)^2 - (20/50)^2 = 0.48$.
+
+		The Gini index of Y=0 is $Gini(Y=0) = 1 -(20/50)^2 - (30/50)^2 = 0.48$.
+
+		The Gini index of children is $Gini(Y) = (50/100)*0.48 +(50/100)*0.48 = 0.48$.\\[1ex]
+
+		If the split was made on Z, the count matrix is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Z}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&35&15\\ 
+			 \hline
+			 -&10&40\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.374}\\
+			 \hline
+		\end{tabular}
+		\end{equation}
+
+		The Gini index of Z=1 is $Gini(Z=1) = 1 -(35/45)^2 - (10/45)^2 = 0.346$.
+
+		The Gini index of Z=0 is $Gini(Z=0) = 1 -(15/55)^2 - (40/55)^2 = 0.397$.
+
+		The Gini index of children is $Gini(Z) = (45/100)*0.346 +(55/100)*0.397 = 0.374$.
+
+		As the result, Z is chosen as the first level criterion, because it has the smallest Gini index.\\[1ex]
+
+		For the second level, if the split was made on X, the count matrix is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{X}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&25&10\\ 
+			 \hline
+			 -&0&10\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.222}\\
+			 \hline
+		\end{tabular}
+		\ (Z = 1) \qquad
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{X}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&0&15\\ 
+			 \hline
+			 -&25&15\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.273}\\
+			 \hline
+		\end{tabular}
+		\ (Z = 0)
+		\end{equation}
+
+		The Gini index of Z=1 is $Gini(X=1|Z=1) = 1 -(25/25)^2 - (0/25)^2 = 0$, and $Gini(X=0|Z=1) = 1 -(10/20)^2 - (10/20)^2 = 0.5$. The Gini index of this children is $(25/45)*0+(20/45)*0.5 = 0.222$.
+
+		The Gini index of Z=0 is $Gini(X=1|Z=0) = 1 -(0/25)^2 - (25/25)^2 = 0$, and $Gini(X=0|Z=0) = 1 -(15/30)^2 - (15/30)^2 = 0.5$. The Gini index of this children is $(25/55)*0+(30/55)*0.5=0.273$.
+
+		If the split was made on Y, the count matrix is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Y}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&15&20\\ 
+			 \hline
+			 -&0&10\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.296}\\
+			 \hline
+		\end{tabular}
+		\ (Z = 1) \qquad
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Y}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&15&0\\ 
+			 \hline
+			 -&20&20\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.312}\\
+			 \hline
+		\end{tabular}
+		\ (Z = 0)
+		\end{equation}
+
+		The Gini index of Z=1 is $Gini(Y=1|Z=1) = 1 -(15/15)^2 - (0/15)^2 = 0$, and $Gini(Y=0|Z=1) = 1 -(20/30)^2 - (10/30)^2 = 0.444$. The Gini index of this children is $(15/45)*0+(30/45)*0.444 = 0.296$.
+
+		The Gini index of Z=0 is $Gini(Y=1|Z=0) = 1 -(15/35)^2 - (20/35)^2 = 0.490$, and $Gini(Y=0|Z=0) = 1 -(0/20)^2 - (20/20)^2 = 0$. The Gini index of this children is $(35/55)*0.490+(20/55)*0=0.312$.
+
+		As a result, for both part, X is chosen as the second level criterion, because they have smaller Gini indexes.\\[1ex]
+
+		So the decision tree is:\\
+		% 定义基本形状
+		\tikzstyle{results}=[ellipse ,text centered,draw=black]
+		\tikzstyle{decisions} =[rectangle, rounded corners,text centered, draw = black]
+		% 箭头形式
+		\tikzstyle{arrow} = [-,>=stealth]
+
+		\begin{tikzpicture}[node distance=1cm]
+
+		\node[decisions,xshift=10cm](rootnode){ Z };
+
+		\node[decisions,below of=rootnode,yshift=-0.5cm,xshift=-1cm](a){X};
+		\node[decisions,below of=rootnode,yshift=-0.5cm,xshift=1cm](b){X};
+
+		\node[results,below of=a,yshift=-0.5cm,xshift=-1cm](result1){+};
+		\node[results,below of=a,yshift=-0.5cm,xshift=0.5cm](result2){$-$};
+		\node[results,below of=a,yshift=-0.5cm,xshift=1.5cm](result3){$-$};
+		\node[results,below of=a,yshift=-0.5cm,xshift=3cm](result4){+};
+
+		\draw[arrow](rootnode) -- node [left,font=\small] {Z=1} (a);
+		\draw[arrow](rootnode) -- node [right,font=\small] {Z=0} (b);
+		\draw[arrow](a) -- node [left,font=\small] {X=1} (result1);
+		\draw[arrow](a) -- node [left,font=\small] {X=0} (result2);
+		\draw[arrow](b) -- node [left,font=\small] {X=1} (result3);
+		\draw[arrow](b) -- node [right,font=\small] {X=0} (result4);
+		\end{tikzpicture}
+
+		The overall training error rate of the induced tree is $(10+15)/100 = 0.25$.
+
+		\subparagraph{2} For the second level, if the split was made on Y, the count matrix is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Y}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&5&20\\ 
+			 \hline
+			 -&20&5\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.32}\\
+			 \hline
+		\end{tabular}
+		\ (X = 1) \qquad
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Y}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&25&0\\ 
+			 \hline
+			 -&0&25\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0}\\
+			 \hline
+		\end{tabular}
+		\ (X = 0)
+		\end{equation}
+		The Gini index of X=1 is $Gini(Y=1|X=1) = 1 -(5/25)^2 - (20/25)^2 = 0.32$, and $Gini(Y=0|X=1) = 1 -(20/25)^2 - (5/25)^2 = 0.32$. The Gini index of this children is $(25/50)*0.32+(25/50)*0.32 = 0.32$.
+
+		The Gini index of Z=0 is $Gini(Y=1|X=0) = 1 -(25/25)^2 - (0/25)^2 = 0$, and $Gini(Y=0|X=0) = 1 -(0/25)^2 - (25/25)^2 = 0$. The Gini index of this children is $(25/50)*0+(25/50)*0=0$.
+
+		if the split was made on Z, the count matrix is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Z}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&25&0\\ 
+			 \hline
+			 -&0&25\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0}\\
+			 \hline
+		\end{tabular}
+		\ (X = 1) \qquad
+		\begin{tabular}{|c|c|c|}
+			\hline
+			&\multicolumn{2}{c|}{Z}\\
+			\hline
+			& 1 & 0\\ \hline
+			 +&10&15\\ 
+			 \hline
+			 -&10&15\\  
+			 \hline 
+			 \multicolumn{3}{|c|}{Gini = 0.5}\\
+			 \hline
+		\end{tabular}
+		\ (X = 0)
+		\end{equation}
+
+		The Gini index of X=1 is $Gini(Z=1|X=1) = 1 -(25/25)^2 - (0/25)^2 = 0$, and $Gini(Z=0|X=1) = 1 -(0/25)^2 - (25/25)^2 = 0$. The Gini index of this children is $(25/50)*0+(25/50)*0=0$.
+
+		The Gini index of Z=0 is $Gini(Z=1|X=0) = 1 -(10/20)^2 - (10/20)^2 = 0.5$, and $Gini(Z=0|X=0) = 1 -(15/30)^2 - (15/30)^2 = 0.5$. The Gini index of this children is $(20/50)*0.5+(30/50)*0.5=0.5$.
+
+		As a result, when X=1, Z is chosen as the second level criterion, and when X=0, Y is chosen as the second level criterion, because they have smaller Gini indexes.\\[1ex]
+
+		So the decision tree is:\\
+		% 定义基本形状
+		\tikzstyle{results}=[ellipse ,text centered,draw=black]
+		\tikzstyle{decisions} =[rectangle, rounded corners,text centered, draw = black]
+		% 箭头形式
+		\tikzstyle{arrow} = [-,>=stealth]
+
+		\begin{tikzpicture}[node distance=1cm]
+
+		\node[decisions,xshift=10cm](rootnode){X};
+
+		\node[decisions,below of=rootnode,yshift=-0.5cm,xshift=-1cm](a){Z};
+		\node[decisions,below of=rootnode,yshift=-0.5cm,xshift=1cm](b){Y};
+
+		\node[results,below of=a,yshift=-0.5cm,xshift=-1cm](result1){+};
+		\node[results,below of=a,yshift=-0.5cm,xshift=0.5cm](result2){$-$};
+		\node[results,below of=a,yshift=-0.5cm,xshift=1.5cm](result3){$+$};
+		\node[results,below of=a,yshift=-0.5cm,xshift=3cm](result4){$-$};
+
+		\draw[arrow](rootnode) -- node [left,font=\small] {X=1} (a);
+		\draw[arrow](rootnode) -- node [right,font=\small] {X=0} (b);
+		\draw[arrow](a) -- node [left,font=\small] {Z=1} (result1);
+		\draw[arrow](a) -- node [left,font=\small] {Z=0} (result2);
+		\draw[arrow](b) -- node [left,font=\small] {Y=1} (result3);
+		\draw[arrow](b) -- node [right,font=\small] {Y=0} (result4);
+		\end{tikzpicture}
+
+
+		The overall training error rate of the induced tree is 0.
+
+		\subparagraph{3} The result of Q2.1 is gotten by the greedy heuristic. However, the the overall training error rate is much higher than the result of Q2.2, which is gotten by setting X as the first splitting attribute. In conclusion, the greedy heuristic method's solution is a local optimal solution rather than a global optimal solution.
+
+	\paragraph{3}
+		\subparagraph{1} $0 \leq p(x)\leq 1$, which is the relative frequency. When $p(x) \not= 0$,  $log\ p(x) \leq 0$, and $-p(x)\ log\ p(x) \geq 0$. When $p(x) = 0$, $-p(x)\ log\ p(x) = 0$. In conclusion, $-p(x)\ log\ p(x) \geq 0$ all the time.
+
+		\subparagraph{2} Suppose there are $i$ classifications totally, the relative frequency of multi-way split is $p(j_a|x_b)$, while $j$ represents classifications and $x$ represents the split, $a=1\ to\ i$ and $b=1\ to\ 3$. The entropy of a individual children is: $Entropy(x_b) = - \sum\limits_{a=1}^{i}p(j_a|x_b)log\ p(j_a|x_b)$. So the the average entropy is:
+		\begin{align}
+			Entropy(multi-way) =& \sum\limits_{b=1}^{3}\frac{n_b}{n}Entropy(x_b)\\
+			=& - \sum\limits_{b=1}^{3}\frac{n_b}{n}\sum\limits_{a=1}^{i}p(j_a|x_b)log\ p(j_a|x_b),
+		\end{align}
+		while $n_b$ is the number of records with $X = x_b$ and $n$ is the number of all records in node $X$.
+
+		Suppose a binary split is \{$x_1$\} and \{$x_2$, $x_3$\}. The relative frequency of the binary split is $p(j_a|x_1)$ and $p(j_a|x_{23})$. The average entropy is:
+		\begin{align}
+			Entropy(binary-way) 
+			=& - (\frac{n_1}{n}\sum\limits_{a=1}^{i}p(j_a|x_1)log\ p(j_a|x_1)+\frac{n_2+n_3}{n}\sum\limits_{a=1}^{i}p(j_a|x_{23})log\ p(j_a|x_{23}))
+		\end{align}
+		So, 
+		\begin{align}
+			&Entropy(multi-way)-Entropy(binary-way)\\
+			&=  - \sum\limits_{b=1}^{3}\frac{n_b}{n}\sum\limits_{a=1}^{i}p(j_a|x_b)log\ p(j_a|x_b)+ (\frac{n_1}{n}\sum\limits_{a=1}^{i}p(j_a|x_1)log\ p(j_a|x_1)+\frac{n_2+n_3}{n}\sum\limits_{a=1}^{i}p(j_a|x_{23})log\ p(j_a|x_{23}))\\
+			&= -\frac{n_2}{n}\sum\limits_{a=1}^{i}p(j_a|x_2)log\ p(j_a|x_2) -\frac{n_3}{n}\sum\limits_{a=1}^{i}p(j_a|x_3)log\ p(j_a|x_3) +\frac{n_2+n_3}{n}\sum\limits_{a=1}^{i}p(j_a|x_{23})log\ p(j_a|x_{23})\\
+		\end{align}
+		According to Gibbs‘ inequality, we have:
+		\begin{align}
+			-(\frac{n_2}{n}\sum\limits_{a=1}^{i}p(j_a|x_2)log\ p(j_a|x_2) +\frac{n_3}{n}\sum\limits_{a=1}^{i}p(j_a|x_3)log\ p(j_a|x_3))\\
+			\leq -(\frac{n_2}{n}\sum\limits_{a=1}^{i}p(j_a|x_2)log\ p(j_a|x_{23}) +\frac{n_3}{n}\sum\limits_{a=1}^{i}p(j_a|x_3)log\ p(j_a|x_{23}))
+		\end{align}
+		so,
+		\begin{align}
+			&Entropy(multi-way)-Entropy(binary-way)\\
+			&\leq -(\frac{n_2}{n}\sum\limits_{a=1}^{i}p(j_a|x_2)log\ p(j_a|x_{23}) +\frac{n_3}{n}\sum\limits_{a=1}^{i}p(j_a|x_3)log\ p(j_a|x_{23}))+\frac{n_2+n_3}{n}\sum\limits_{a=1}^{i}p(j_a|x_{23})log\ p(j_a|x_{23})\\
+			&=\sum\limits_{a=1}^{i}(\frac{n_2+n_3}{n}p(j_a|x_{23})-\frac{n_2}{n}p(j_a|x_2)-\frac{n_3}{n}p(j_a|x_3))log\ p(j_a|x_{23})
+		\end{align}
+		while $p(j_a|x_{23})=\frac{n_{ja|x2}+n_{ja|x3}}{n_2+n_3}$, $p(j_a|x_2) = \frac{n_{ja|x2}}{n_2}$, and $p(j_a|x_3) = \frac{n_{ja|x3}}{n_3}$, $n_{ja|xb}$ is the number of records belong to ${j=a,x=b}$. So,
+		\begin{align}
+			&Entropy(multi-way)-Entropy(binary-way)\\
+			&\leq \sum\limits_{a=1}^{i}(\frac{n_2+n_3}{n}p(j_a|x_{23})-\frac{n_2}{n}p(j_a|x_2)-\frac{n_3}{n}p(j_a|x_3))log\ p(j_a|x_{23})\\
+			&= \sum\limits_{a=1}^{i}(\frac{n_2+n_3}{n}\frac{n_{ja|x2}+n_{ja|x3}}{n_2+n_3}-\frac{n_2}{n}\frac{n_{ja|x2}}{n_2}-\frac{n_3}{n}\frac{n_{ja|x3}}{n_3})log\ p(j_a|x_{23})\\
+			&=\sum\limits_{a=1}^{i}(\frac{n_{ja|x2}+n_{ja|x3}}{n}-\frac{n_{ja|x2}}{n_2}-\frac{n_{ja|x3}}{n_3})log\ p(j_a|x_{23})\\
+			&=0
+		\end{align}
+
+		Other binary split methods can be proved in a similar way. In conclusion,  the average entropy of the successors for node X in a multi-way split is always smaller than or equal to the average entropy of the successors of node X in a binary split. 
+
+
+
+\end{document}
