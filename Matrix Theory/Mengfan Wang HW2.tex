@@ -1,0 +1,119 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsfonts,amssymb} %空心字符
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang} 
+	\title{Matrix Theory Homework 2} 
+\begin{document}
+	\maketitle 
+	\paragraph{1}
+		\subparagraph{1} Because $\mathbf{A},\mathbf{B} \in \mathbb{R}^{n\times n}$ are upper triangular matrices, the $1_{st}$ to $i-1_{th}$ entries in the $i_{th}$ row and $j+1_{th}$ to $n_{th}$ entries in the $j_{th}$ column are zeros. Suppose $\mathbf{C} =[c_{ij}]= \mathbf{AB}$:
+		\begin{align}
+			c_{ij} =& \sum\limits_{l=1}^{n}a_{il}b_{lj}\\ =& \sum\limits_{l=1}^{i-1}a_{il}b_{lj} + \sum\limits_{l=i}^{n}a_{il}b_{lj}
+		\end{align}
+
+		When $i>j$, for the first part of the equation, $a_{il} = 0$, because $l \leq i-1$. And for the second part of the equation, $b_{lj}=0$, because $l \geq i \geq j+1$. As a result, $c_{ij} =0$ when $i>j$. $\mathbf{AB}$ is a upper triangular matrix.
+
+	\paragraph{2} Solve the equations of system $\mathbf{Ax} = \mathbf{0}$, get:
+	\begin{equation}
+		\mathbf{x} = t*\left( \begin{array}{c} 1 \\-1\\2
+		\end{array}\right),
+ 	\end{equation}
+ 	while $t$ is the free parameter. So the basis of $Ker(\mathbf{A})$ is $[1\ -1\ 2]^t$.
+ 	Suppose $\mathbf{Ax} = [\mathbf{a}_1\ \mathbf{a}_2\ \mathbf{a}_3]$, then $Ran(\mathbf{A}) = span(\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3)$. $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ is not linearly independent because $\mathbf{a}_1-\mathbf{a}_2+2\mathbf{a}_3 = \mathbf{0}$. But $\mathbf{a}_1,\mathbf{a}_3$ is linearly independent because the only solution of $\alpha\mathbf{a}_1+\beta\mathbf{a}_3=0$ is $\alpha = 0, \beta = 0$. Thus $span(\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3)=  span(\mathbf{a}_1,\mathbf{a}_3)$, and the bases of $Ran(\mathbf{A})$ are $[1\ 2\ 3]^t$ and $[1\ 1\ 1]^t$.
+
+ 	\paragraph{3} $\mathbf{A}$ can be changed to row echelon form firstly by a a combination of elementary row operations:
+ 	\begin{align}
+ 		Row\ 2 &=  Row\ 2 - 3*Row\ 1\\
+ 		Row\ 3 &= Row\ 3 - 2*Row\ 1\\
+ 		Row\ 3 &= Row\ 3 - Row\ 2\\
+ 		Row\ 2 &= - Row\ 2
+ 	\end{align}
+
+ 	And construct the matrix  $\mathbf{P}$ to accomplish these operations:
+ 	\begin{equation}
+ 		 \mathbf{P} = \left[ \begin{array}{ccc} 1 & 0 & 0 \\3&-1&0\\1&-1&1
+		\end{array}\right],
+ 	\end{equation}
+ 	then
+ 	\begin{equation}
+ 		\mathbf{B} = \mathbf{PA} = \left[ \begin{array}{cccc} 1 & 2 & 2&0 \\0&1&5&-1\\ 0 & 0&0&0
+		\end{array}\right]
+ 	\end{equation}
+   	$\mathbf{B}$ can be changed to $\mathbf{PAQ}$ by a a combination of elementary column operations:
+   	\begin{align}
+   		Column\ 2 &= Column\ 2 -2*Column\ 1 \\
+   		Column\ 3 &= Column\ 3 -2*Column\ 1 \\
+   		Column\ 3 &= Column\ 3 -5*Column\ 2 \\
+   		Column\ 4 &= Column\ 4 +Column\ 2
+   	\end{align}
+   	Construct the matrix $\mathbf{Q}$ to accomplish these column operations:
+   	\begin{equation}
+   		\mathbf{Q} = \left[ \begin{array}{cccc} 1&-2&8&-2\\0&1&-5&1\\0&0&1&0\\0&0&0&1
+		\end{array}\right],
+   	\end{equation}
+   	so that
+   	\begin{equation}
+   		\mathbf{C} = \mathbf{BQ} = \mathbf{PAQ} = \left[ \begin{array}{cccc} 1 & 0& 0&0 \\0&1&0&0\\ 0 & 0&0&0
+   		\end{array}\right]
+   	\end{equation}
+
+   	\subparagraph{4} Premise: $p$ should not be 0.
+   	From Problem 3 we got the row echelon form of $\mathbf{A}$: $\mathbf{B} = \mathbf{PA}$. So $\mathbf{A}$ can be represented by $\mathbf{A} = \mathbf{P}^{-1}\mathbf{B}$. Then we multiply the first two columns of $\mathbf{P}^{-1}$, regarded as $\mathbf{X}$, by the fist two rows of $\mathbf{B}$, regarded as $\mathbf{Y}^t$:
+   	\begin{equation}
+   		\mathbf{XY}^t = \left[ \begin{array}{cc} 1 & 0\\3 &-1\\2 & -1
+   		\end{array}\right] * \left[ \begin{array}{cccc} 1 & 2 &2 &0\\0 & 1 &5&-1
+   		\end{array}\right] = \left[ \begin{array}{cccc} 1 & 2 &2 &0\\3 & 5 &1&1\\2&3&-1&1 
+   		\end{array}\right] = \mathbf{A}
+   	\end{equation}
+
+   	Generalized: Suppose $m\geq n$. If $p = n$, $\mathbf{A}$ can be factored as $\mathbf{A} = \mathbf{AI}_n$, while $\mathbf{A} \in \mathbb{R}^{m\times p}$ and $\mathbf{I}^t_n \in \mathbb{R}^{n\times p}$. If $p < n$, $\mathbf{A}$ can be changed to row echelon form $\left[ \begin{array}{c} \mathbf{Y}^t\\ \mathbf{0}
+   		\end{array} \right]$, while $ \mathbf{Y} \in \mathbb{R}^{n\times p}$, and the elementary row operations can be represented as a nonsingular matrix $\mathbf{P} \in \mathbb{R}^{m\times m}$. $\mathbf{P}^{-1}$ can be divided into $\mathbf{P}^{-1} = [\mathbf{X}\ \mathbf{H}]$, while $ \mathbf{X} \in \mathbb{R}^{m\times p}$ and $ \mathbf{H} \in\mathbb{R}^{m\times m-p}$. Thus:
+   		\begin{equation}
+   			\mathbf{A} = \mathbf{P}^{-1}\left[ \begin{array}{c} \mathbf{Y}^t\\ \mathbf{0}
+   		\end{array} \right] = [\mathbf{X}\ \mathbf{H}]*\left[ \begin{array}{c} \mathbf{Y}^t\\ \mathbf{0}
+   		\end{array} \right] = \mathbf{XY}^t + \mathbf{H0}= \mathbf{XY}^t
+   		\end{equation}
+   		If $m<n$, then $\mathbf{A}^t \in \mathbb{R}^{n\times m}$ can factored by this method: $\mathbf{A}^t = \mathbf{YX}^t$, while $\mathbf{Y} \in \mathbb{R}^{n\times p}$ and $\mathbf{X} \in \mathbb{R}^{m\times p}$. And $\mathbf{A} = (\mathbf{YX}^t)^t = \mathbf{XY}^t$.
+
+   	\paragraph{5} 
+   		\subparagraph{a} Construct matrix $\mathbf{C}$:
+   		\begin{equation}
+   			\mathbf{C} = \mathbf{PMQ} = \left[ \begin{array}{cc} \mathbf{I}& \mathbf{I}\\ \mathbf{0} & \mathbf{I} 
+   		\end{array} \right]\left[ \begin{array}{cc} \mathbf{A}& \mathbf{0}\\ \mathbf{0} & \mathbf{B} 
+   		\end{array} \right]\left[ \begin{array}{cc} -\mathbf{B}& \mathbf{I}\\ \mathbf{A} & \mathbf{I} 
+   		\end{array} \right] = \left[ \begin{array}{cc} \mathbf{0}& \mathbf{A+B}\\ \mathbf{AB} & \mathbf{B}
+   		\end{array} \right]
+   		\end{equation}
+   		$rank(\mathbf{C})\leq min[rank(\mathbf{P}),rank(\mathbf{M}),rank(\mathbf{Q})]\leq rank(\mathbf{M})$, which will be proved in Problem 5.(b).
+   		So we have:
+   		\begin{align}
+   			rank(\mathbf{M}) &= rank(\left[ \begin{array}{cc} \mathbf{A}& \mathbf{0}\\ \mathbf{0} & \mathbf{B} 
+   		\end{array} \right]) = rank(\mathbf{A})+rank(\mathbf{B}) \\ &\geq rank(\mathbf{C}) = rank(\left[ \begin{array}{cc} \mathbf{0}& \mathbf{A+B}\\ \mathbf{AB} & \mathbf{B}
+   		\end{array} \right])\\
+   		& = rank(\mathbf{A+B})+ rank([\mathbf{AB}\ \mathbf{B}])\\ 
+   		& \geq rank(\mathbf{A+B})
+   		\end{align}
+   		In conclusion, $ rank(\mathbf{A})+rank(\mathbf{B})\geq rank(\mathbf{A+B})$.
+
+   		\subparagraph{b} Firstly, we will show $rank(\mathbf{A}) = rank(\mathbf{A}^t)$ for all matrices. 
+
+   		Suppose $\mathbf{A} \in \mathbb{R}^{m\times n}$ and has rank $p$. If $p=0$, it's obvious that $rank(\mathbf{A}) = rank(\mathbf{A}^t) = 0$. Otherwise, $\mathbf{A}$ can be factored as $\mathbf{A} = \mathbf{XY}^t$, according to Problem 4, so $\mathbf{A}^t = \mathbf{YX}^t$. Suppose $\mathbf{A}^t = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]$ and $\mathbf{Y} = [\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}]$, while $\mathbf{a}$ and $\mathbf{y}$ are column vectors. Then $ [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]$ can be represented by a linear combination of $[\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}]$ with coefficients $\mathbf{X}^t$. In other words, $span([\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]) \subset span([\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}])$, so $rank(\mathbf{A}^t) \leq rank(\mathbf{Y}) = p = rank(\mathbf{A})$. It's same to $\mathbf{B} = \mathbf{A}^t$: $rank(\mathbf{B}^t) = rank(\mathbf{A}) \leq rank(\mathbf{B}) = rank(\mathbf{A}^t)$. The only solution is $rank(\mathbf{A}^t) = rank(\mathbf{A})$.\\[1ex]
+
+   		To this proposition, suppose $\mathbf{A} = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}] \in \mathbb{R}^{m\times l}$ and $\mathbf{B} = [\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]^t \in \mathbb{R}^{l\times n}$ , while $\mathbf{a}$ are column vectors and $\mathbf{b}$ are row vectors. $\mathbf{AB} = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}]*\mathbf{B}$, so column vectors of $\mathbf{AB}$ can be represented by a linear combination of $[\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}]$ with coefficients $\mathbf{B}$. So, $span(all\ column\ vectors\ of\ \mathbf{AB}) \subset span([\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}])$, and $rank(\mathbf{AB})\leq rank(\mathbf{A})$.
+
+   		Similarly, $(\mathbf{AB})^t = \mathbf{B}^t\mathbf{A}^t = [\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]*\mathbf{A}^t$, so column vectors of $\mathbf{AB}$ can be represented by a linear combination of $[\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]$ with coefficients $\mathbf{A}^t$. So, $span(all\ column\ vectors\ of\ (\mathbf{AB})^t) \subset span([\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}])$, and $rank((\mathbf{AB})^t)\leq rank(\mathbf{B}^t)$. Therefore, $rank(\mathbf{AB})\leq rank(\mathbf{B})$.
+
+   		In conclusion,  $rank(\mathbf{AB})\leq min[rank(\mathbf{A}),rank(\mathbf{B})]$.
+
+
+
+
+
+\end{document}
