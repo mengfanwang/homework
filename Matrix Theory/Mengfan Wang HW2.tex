@@ -13,12 +13,71 @@
 \begin{document}
 	\maketitle 
 	\paragraph{1}
-		\subparagraph{1} Because $\mathbf{A},\mathbf{B} \in \mathbb{R}^{n\times n}$ are upper triangular matrices, the $1_{st}$ to $i-1_{th}$ entries in the $i_{th}$ row and $j+1_{th}$ to $n_{th}$ entries in the $j_{th}$ column are zeros. Suppose $\mathbf{C} =[c_{ij}]= \mathbf{AB}$:
+		\subparagraph{a} Because $\mathbf{A},\mathbf{B} \in \mathbb{R}^{n\times n}$ are upper triangular matrices, the $1_{st}$ to $i-1_{th}$ entries in the $i_{th}$ row and $j+1_{th}$ to $n_{th}$ entries in the $j_{th}$ column are zeros. Suppose $\mathbf{C} =[c_{ij}]= \mathbf{AB}$:
 		\begin{align}
 			c_{ij} =& \sum\limits_{l=1}^{n}a_{il}b_{lj}\\ =& \sum\limits_{l=1}^{i-1}a_{il}b_{lj} + \sum\limits_{l=i}^{n}a_{il}b_{lj}
 		\end{align}
 
 		When $i>j$, for the first part of the equation, $a_{il} = 0$, because $l \leq i-1$. And for the second part of the equation, $b_{lj}=0$, because $l \geq i \geq j+1$. As a result, $c_{ij} =0$ when $i>j$. $\mathbf{AB}$ is a upper triangular matrix.
+
+		Similarly, if $\mathbf{A},\mathbf{B} \in \mathbb{R}^{n\times n}$ are lower triangular matrices, $\mathbf{AB}$ is also lower triangular.
+
+		\subparagraph{b} Firstly, show the diagonal of $\mathbf{A}$ doesn't consist zeros. If $a_{kk}$ is the last entry on the diagonal equaling to zero:
+		\begin{equation}
+			\mathbf{A} = \left[ \begin{array}{ccccccc} a_{11} & a_{12} & \cdots &a_{1k}&a_{1(k+1)} &\cdots &a_{1n}\\
+			0&a_{22}&\cdots&a_{2k}&a_{2(k+1)}&\cdots &a_{2n}\\
+			&&\vdots\\
+			0&0&\cdots&0&a_{k(k+1)}&\cdots &a_{kn}\\
+			0&0&\cdots&0&a_{(k+1)(k+1)}&\cdots &a_{(k+1)n}\\
+			&&\vdots\\
+			0&0&\cdots&0&0&\cdots &a_{nn}\\
+		\end{array}\right]
+		\end{equation}
+		The system of equations $\mathbf{Ax}=\mathbf{0}$ should be:
+		\begin{align}
+			a_{nn}x_n = 0\\
+			a_{(n-1)n}x_n+a_{(n-1)(n-1)}x_{n-1}= 0\\
+			\vdots\\
+			a_{kn}x_n+a_{k(n-1)}x_{n-1} \cdots + a_{kk}x_k = 0\\
+			\vdots
+		\end{align}
+		The solution is $x_n=x_{n-1} \cdots x_{k+1} = 0$, but $x_k$ is a free parameter and can choose any value, because $a_{kk}=0$. It means $\mathbf{A}$ is not invertible, which violates the condition. So the diagonal of $\mathbf{A}$ is all nonzero. The same to lower triangular matrices. 
+
+		Proof: Suppose $\mathbf{A} = [a_{ij}]$, $\mathbf{B} = [b_{ij}]$, and $\mathbf{C} = [c_{ij}]=\mathbf{AB}$. Because $\mathbf{B}$ is in row echelon form, the last nonzero entry in each column is at the $i_{th}$ row and the $j_{th}$ only when $i\leq j$. Entries in $\mathbf{C}$ can be calculated by:
+		\begin{align}
+			c_{ij} =& \sum\limits_{l=1}^{n}a_{il}b_{lj}\\
+			=& \sum\limits_{l=1}^{i-1}a_{il}b_{lj} + a_{ii}b_{ij} + \sum\limits_{l=i+1}^{n}a_{il}b_{lj}
+		\end{align}
+		Suppose $b_{ij}$ is the last nonzero entry in the $j_{th}$ column. Because $\mathbf{A}$ is upper triangular, $a_{il} = 0$ when $l\leq i-1$; and because $b_{ij}$ is the last nonzero entry in the $j_{th}$ column, $b_{lj} = 0$ when $l\geq i+1$. So $c_{ij} = a_{ii}b_{ij}$, which is nonzero because $a_{ii}$ and $b_{ij}$ are nonzero. For any entry $c_{mj}$ if $m>i$:
+		\begin{align}
+			c_{mj} =& \sum\limits_{l=1}^{n}a_{ml}b_{lj}\\
+			=& \sum\limits_{l=1}^{m-1}a_{ml}b_{lj} + \sum\limits_{l=m}^{n}a_{ml}b_{lj}
+		\end{align}
+		 Because $\mathbf{A}$ is upper triangular, $a_{ml} = 0$ when $l\leq m-1$; and because $b_{ij}$  is the last nonzero entry, $b_{lj} = 0$ when $l\geq m \geq i+1$. So $c_{mj} = 0$. Thus, for any column, the last nonzero entry's position doesn't changed from $\mathbf{B}$ to $\mathbf{C}$. So, $\mathbf{AB}$  is also in row echelon form with pivots in the same locations as $\mathbf{B}$.
+
+		\subparagraph{c}  Suppose $\mathbf{B} = \mathbf{A}^{-1}$ is not lower triangular and $b_{ij}$ is the first nonzero entry in the $j_{th}$ column with $i<j$. Suppose $\mathbf{C} = [c_{pq}] = \mathbf{AB}$, then:
+		\begin{align}
+			c_{ij} = & \sum\limits_{l=1}^{n}a_{il}b_{lj}\\
+			= &\sum\limits_{l=1}^{i-1} a_{il}b_{lj} + a_{ii}b_{ij} + \sum\limits_{l=i+1}^{n} a_{il}b_{lj} 
+		\end{align}
+		The first part of the equation is zero, because $b_{ij}$ is the first no zero entry, and $b_{1j} = b_{2j} = \cdots = b_{(i-1)j} =0$. The third part should also be zero, because $a_{il} = 0$ when $l\geq i+1$. Because $ \mathbf{A}$ is invertible, $a_{ii}$ is not zero, which was proved in part(b).  As a result, $c_{ij} = a_{ii}b_{ij}$, which is not zero. However, $\mathbf{C} = \mathbf{AB} = \mathbf{AA}^{-1} = \mathbf{I}$, so $c_{ij}$ should be zero because $i \not= j$. It violates the assumption, so $\mathbf{A}^{-1}$ must be a lower triangular matrix.
+
+		Similarly, $\mathbf{A}^{-1}$ is also upper triangular if $\mathbf{A}$ is invertible and upper triangular.
+
+		\subparagraph{d} If $\mathbf{C} = \mathbf{L}_1\mathbf{U}_1 = \mathbf{L}_2\mathbf{U}_2$, suppose $\mathbf{D} = \mathbf{U}_1\mathbf{U}_2^{-1} = \mathbf{L}_1^{-1}\mathbf{L}_2$ because all of them are invertible. Otherwise, $\mathbf{C}$ is not invertible. From Problem 1(c) we can know $\mathbf{U}_2^{-1}$ is upper triangular and $\mathbf{L}_1^{-1}$ is lower triangular. From Problem 1(a) we can know $\mathbf{U}_1\mathbf{U}_2^{-1}$ is upper triangular because $\mathbf{U}_1$ and $\mathbf{U}_2^{-1}$ are upper triangular; and $ \mathbf{L}_1^{-1}\mathbf{L}_2$ is lower triangular because $\mathbf{L}_1^{-1}$ and $\mathbf{L}_2$ are lower triangular. As a result, $\mathbf{D}$ is not only upper triangular but also lower triangular, so only the diagonal of $\mathbf{D}$ can be nonzero. 
+
+		Now we will show if $\mathbf{L}$ is unit triangular, $\mathbf{M} = \mathbf{L}^{-1}$ is also unit lower triangular. Because $\mathbf{I} = \mathbf{LL}^{-1}$ , we have:
+		\begin{equation}
+			\delta_{ii} = \sum\limits_{k=1}^{n}l_{ik}m_{ki} =   \sum\limits_{k=1}^{i-1}l_{ik}m_{ki} + l_{ii}m_{ii} + \sum\limits_{k=i+1}^{n}l_{ik}m_{ki} = 1
+		\end{equation}
+		Because $m_{ki} = 0$ when $k \leq i-1$ and $l_{ik} = 0$ when $k\geq i+1$, $l_{ii}m_{ii} = 1$. So $m_{ii}=1$, and $\mathbf{M} = \mathbf{L}^{-1}$ is also unit lower triangular. 
+
+		$ \mathbf{L}_1^{-1}\mathbf{L}_2$ is unit lower triangular, which can be proved in a similar way. So the diagonal entries of $ \mathbf{L}_1^{-1}\mathbf{L}_2$ is all `1's. As a result, $\mathbf{U}_1\mathbf{U}_2^{-1} = \mathbf{L}_1^{-1}\mathbf{L}_2 = \mathbf{I}$. Because $\mathbf{U}_1\mathbf{U}_1^{-1} = \mathbf{L}_1^{-1}\mathbf{L}_1 = \mathbf{I}$, and the inverse of a matrix is unique, $\mathbf{U}_1 = \mathbf{U}_2$ and $\mathbf{L}_1 = \mathbf{L}_2$ can be proved.
+
+		In conclusion, the $\mathbf{LU}$ factorization of a matrix is unique.
+
+
+
 
 	\paragraph{2} Solve the equations of system $\mathbf{Ax} = \mathbf{0}$, get:
 	\begin{equation}
@@ -26,7 +85,7 @@
 		\end{array}\right),
  	\end{equation}
  	while $t$ is the free parameter. So the basis of $Ker(\mathbf{A})$ is $[1\ -1\ 2]^t$.
- 	Suppose $\mathbf{Ax} = [\mathbf{a}_1\ \mathbf{a}_2\ \mathbf{a}_3]$, then $Ran(\mathbf{A}) = span(\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3)$. $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ is not linearly independent because $\mathbf{a}_1-\mathbf{a}_2+2\mathbf{a}_3 = \mathbf{0}$. But $\mathbf{a}_1,\mathbf{a}_3$ is linearly independent because the only solution of $\alpha\mathbf{a}_1+\beta\mathbf{a}_3=0$ is $\alpha = 0, \beta = 0$. Thus $span(\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3)=  span(\mathbf{a}_1,\mathbf{a}_3)$, and the bases of $Ran(\mathbf{A})$ are $[1\ 2\ 3]^t$ and $[1\ 1\ 1]^t$.
+ 	Suppose $\mathbf{A} = [\mathbf{a}_1\ \mathbf{a}_2\ \mathbf{a}_3]$, then $Ran(\mathbf{A}) = span(\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3)$. $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ is not linearly independent because $\mathbf{a}_1-\mathbf{a}_2+2\mathbf{a}_3 = \mathbf{0}$. But $\mathbf{a}_1,\mathbf{a}_3$ is linearly independent because the only solution of $\alpha\mathbf{a}_1+\beta\mathbf{a}_3=0$ is $\alpha = 0, \beta = 0$. Thus $span(\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3)=  span(\mathbf{a}_1,\mathbf{a}_3)$, and the bases of $Ran(\mathbf{A})$ are $[1\ 2\ 3]^t$ and $[1\ 1\ 1]^t$.
 
  	\paragraph{3} $\mathbf{A}$ can be changed to row echelon form firstly by a a combination of elementary row operations:
  	\begin{align}
@@ -65,7 +124,7 @@
    	\end{equation}
 
    	\subparagraph{4} Premise: $p$ should not be 0.
-   	From Problem 3 we got the row echelon form of $\mathbf{A}$: $\mathbf{B} = \mathbf{PA}$. So $\mathbf{A}$ can be represented by $\mathbf{A} = \mathbf{P}^{-1}\mathbf{B}$. Then we multiply the first two columns of $\mathbf{P}^{-1}$, regarded as $\mathbf{X}$, by the fist two rows of $\mathbf{B}$, regarded as $\mathbf{Y}^t$:
+   	From Problem 3 we got the row echelon form of $\mathbf{A}$: $\mathbf{B} = \mathbf{PA}$. So $\mathbf{A}$ can be represented by $\mathbf{A} = \mathbf{P}^{-1}\mathbf{B}$. Then we multiply the first two columns of $\mathbf{P}^{-1}$, regarded as $\mathbf{X}$, by the first two rows of $\mathbf{B}$, regarded as $\mathbf{Y}^t$:
    	\begin{equation}
    		\mathbf{XY}^t = \left[ \begin{array}{cc} 1 & 0\\3 &-1\\2 & -1
    		\end{array}\right] * \left[ \begin{array}{cccc} 1 & 2 &2 &0\\0 & 1 &5&-1
@@ -106,9 +165,9 @@
 
    		Suppose $\mathbf{A} \in \mathbb{R}^{m\times n}$ and has rank $p$. If $p=0$, it's obvious that $rank(\mathbf{A}) = rank(\mathbf{A}^t) = 0$. Otherwise, $\mathbf{A}$ can be factored as $\mathbf{A} = \mathbf{XY}^t$, according to Problem 4, so $\mathbf{A}^t = \mathbf{YX}^t$. Suppose $\mathbf{A}^t = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]$ and $\mathbf{Y} = [\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}]$, while $\mathbf{a}$ and $\mathbf{y}$ are column vectors. Then $ [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]$ can be represented by a linear combination of $[\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}]$ with coefficients $\mathbf{X}^t$. In other words, $span([\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]) \subset span([\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}])$, so $rank(\mathbf{A}^t) \leq rank(\mathbf{Y}) = p = rank(\mathbf{A})$. It's same to $\mathbf{B} = \mathbf{A}^t$: $rank(\mathbf{B}^t) = rank(\mathbf{A}) \leq rank(\mathbf{B}) = rank(\mathbf{A}^t)$. The only solution is $rank(\mathbf{A}^t) = rank(\mathbf{A})$.\\[1ex]
 
-   		To this proposition, suppose $\mathbf{A} = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}] \in \mathbb{R}^{m\times l}$ and $\mathbf{B} = [\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]^t \in \mathbb{R}^{l\times n}$ , while $\mathbf{a}$ are column vectors and $\mathbf{b}$ are row vectors. $\mathbf{AB} = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}]*\mathbf{B}$, so column vectors of $\mathbf{AB}$ can be represented by a linear combination of $[\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}]$ with coefficients $\mathbf{B}$. So, $span(all\ column\ vectors\ of\ \mathbf{AB}) \subset span([\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}])$, and $rank(\mathbf{AB})\leq rank(\mathbf{A})$.
+   		To this proposition, suppose $\mathbf{A} = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}] \in \mathbb{R}^{m\times l}$ and $\mathbf{B} = [\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]^t \in \mathbb{R}^{l\times n}$ , while $\mathbf{a}$ and $\mathbf{b}$ are column vectors. $\mathbf{AB} = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}]*\mathbf{B}$, so column vectors of $\mathbf{AB}$ can be represented by a linear combination of $[\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}]$ with coefficients $\mathbf{B}$. So, $span(all\ column\ vectors\ of\ \mathbf{AB}) \subset span([\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_l}])$, and $rank(\mathbf{AB})\leq rank(\mathbf{A})$.
 
-   		Similarly, $(\mathbf{AB})^t = \mathbf{B}^t\mathbf{A}^t = [\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]*\mathbf{A}^t$, so column vectors of $\mathbf{AB}$ can be represented by a linear combination of $[\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]$ with coefficients $\mathbf{A}^t$. So, $span(all\ column\ vectors\ of\ (\mathbf{AB})^t) \subset span([\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}])$, and $rank((\mathbf{AB})^t)\leq rank(\mathbf{B}^t)$. Therefore, $rank(\mathbf{AB})\leq rank(\mathbf{B})$.
+   		Similarly, $(\mathbf{AB})^t = \mathbf{B}^t\mathbf{A}^t = [\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]*\mathbf{A}^t$, so column vectors of $(\mathbf{AB})^t$ can be represented by a linear combination of $[\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}]$ with coefficients $\mathbf{A}^t$. So, $span(all\ column\ vectors\ of\ (\mathbf{AB})^t) \subset span([\mathbf{b}_1\ \mathbf{b}_2 \cdots \mathbf{b_l}])$, and $rank((\mathbf{AB})^t)\leq rank(\mathbf{B}^t)$. Therefore, $rank(\mathbf{AB})\leq rank(\mathbf{B})$.
 
    		In conclusion,  $rank(\mathbf{AB})\leq min[rank(\mathbf{A}),rank(\mathbf{B})]$.
 
