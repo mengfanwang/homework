@@ -1,0 +1,83 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsfonts,amssymb} %空心字符
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang} 
+	\title{Optimization Techniques Homework 2} 
+\begin{document}
+	\maketitle 
+	\paragraph{1} Proof: Because $f(x)$ is a convex function, then we have $f(\theta x +(1-\theta)y)\leq \theta f(x) + (1-\theta)f(y)$ for all $x,y \in \mathbf{dom}f, 0 \leq \theta \leq 1$. And:
+	\begin{align}
+		&f(\theta y + (1-\theta)x) = f(x+\theta(y-x))\\
+		&\theta f(y) +(1-\theta)f(x) = f(x)+\theta(f(y)-f(x))
+	\end{align}
+	for all $x,y \in \mathbf{dom}f, 0 \leq \theta \leq 1$. So we have:
+	\begin{align}
+		&  \theta f(y) +(1-\theta)f(x)\geq f(\theta y + (1-\theta)x)\\
+		& \Rightarrow f(x)+\theta(f(y)-f(x))\geq f(x+\theta(y-x))\\
+		& \Rightarrow f(y) -f(x) \geq \frac{f(x+\theta (y-x))-f(x)}{\theta }\frac{1}{(y-x)^T}(y-x) \\
+		& \Rightarrow f(y) -f(x) \geq [\frac{f(x+\theta (y-x))-f(x)}{\theta (y-x)}]^T(y-x) \label{1}
+	\end{align}
+	Because $0 \leq \theta \leq 1$, and $y > x$ or $y < x$ are both possible, so:
+	\begin{equation}
+		\lim_{\theta \to 0^+}\frac{f(x+\theta (y-x))-f(x)}{\theta (y-x)} = \lim_{h \to 0}\frac{f(x+h)-f(x)}{h} = \nabla f(x) 
+	\end{equation}
+	Taking the limit of $\theta$ in Eq.\ref{1} as $\theta$ approaches $0^+$:
+	\begin{align}
+		& \lim_{\theta \to 0^+}f(y) -f(x) \geq \lim_{\theta \to 0^+}[\frac{f(x+\theta (y-x))-f(x)}{\theta (y-x)}]^T(y-x)\\
+		& \Rightarrow f(y)-f(x)\geq \nabla f(x)^T (y-x)\\
+		& \Rightarrow f(y) \geq f(x)+ \nabla f(x)^T (y-x)
+	\end{align}
+
+	\paragraph{2} Suppose $\xi = \theta x +(1-\theta)y$ for all $x,y \in \mathbf{dom}f, 0 \leq \theta \leq 1$:
+	\begin{align}
+		f(\xi) & =  f(\theta x + (1-\theta) y)\\
+		& =  f(\xi) + \nabla f(\xi)^T(\xi-\xi)\\
+		& =  [\theta f(\xi) +(1-\theta)f(\xi)]+ \nabla f(\xi)^T (\theta x +(1-\theta)y - \theta \xi-(1-\theta)\xi)\\
+		& = [\theta f(\xi) +(1-\theta)f(\xi)] + \theta\nabla f(\xi)^T(x-\xi) + (1-\theta)\nabla f(\xi)^T(y-\xi)\\
+		& = \theta[f(\xi) + \nabla f(\xi)^T(x-\xi)]+(1-\theta)[f(\xi)+\nabla f(\xi)^T(y-\xi)]\\
+		& \leq \theta f(x) + (1-\theta)f(y)
+	\end{align}
+		In conclusion, $ f(\theta x + (1-\theta) y) \leq \theta f(x) + (1-\theta)f(y)$ for all $x,y \in \mathbf{dom}f, 0 \leq \theta \leq 1$, so $f(x)$ is a convex function.
+
+	\paragraph{3} Premise: the base of logarithm should be greater than $1$, or $x\log x$ is concave.
+	Suppose $f(x) = x\log x$, for all $x,y \in \mathbb{R}_{++}$. Set the base of logarithm to $a > 1$:
+	\begin{align}
+		\nabla^2 f(x) & = \frac{d^2}{dx^2}( x\log x)\\
+		& = \frac{d}{dx} (\log x+\frac{1}{\ln a})\\
+		& = \frac{1}{x\ln a}>0
+	\end{align}
+	According to the second-order condition, $x\log x$ is a convex function on $\mathbb{R_{++}}$.
+
+	\paragraph{4} $\forall x_1,x_2 \in \{x|f(x)\leq c\}$, we have $f(x_1)\leq c$ and $f(x_2)\leq c$. Because $f(x)$ is a convex function, $ \forall 0 \leq \theta \leq 1$:
+	\begin{align}
+		f(\theta x_1 + (1-\theta)x_2) & \leq \theta f(x_1) + (1-\theta)f(x_2)\\
+		& \leq \theta c + (1-\theta)c\\
+		& = c
+	\end{align}
+	As a result, $\theta x_1 + (1-\theta)x_2 \in \{x|f(x)\leq c\}$ if $ x_1,x_2 \in \{x|f(x)\leq c\}, \ \forall 0 \leq \theta \leq 1$. According to the definition of convex set, $\{x|f(x)\leq c\}$ is a convex set.
+
+
+	\paragraph{5}
+	\begin{equation}
+		v_i = f^{old}(\mathbf{x}_i) + b^{old} - y_1a_1^{old}\mathbf{x}_1^T\mathbf{x}_i - y_2a_2^{old}\mathbf{x}_2^T\mathbf{x}_i
+	\end{equation}\\[2ex]
+		\begin{equation}
+		v_i = f^{old}(\mathbf{x}_i) - b^{old} - y_1a_1^{old}\mathbf{x}_1^T\mathbf{x}_i - y_2a_2^{old}\mathbf{x}_2^T\mathbf{x}_i
+	\end{equation}\\[2ex]
+	\begin{align}
+		v_i = & f^{old}(\mathbf{x}_i) - b^{old} - y_1a_1^{old}\mathbf{x}_1^T\mathbf{x}_i - y_2a_2^{old}\mathbf{x}_2^T\mathbf{x}_i\\
+		= & (\mathbf{w}^T)^{old}\mathbf{x}_i + b^{old} - b^{old}- y_1a_1^{old}\mathbf{x}_1^T\mathbf{x}_i - y_2a_2^{old}\mathbf{x}_2^T\mathbf{x}_i\\
+		= & \sum\limits_{j = 3}^{N} y_ja_j^{old}\mathbf{x}_j^T\mathbf{x}_i
+ 	\end{align}
+
+
+
+
+\end{document}
