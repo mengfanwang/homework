@@ -1,0 +1,243 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsfonts,amssymb} %空心字符
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang} 
+	\title{Matrix Theory Homework 1} 
+\begin{document}
+\maketitle 
+	\paragraph{1} 
+		\subparagraph{1}Proposition: The row echelon form of a nonzero matrix $\mathbf{A}$ will not be unique. 
+
+		Proof: Suppose $\mathbf{B}$ is one row echelon form of $\mathbf{A}$:
+		\begin{align}
+				\mathbf{B} = 
+				\left[ \begin{array}{ccccccc}
+				a_{11} & a_{12} & \cdots & a_{1k} & a_{1(k+1)} & \cdots & a_{1n}\\
+				0 & a_{22} & \cdots & a_{2k} & a_{2(k+1)} & \dots & a_{2n}\\	
+				&& \vdots && \vdots \\		
+				0&0& \cdots &0&0& \cdots & 0
+				\end{array}		\right]
+		\end{align}
+		Another row echelon form $\mathbf{C}$ can be constructed by add the second row to the first row:
+		\begin{align}
+				\mathbf{C} = 
+				\left[ \begin{array}{ccccccc}
+				a_{11} & a_{12}+a_{22} & \cdots & a_{1k}+a_{2k} & a_{1(k+1)}+a_{2(k+1)} & \cdots & a_{1n}+a_{2n}\\
+				0 & a_{22} & \cdots & a_{2k} & a_{2(k+1)} & \dots & a_{2n}\\	
+				&& \vdots && \vdots \\		
+				0&0& \cdots &0&0& \cdots & 0
+				\end{array}		\right]
+		\end{align}
+		Of course, there are infinite row echelon forms of $\mathbf{A}$. Only one possibility is provided here. 
+
+
+		\subparagraph{2} Proposition: The location of all pivots is uniquely determined.
+
+		Proof: For a row echelon form of a nonzero matrix $\mathbf{A}$, any two rows of it are linearly independent. Thus, the number of pivots equals to the rank of $\mathbf{A}$, which is constant. If $Rank(\mathbf{A})$ equals to the number of columns, obviously, all pivots must be on the diagonal, according to the definition of row echelon form. 
+
+		If $Rank(\mathbf{A})$ is smaller than the number of columns, there must be some columns without a pivot. Suppose $\mathbf{B}$ is one row echelon form of $\mathbf{A}$, the $k_{th}$ column is a column without a pivot. $a_{1k}$ to $a_{(i-1)k}$ are no zeros, and $a_{ik}$ to $a_{mk}$ are zeros.
+		\begin{align}
+				\mathbf{B} = 
+				\left[ \begin{array}{ccccccc}
+				a_{11} & a_{12} & \cdots & a_{1k} & a_{1(k+1)} & \cdots & a_{1n}\\
+				0 & a_{22} & \cdots & a_{2k} & a_{2(k+1)} & \dots & a_{2n}\\	
+				&& \vdots && \vdots \\	
+				0 & 0 & \cdots &  0 & a_{i(k+1)} & \cdots & a_{in}\\
+				&& \vdots && \vdots \\	
+				0&0& \cdots &0&0& \cdots & 0
+				\end{array}		\right]
+		\end{align}
+		And suppose there exists another row echelon form $\mathbf{C}$, whose the $k_{th}$ column contains a pivot at $h_{th}$ row. It means $\mathbf{B}$ can be changed to $\mathbf{C}$ by only \textbf{Type 1} elementary operations. Because $\mathbf{B}$ can be changed to $\mathbf{A}$ firstly, and then be changed to $\mathbf{C}$ by \textbf{Type 1} and \textbf{Type 2} operations. And \textbf{Type 2} can be substituted by \textbf{Type 1} operations. So the $h_{th}$ row of $\mathbf{C}$ can be represented by a combination of rows in $\mathbf{B}$:
+		\begin{equation}
+			Row\ h\ in\ \mathbf{C} = \sum\limits_{j=1}^{m} \lambda_j(Row\ j\ in\ \mathbf{B})
+		\end{equation}
+		And $Row\ h\ in\ \mathbf{C}$ should keep the first $(k-1)$ entries are zeros, so:
+		\begin{align}
+			\lambda_1a_{11}+0+0 \cdots +0=0\\
+			\lambda_1a_{12} + \lambda_2a_{22}+0\cdots+0 = 0\\
+			\vdots \qquad\\
+			\lambda_1a_{1(k-1)} + \lambda_2a_{2(k-1)}+ \cdots + \lambda_{i-1}a_{(i-1)(k-1)} = 0
+		\end{align}
+		The unique solution is $\lambda_1=\lambda_2=\cdots=\lambda_{i-1}=0$. However, the $k_{th}$ entries of the latter $(m-i+1)$ rows are all zeros. That means no matter how the values of $\lambda_{i}$ to $\lambda_m$ are, $a_{hk}$ is always zero. $\mathbf{C}$ didn't exist. Because no column can add a pivot, and the number of pivots is constant, no column can delete a pivot, either.
+
+		As a result, it's uniquely determined which column contains a pivot, so is the location of pivots.
+
+	\paragraph{2} If this system of equations has a single unique solution, its  coefficient matrix $\mathbf{A}$ should be invertible. If $\mathbf{A}$ is invertible, its determinant should not be zero. Thus:
+		\begin{equation}
+			|\mathbf{A}| = 
+			\begin{array}{|ccc|}
+			2 & 3 &5\\
+			a & 1 & 2\\
+			3 & 4 &7
+			\end{array}
+			= 1- a \not= 0
+		\end{equation}
+
+	As a result, when $a \not= 1$, the system of equations will have a single unique solution.
+
+	It's impossible to find a value of $a$ for which the system of equations is inconsistent. As mentioned above, when $a \not= 1$, the system of equations is always consistent and have only one solution. When $a = 1$, it havs infinite solutions, which is 
+		\begin{equation}
+			\left[ \begin{array}{c}
+			 x\\ y\\ z 
+			 \end{array} \right]
+			 = 
+			 \left[ \begin{array}{c}
+			 -1\\ -1\\ 1 
+			 \end{array} \right] *s +
+			 \left[ \begin{array}{c}
+			 5\\ -3\\ 0 
+			 \end{array} \right]
+		\end{equation}
+
+	As a result, the system of equations can't be inconsistent no matter what the value of $a$ is.
+
+	\paragraph{3} 
+		\subparagraph{a} Construct augmented matrix:
+	\renewcommand\arraystretch{1.5}
+		\begin{align}
+		\renewcommand\arraystretch{2}
+			[\mathbf{A}|\mathbf{I}_m] =
+			&\left[ \begin{array}{ccc|cc}
+			 2 & 1 & 0 & 1 & 0\\
+			 1 & -1 & -3 & 0 & 1\\
+			 \end{array} \right]\\
+			 & \qquad \qquad \downarrow Type1: Row 1 + Row2 \rightarrow Row1 \\
+			 & \qquad \qquad \downarrow Type1: Row 2 - \frac{1}{2} Row1 \rightarrow Row2 \\
+			 &\left[ \begin{array}{ccc|cc}
+			 3 & 0 & -3 & 1 & 1\\
+			 0 & -\frac{3}{2} & -3 & -\frac{1}{2} & 1\\
+			 \end{array} \right]\\
+			 & \qquad \qquad \downarrow Type2: \frac{1}{3}*Row 1 \rightarrow Row1 \\
+			 & \qquad \qquad \downarrow Type2: -\frac{2}{3}*Row 2 \rightarrow Row2 \\
+			 &\left[ \begin{array}{ccc|cc}
+			 1 & 0 & -1 & \frac{1}{3} & \frac{1}{3}\\
+			 0 & 1 & 2 & \frac{1}{3} & -\frac{2}{3}\\
+			 \end{array} \right]
+		\end{align}
+		
+	So, labeling the free parameter as $s$ and $t$ for the first and second right-hand side columns respectively, all right inverses are given by
+	\begin{align}
+		\mathbf{B}_R = &\left[ \begin{array}{cc}
+			 s+\frac{1}{3} & t+\frac{1}{3}\\
+			 -2s+\frac{1}{3} & -2t-\frac{2}{3}\\
+			 s & t \\
+			 \end{array} \right]
+	\end{align}
+
+	If $\mathbf{A} \in \mathbb{R}^{m\times n}$ has a right inverse, its reduced row echelon form has a leading one in each row. So the augmented matrix will be:
+	\begin{equation}
+				\left[ \begin{array}{ccccccc|ccc}
+				1 & 0 & \cdots & 0 & a_{1(m+1)} & \cdots & a_{1n} & b_{11} & \cdots & b_{1m}\\
+				0 & 1 & \cdots & 0 & a_{2(m+1)} & \dots & a_{2n} & b_{11} & \cdots & b_{1m}\\	
+				&& \vdots && \vdots &&&& \vdots \\		
+				0&0& \cdots &1&a_{m(m+1)}& \cdots & a_{mn} & b_{m1} & \cdots & b_{mm}
+				\end{array}		\right]
+	\end{equation}
+	There are $(m-n)$ free parameters in the left matrix, and $m$ systems from the right matrix. Thus, totally $m(n-m)$ free parameters are used.
+
+
+	\subparagraph{b} Because $\mathbf{B}_1$ and $\mathbf{B}_2$ are each left inverses to $\mathbf{C}$, we have: $\mathbf{B}_1\mathbf{C} = \mathbf{I}$ and $\mathbf{B}_2\mathbf{C} = \mathbf{I}$. So:
+	\begin{align}
+		(\alpha\mathbf{B}_1+\beta\mathbf{B}_2)\mathbf{C}  &  = \alpha\mathbf{B}_1\mathbf{C}+\beta\mathbf{B}_2\mathbf{C} \\
+		& = \alpha\mathbf{I} + \beta\mathbf{I}\\
+		& = \mathbf{I}
+	\end{align} 
+	As a result, $\alpha\mathbf{B}_1+\beta\mathbf{B}_2$ is also a left inverse for $\mathbf{C}$.
+
+
+	\paragraph{4} Because $\mathbf{A}$ is invertible, $\mathbf{A}^t$ is also invertible. So we have:
+		\begin{align}
+			&\mathbf{A}^t(\mathbf{A}^t)^{-1} = \mathbf{I}\\
+			&\mathbf{A}^t(\mathbf{A}^{-1})^t = (\mathbf{A}^{-1}\mathbf{A})^t = \mathbf{I}^t = \mathbf{I}
+		\end{align}
+
+	Because the invertible matrix of $\mathbf{A}^t$ is unique, $(\mathbf{A}^t)^{-1} = (\mathbf{A}^{-1})^t$.
+
+	\paragraph{5}
+		\subparagraph{a} The original proposition is equivalent to $(\mathbf{A}+\mathbf{XY}^t)(\mathbf{A}^{-1}-\mathbf{A}^{-1}\mathbf{XW}^{-1}\mathbf{Y}^t\mathbf{A}^{-1}) = \mathbf{I}$
+
+	Proof:
+	\begin{align}
+		& (\mathbf{A}+\mathbf{XY}^t)(\mathbf{A}^{-1}-\mathbf{A}^{-1}\mathbf{XW}^{-1}\mathbf{Y}^t\mathbf{A}^{-1}) \\
+		= & (\mathbf{I} - \mathbf{XW}^{-1}\mathbf{Y}^t\mathbf{A}^{-1})+(\mathbf{XY}^t\mathbf{A}^{-1}-\mathbf{XY}^t\mathbf{A}^{-1}\mathbf{XW}^{-1}\mathbf{Y}^t\mathbf{A}^{-1}) \\
+		= & (\mathbf{I}+\mathbf{XY}^t\mathbf{A}^{-1}) - (\mathbf{XW}^{-1}\mathbf{Y}^t\mathbf{A}^{-1}+\mathbf{XY}^t\mathbf{A}^{-1}\mathbf{XW}^{-1}\mathbf{Y}^t\mathbf{A}^{-1})\\
+		= & \mathbf{I}+\mathbf{XY}^t\mathbf{A}^{-1} - (\mathbf{X}+ \mathbf{XY}^t\mathbf{A}^{-1}\mathbf{X})\mathbf{W}^{-1}\mathbf{Y}^t\mathbf{A}^{-1}\\
+		= & \mathbf{I}+\mathbf{XY}^t\mathbf{A}^{-1} - \mathbf{X}(\mathbf{I}+\mathbf{Y}^t\mathbf{A}^{-1}\mathbf{X})(\mathbf{I}+\mathbf{Y}^t\mathbf{A}^{-1}\mathbf{X})^{-1}\mathbf{Y}^t\mathbf{A}^{-1}\\
+		= & \mathbf{I} + \mathbf{XY}^t\mathbf{A}^{-1} - \mathbf{XY}^t\mathbf{A}^{-1}\\
+		= & \mathbf{I}
+	\end{align}
+
+	\subparagraph{b} Construct a matrix $\left[ \begin{array}{cc}
+			 \mathbf{A} & \mathbf{X} \\
+			 \mathbf{Y}^t & \mathbf{-I} \\
+			 \end{array} \right]$, which can be decomposed as:
+	\begin{align}
+		\left[ \begin{array}{cc}
+			 \mathbf{A} & \mathbf{X} \\
+			 \mathbf{Y}^t & -\mathbf{I} \\
+			 \end{array} \right] = & \left[ \begin{array}{cc}
+			 \mathbf{I} & \mathbf{0} \\
+			 \mathbf{Y}^t\mathbf{A}^{-1} & \mathbf{I} \\
+			 \end{array} \right]  \left[ \begin{array}{cc}
+			 \mathbf{A} & \mathbf{0} \\
+			 \mathbf{0} & -\mathbf{I} - \mathbf{Y}^t\mathbf{A}^{-1}\mathbf{X} \\
+			 \end{array} \right]\left[ \begin{array}{cc}
+			 \mathbf{I} & \mathbf{A}^{-1}\mathbf{X} \\
+			 \mathbf{0} & \mathbf{I} \\
+			 \end{array} \right] \\
+			 = &\left[ \begin{array}{cc}
+			 \mathbf{I} & \mathbf{0} \\
+			 \mathbf{Y}^t\mathbf{A}^{-1} & \mathbf{I} \\
+			 \end{array} \right]  \left[ \begin{array}{cc}
+			 \mathbf{A} & \mathbf{0} \\
+			 \mathbf{0} & -\mathbf{W}  \\
+			 \end{array} \right]\left[ \begin{array}{cc}
+			 \mathbf{I} & \mathbf{A}^{-1}\mathbf{X} \\
+			 \mathbf{0} & \mathbf{I} \\
+			 \end{array} \right] 
+	\end{align}
+
+	Because $\mathbf{W}$ is not invertible, $ \left[ \begin{array}{cc}
+			 \mathbf{A} & \mathbf{0} \\
+			 \mathbf{0} & -\mathbf{W}  \\
+			 \end{array} \right]$ is not invertible; Thus  $\left[ \begin{array}{cc}
+			 \mathbf{A} & \mathbf{X} \\
+			 \mathbf{Y}^t & \mathbf{-I} \\
+			 \end{array} \right]$ is not invertible, either. It means for a system of equations:
+		\begin{equation}
+			\left[ \begin{array}{cc}
+			 \mathbf{A} & \mathbf{X} \\
+			 \mathbf{Y}^t & \mathbf{-I} \\
+			 \end{array} \right]\left[ \begin{array}{c}
+			 \mathbf{m}\\
+			 \mathbf{n} \\
+			 \end{array} \right] = \mathbf{0}\label{eq4}
+		\end{equation}
+
+		There is always a nontrivial solution $\left[ \begin{array}{c}
+			 \mathbf{m}^*\\
+			 \mathbf{n}^* \\
+			 \end{array} \right]$ whose entries are not all zeros. Eq.\ref{eq4} can be presented as:
+			 \begin{align}
+			 	\mathbf{Am} + \mathbf{Xn} = & \mathbf{0} \label{eq1}\\ 	
+			 	\mathbf{Y}^t\mathbf{m} - \mathbf{In} = & \mathbf{0}
+			 	\label{eq2}
+			 \end{align}
+		If $\mathbf{m}^* = \mathbf{0}$, from Eq.\ref{eq2} we can get $\mathbf{n}^* = \mathbf{0}$, then $\left[ \begin{array}{c}
+			 \mathbf{m}^*\\
+			 \mathbf{n}^* \\
+			 \end{array} \right]$ is not a nontrivial solution. That is, $\mathbf{m}^*$ must be nontrivial. Combine Eq.\ref{eq1} and Eq.\ref{eq2}:
+			 \begin{equation}
+			 	(\mathbf{A}+\mathbf{XY}^t)\mathbf{m} = \mathbf{0}\label{eq3}
+			 \end{equation}
+		when $\mathbf{m} = \mathbf{m}^*$, Eq.\ref{eq3} works. Because this equation has a nontrivial solution, $\mathbf{A}+\mathbf{XY}^t$ is not invertible.
+
+
+\end{document}
