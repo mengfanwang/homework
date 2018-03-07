@@ -1,0 +1,166 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsfonts,amssymb} %空心字符
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang} 
+	\title{Matrix Theory Homework 3} 
+\begin{document}
+	\maketitle 
+	\paragraph{1}
+		\subparagraph{a} Sufficient condition: if $\mathbf{y} \in Ker(\mathbf{X}^T\mathbf{X})$, then $\mathbf{X}^T\mathbf{Xy} = \mathbf{0}$.
+		\begin{align}
+			\mathbf{y}^T\mathbf{X}^T\mathbf{Xy} = \mathbf{y}^T\mathbf{0} = 0\\
+			(\mathbf{Xy})^T\mathbf{Xy} = 0\\
+			\mathbf{Xy} = \mathbf{0}
+		\end{align}
+
+		So, $\mathbf{y} \in Ker(\mathbf{X})$.
+
+		Necessary condition: if $\mathbf{y} \in Ker(\mathbf{X})$, then $\mathbf{Xy} = \mathbf{0}$.
+		So, $\mathbf{X}^T\mathbf{Xy} = \mathbf{X}^T\mathbf{0} = \mathbf{0}$, $\mathbf{y} \in Ker(\mathbf{X}^T\mathbf{X})$.
+
+		In conclusion, $Ker(\mathbf{X}^T\mathbf{X}) = Ker(\mathbf{X})$.
+
+		\subparagraph{b}Firstly, we will show $rank(\mathbf{A}) = rank(\mathbf{A}^T)$ for all matrices. 
+
+   		Suppose $\mathbf{A} \in \mathbb{R}^{m\times n}$ and has rank $p$. If $p=0$, it's obvious that $rank(\mathbf{A}) = rank(\mathbf{A}^T) = 0$. Otherwise, $\mathbf{A}$ can be factored as $\mathbf{A} = \mathbf{XY}^T$, so $\mathbf{A}^T = \mathbf{YX}^T$. Suppose $\mathbf{A}^T = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]$ and $\mathbf{Y} = [\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}]$, while $\mathbf{a}$ and $\mathbf{y}$ are column vectors. Then $ [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]$ can be represented by a linear combination of $[\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}]$ with coefficients $\mathbf{X}^t$. In other words, $span([\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]) \subset span([\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}])$, so $rank(\mathbf{A}^T) \leq rank(\mathbf{Y}) = p = rank(\mathbf{A})$. It's same to $\mathbf{B} = \mathbf{A}^T$: $rank(\mathbf{B}^T) = rank(\mathbf{A}) \leq rank(\mathbf{B}) = rank(\mathbf{A}^T)$. The only solution is $rank(\mathbf{A}^T) = rank(\mathbf{A})$.
+
+   		So, $rank(\mathbf{XX}^T) = rank((\mathbf{X}^T\mathbf{X})^T) = rank(\mathbf{X}^T\mathbf{X})$.
+
+	\paragraph{2}
+		\subparagraph{a}$\forall \mathbf{x} \in \mathbb{R}^{n}$, $\exists \mathbf{w} = \mathbf{Qx} \in Ran(\mathbf{Q})$. Because $Ran(\mathbf{P}) = Ran(\mathbf{Q})$, $\exists \mathbf{z}$ that $\mathbf{w} = \mathbf{Pz} = \mathbf{PPz} = \mathbf{Pw}$. So, $\mathbf{PQx} = \mathbf{Pw} = \mathbf{w} = \mathbf{Qx}$. Therefore, $(\mathbf{PQ}-\mathbf{Q})\mathbf{x} = \mathbf{0}\  \forall \mathbf{x} \in \mathbb{R}^n$. As a result, $\mathbf{PQ} = \mathbf{Q}$.
+
+		\subparagraph{b}$\forall \mathbf{w} \in \mathbb{R}^{n}$ can be decomposed as $\mathbf{w} = \mathbf{x} + \mathbf{y}$, while $\mathbf{x} \in Ran(\mathbf{Q})$ and $\mathbf{y} \in Ker(\mathbf{Q})$. So $\mathbf{y} \in Ker(\mathbf{P})$, too. And $\exists \mathbf{z}$ let $\mathbf{x} = \mathbf{Qz} = \mathbf{QQz} = \mathbf{Qx}$. Then we have:
+		\begin{align}
+			\mathbf{Px} & = \mathbf{Px}\\
+			\mathbf{PQx} & = \mathbf{Px} \\
+			\mathbf{PQx} + \mathbf{PQy} & = \mathbf{Px} + \mathbf{Py} \ (\mathbf{PQy} = \mathbf{Py} = \mathbf{0})\\
+			\mathbf{PQ(x+y)} & = \mathbf{P(x+y)}\\
+			\mathbf{PQw} & = \mathbf{Pw}
+		\end{align}
+		Therefore, $(\mathbf{PQ}-\mathbf{P})\mathbf{w} = \mathbf{0}\  \forall \mathbf{w} \in \mathbb{R}^n$. As a result, $\mathbf{PQ} = \mathbf{P}$.
+
+
+		\subparagraph{c}Because
+		\begin{align}
+		&\mathbf{M}(\mathbf{I}-\mathbf{PSQ})\\
+		=&(\mathbf{I}+\mathbf{PSQ})(\mathbf{I}-\mathbf{PSQ})\\
+		=&\mathbf{I} + \mathbf{PSQ} - \mathbf{PSQ} -\mathbf{PSQPSQ}\\
+		=&\mathbf{I} - (\mathbf{I}-\mathbf{Q})\mathbf{SQ}(\mathbf{I}-\mathbf{Q})\mathbf{SQ}\\
+		=&\mathbf{I} - (\mathbf{SQ} - \mathbf{QSQ})(\mathbf{SQ} - \mathbf{QSQ})\\
+		=&\mathbf{I} - \mathbf{SQSQ} + \mathbf{SQ}^2\mathbf{SQ} +\mathbf{QSQSQ} - \mathbf{QSQ}^2\mathbf{SQ}\\
+		=&\mathbf{I} - \mathbf{SQSQ} + \mathbf{SQSQ}+\mathbf{QSQSQ}- \mathbf{QSQSQ}\\
+		=&\mathbf{I}\\
+		\end{align}
+		So, $\mathbf{M}$ is invertible and $\mathbf{M}^{-1}=\mathbf{I}-\mathbf{PSQ}$.
+
+	\paragraph{3}
+		\subparagraph{a} If $\mathbf{Q}$ is a projector onto $Ker(\mathbf{A})$, $\mathbf{Q}^2 = \mathbf{Q}$ and $Ran(\mathbf{Q}) = Ker(\mathbf{A})$.
+		\begin{align}
+			\mathbf{Q}^2 &= (\mathbf{I}-\mathbf{B}_R\mathbf{A})(\mathbf{I}-\mathbf{B}_R\mathbf{A})\\
+			& = \mathbf{I} - 2\mathbf{B}_R\mathbf{A} + \mathbf{B}_R\mathbf{A}\mathbf{B}_R\mathbf{A}\\
+			& = \mathbf{I} - \mathbf{B}_R\mathbf{A}\\
+			& = \mathbf{Q}
+		\end{align}
+
+		$\forall \mathbf{z} \in Ran(\mathbf{Q})$, $\exists \mathbf{x}$ so that $\mathbf{Qx=z}$:
+		\begin{align}
+			(\mathbf{I} - \mathbf{B}_R\mathbf{A})\mathbf{x} & = \mathbf{z} \\
+			\mathbf{A}(\mathbf{I} - \mathbf{B}_R\mathbf{A})\mathbf{x} & = \mathbf{Az} \\
+			\mathbf{Az} & = \mathbf{Ax} - \mathbf{AB}_R\mathbf{Ax}\\
+			\mathbf{Az} & = \mathbf{0}\\
+		\end{align}
+		So $\mathbf{z} \in Ker(\mathbf{A})$, and $Ran(\mathbf{Q}) \subset Ker(\mathbf{A})$.
+
+		$\forall \mathbf{z} \in Ker(\mathbf{A})$, $\mathbf{Az=0}$. So $\mathbf{Qz} = (\mathbf{I} - \mathbf{B}_R\mathbf{A})\mathbf{z} = \mathbf{z}$. So $\mathbf{z} \in Ran(\mathbf{Q})$, and $Ker(\mathbf{A} )\subset Ran(\mathbf{Q})$.
+
+		As a result, $Ker(\mathbf{A} = Ran(\mathbf{Q})$ and $\mathbf{Q}$ is a projector onto $Ker(\mathbf{A})$.
+
+		\subparagraph{b} If $\mathbf{Q}$ is an orthogonal projector onto $Ker(\mathbf{A})$, $\mathbf{Q}^* = \mathbf{Q}$. Define $\langle \mathbf{u},\mathbf{Q}\mathbf{v} \rangle = \mathbf{u}^T\mathbf{Q}\mathbf{v}  = \langle  \mathbf{Q}^*\mathbf{u},\mathbf{v} \rangle = \mathbf{u}^T(\mathbf{Q}^*)^T\mathbf{v} = \mathbf{u}^T\mathbf{Q}^T\mathbf{v},\ \forall \mathbf{u,v} \in \mathbb{R}^n$. So:
+		\begin{align}
+			\mathbf{Q} & = \mathbf{Q}^T\\
+			\mathbf{I} - \mathbf{B}_R\mathbf{A} & = \mathbf{I} - \mathbf{A}^T\mathbf{B}_R^T\\
+			\mathbf{B}_R\mathbf{A} & = \mathbf{A}^T\mathbf{B}_R^T\\
+			\mathbf{B}_R\mathbf{A}\mathbf{B}_R & = \mathbf{A}^T\mathbf{B}_R^T\mathbf{B}_R\\
+			\mathbf{B}_R & = \mathbf{A}^T\mathbf{B}_R^T\mathbf{B}_R\\
+			\mathbf{A}\mathbf{A}^T\mathbf{B}_R^T\mathbf{B}_R & = \mathbf{I}\\
+			\mathbf{B}_R^T\mathbf{B}_R & = (\mathbf{A}\mathbf{A}^T)^{-1}
+		\end{align}
+		Because $\mathbf{A}\mathbf{A}^T$ is the Gram matrix of $\mathbf{A}^T$, and the column vectors of $\mathbf{A}^T$ is independent because $\mathbf{A}$ has right inverse. So $\mathbf{A}\mathbf{A}^T$ is invertible. As a result, while $(\widetilde{\mathbf{B}_R}^T \widetilde{\mathbf{B}_R} ) = (\mathbf{A}\mathbf{A}^T)^{-1}$, $(\widetilde{\mathbf{Q}} = \mathbf{I} - \widetilde{\mathbf{B}_R}\mathbf{A}) $  is an orthogonal projector onto $Ker(\mathbf{A})$.
+ 
+	\paragraph{4}
+		\subparagraph{a} In my opinion. $\mathbf{A}$ should in $\mathbb{R}^{m\times m}$ and $\mathbf{B}$ should in $\mathbb{R}^{n\times n}$ to make $P(\mathbf{Z}) = \mathbf{AZB}$ be meaningful.
+
+		Firstly, I'm going to show $tr(\mathbf{AB}) = tr(\mathbf{BA})$ while $\mathbf{A}=[a_{ij}], \mathbf{B} = [b_{ij}] \in \mathbb{R}^{n\times n}$:
+		\begin{equation}
+			tr(\mathbf{AB}) = \sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n} a_{ij}b_{ji} = \sum\limits_{j=1}^{n}\sum\limits_{i=1}^{n} b_{ji}a_{ij} = tr(\mathbf{BA}) 
+		\end{equation}
+
+		Then, I'll show $P^*(\mathbf{Z}) = \mathbf{A}^T\mathbf{Z}\mathbf{B}^T$,because:
+		\begin{align}
+			\langle \mathbf{Y},P(\mathbf{Z}) \rangle_F & = tr(\mathbf{Y}^T\mathbf{AZB}) = tr(\mathbf{BY}^T\mathbf{AZ})\\
+			\langle P^*(\mathbf{Y}),\mathbf{Z} \rangle_F & = tr[(\mathbf{A}^T\mathbf{Y}\mathbf{B}^T)^T\mathbf{Z}] = tr(\mathbf{BY}^T\mathbf{AZ})=\langle \mathbf{Y},P(\mathbf{Z}) \rangle_F\\
+		\end{align}
+
+		So $P^*(\mathbf{Z}) = \mathbf{A}^T\mathbf{Z}\mathbf{B}^T$.
+
+		\subparagraph{b}If $P(\mathbf{Z})$ is the solution operator for the BAP, it need to satisfy the three conditions: $Ran(P) =\mathcal{W}, P(P(\mathbf{Z})) = P(\mathbf{Z}), P^* = P$.
+
+		The first condition, $Ran(P) =\mathcal{W}$, is true when $Ran(\mathbf{A}) = \mathcal{M}$ and $Ker(\mathbf{B}) = \mathcal{N}$. Proof: $\forall \mathbf{X} \in Ran(P), \exists \mathbf{Z} \in \mathbb{R}^{m\times n}, \mathbf{X} = P(\mathbf{Z}) = \mathbf{AZB}$. So $Ran(\mathbf{X}) = Ran(\mathbf{AZB}) \subset Ran(\mathbf{A}) = \mathcal{M}$, because column vectors of $\mathbf{AZB}$ can be represented by a linear combination of column vectors of $\mathbf{A}$. And $Ker(\mathbf{X}) = Ker(\mathbf{AZB}) \supset Ker(\mathbf{B}) = \mathcal{N}$. Because if $\mathbf{z} \in Ker(\mathbf{B})$ so that $\mathbf{Bz} = \mathbf{0}$, $\mathbf{AZBz = 0}$ too.
+
+	\paragraph{5} Suppose this matrix $\mathbf{A} = \mathbf{QR} = [\mathbf{a}_1\ \mathbf{a}_2\ \mathbf{a}_3]$, while $\mathbf{Q} = [\mathbf{q}_1\ \mathbf{q}_2\ \mathbf{q}_3]$ is orthonormal, $\mathbf{a}$ and $\mathbf{q}$ are column vectors. Applying the Gram-Schmidt process to $\{\mathbf{a}_1\ \mathbf{a}_2\ \mathbf{a}_3\}$:
+	\begin{align}
+		\mathbf{q}_1 & = \frac{\mathbf{a}_1}{\left\|\mathbf{a}_1\right\|} = [\frac{\sqrt{2}}{2}\ 0\ 0\ -\frac{\sqrt{2}}{2}]^T \\
+		\mathbf{q}_2 & = \frac{\mathbf{a}_2- \left \langle\mathbf{q}_1,\mathbf{a}_2\right \rangle\mathbf{q}_1}{\left\|\mathbf{a}_2- \left \langle\mathbf{q}_1,\mathbf{a}_2\right \rangle\mathbf{q}_1\right\|} = [-\frac{\sqrt{6}}{6}\ \frac{\sqrt{6}}{3}\ 0\ -\frac{\sqrt{6}}{6}]^T\\
+		\mathbf{q}_3 & = \frac{\mathbf{a}_3- \left \langle\mathbf{q}_1,\mathbf{a}_3\right \rangle\mathbf{q}_1-\left \langle\mathbf{q}_2,\mathbf{a}_3\right \rangle\mathbf{q}_2}{\left\|\mathbf{a}_3- \left \langle\mathbf{q}_1,\mathbf{a}_3\right \rangle\mathbf{q}_1-\left \langle\mathbf{q}_2,\mathbf{a}_3\right \rangle\mathbf{q}_2 \right\|} = [-\frac{\sqrt{3}}{6}\ -\frac{\sqrt{3}}{6}\ \frac{\sqrt{3}}{2}\ -\frac{\sqrt{3}}{6}]^T
+		\end{align}
+	\begin{equation}
+	\renewcommand\arraystretch{1.5}
+	\mathbf{Q}  = [\mathbf{q}_1\ \mathbf{q}_2\ \mathbf{q}_3] = \left[\begin{array}{ccc} \frac{\sqrt{2}}{2} & -\frac{\sqrt{6}}{6} & -\frac{\sqrt{3}}{6}\\ 0 & \frac{\sqrt{6}}{3} & -\frac{\sqrt{3}}{6} \\ 0&0&\frac{\sqrt{3}}{2}\\ -\frac{\sqrt{2}}{2}&-\frac{\sqrt{6}}{6}& -\frac{\sqrt{3}}{6} \end{array}\right]
+		\end{equation}
+		\begin{equation}
+	\renewcommand\arraystretch{1.5}
+	\mathbf{R} = \mathbf{Q}^{-1}\mathbf{A} = \mathbf{Q}^T\mathbf{A} = \left[\begin{array}{ccc} \sqrt{2} &\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \\ 0 & \frac{\sqrt{6}}{2} & \frac{\sqrt{6}}{6} \\ 0 & 0 & \frac{2\sqrt{3}}{3}\\\end{array}\right]
+		\end{equation}
+
+	\paragraph{6}
+		\subparagraph{a} Suppose there are two matrices $\mathbf{X}_1$ and $\mathbf{X}_2$ satisfy all four conditions, then we have:
+		\begin{align}
+			\mathbf{X}_1 & = \mathbf{X}_1\mathbf{AX}_1 = \mathbf{X}_1(\mathbf{AX}_1)^T = \mathbf{X}_1[(\mathbf{AX}_2\mathbf{A})\mathbf{X}_1]^T = \mathbf{X}(\mathbf{AX}_1)^T(\mathbf{AX}_2)^T\\& = \mathbf{X}_1\mathbf{AX}_1\mathbf{AX}_2 = \mathbf{X}_1\mathbf{AX}_2 = \mathbf{X}_1\mathbf{A}(\mathbf{X}_2\mathbf{A}\mathbf{X}_2) = (\mathbf{X}_1\mathbf{A})^T(\mathbf{X}_2\mathbf{A})^T\mathbf{X}_2\\ & = (\mathbf{X}_2\mathbf{AX}_1\mathbf{A})^T\mathbf{X}_2 = (\mathbf{X}_2\mathbf{A})^T\mathbf{X}_2 = \mathbf{X}_2\mathbf{AX}_2 = \mathbf{X}_2
+		\end{align}
+		So, there can be at most one matrix $\mathbf{X}$ that satisfies all four conditions.
+
+		\subparagraph{b}Suppose $\mathbf{A}$ can be full-rank factorized as $\mathbf{MN}^T$, $\mathbf{A}^\dagger = \mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T$. So,
+		\begin{align}
+			\mathbf{AA}^\dagger\mathbf{A} & = \mathbf{MN}^T\mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T\mathbf{MN}^T\\
+			& = \mathbf{MN}^T = \mathbf{A}\\
+			\mathbf{A}^\dagger\mathbf{AA}^\dagger & = \mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T\mathbf{MN}^T\mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T\\
+			& =  \mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T = \mathbf{A}^\dagger\\
+			(\mathbf{AA}^\dagger)^T & = (\mathbf{MN}^T\mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T)^T\\
+			& = (\mathbf{M}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T)^T\\
+			& = \mathbf{M}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T\\
+			& = \mathbf{MN}^T\mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T = \mathbf{AA}^\dagger\\
+			(\mathbf{A}^\dagger\mathbf{A})^T & = (\mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T\mathbf{MN}^T)^T\\
+			& = (\mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}\mathbf{N}^T)^T\\
+			& = \mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}\mathbf{N}^T\\
+			& = \mathbf{N}(\mathbf{N}^T\mathbf{N})^{-1}(\mathbf{M}^T\mathbf{M})^{-1}\mathbf{M}^T\mathbf{MN}^T = \mathbf{A}^\dagger\mathbf{A},
+		\end{align}
+		while $[(\mathbf{N}^T\mathbf{N})^{-1}]^T=[(\mathbf{N}^T\mathbf{N})^{T}]^{-1} = (\mathbf{N}^T\mathbf{N})^{-1}$ and $[(\mathbf{M}^T\mathbf{M})^{-1}]^T =[(\mathbf{M}^T\mathbf{M})^{T}]^{-1}= (\mathbf{M}^T\mathbf{M})^{-1}$.
+		So $\mathbf{A}^\dagger$ satisfies all four conditions, and because there can be at most one matrix that satisfies all four conditions, these conditions can be used to characterize pseudoinverses.
+
+
+	\paragraph{7}
+		\subparagraph{a}
+
+		\subparagraph{b}
+
+		\subparagraph{c}
+
+
+\end{document}
