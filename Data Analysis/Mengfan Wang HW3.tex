@@ -1,0 +1,272 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows} %decision tree
+\usepackage{listings}
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}%matlab
+\usepackage{algorithm} % 伪代码	
+\usepackage{algorithmic}  %伪代码
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} 
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang PID:mengfanw} 
+	\title{Data Analytics Homework 3} 
+\begin{document}
+	\maketitle 
+	\paragraph{1}
+		\subparagraph{1}
+		\begin{align}
+			p(X = 1) & = \frac{g+d}{a+b+g+d}\\
+			p(X = 0) & = \frac{a+b}{a+b+g+d}\\
+			p(Y = 1) & = \frac{b+d}{a+b+g+d}\\
+			p(Y = 0) & = \frac{a+g}{a+b+g+d}
+		\end{align}
+		So, $E(X) = p(X=1)= \frac{g+d}{a+b+g+d}$ and $E(Y) = p(Y = 1) =  \frac{b+d}{a+b+g+d}$.
+ 
+		\subparagraph{2} $X$ and $Y$ are independent if and only if $p(X;Y) = p(X)p(Y)$ for any values of $X$ and $Y$.
+		\begin{align}
+			p(X=0;Y=0) & = p(X=0)p(Y=0)\\
+			 (a+b)(a+g)& = a(a+b+g+d)\\
+			 ad& =bg\\
+			 p(X=0;Y=1) & = p(X=0)p(Y=1)\\
+			 (a+b)(b+d) & = b(a+b+g+d)\\
+			 ad& =bg\\
+			 p(X=1;Y=0) & = p(X=1)p(Y=0)\\
+			 (g+d)(a+g)& = g(a+b+g+d)\\
+			 ad& =bg\\
+			 p(X=1;Y=1) & = p(X=1)p(Y=1)\\
+			 (g+d)(b+d)& = d(a+b+g+d)\\
+			 ad& =bg
+		\end{align}
+		As a result, the necessary and sufficient condition so that $X$ and $Y$ are independent is $ad = bg$.
+
+	\paragraph{2}
+		\subparagraph{1} 
+		\begin{align}
+			p(recover;real\ drug) & = p(recover)p(real\ drug|recover)\\
+			& = 0.65* 0.50 = 0.325\\
+			p(recover;placebo) & = p(recover)p(placebo|recover)\\
+			& = 0.65*0.50 = 0.325\\
+			p(not\ recover;real\ drug) & = p(not\ recover)p(real\ drug|not\ recover)\\
+			& = 0.35*0.55 = 0.1925\\
+			p(not\ recover;placebo) & = p(not\ recover)p(placebo|not\ recover)\\
+			& = 0.35*0.45 = 0.1575
+		\end{align}
+		So, 
+		\begin{align}
+			p(recover|real\ drug) & = \frac{p(recover;real\ drug)}{p(recover;real\ drug)+p(not\ recover;real\ drug)}\\
+			&=\frac{0.325}{0.325+0.1925} = 0.628\\
+			p(recover|placebo) & = \frac{p(recover;placebo)}{p(recover;placebo)+p(not\ recover;placebo)}\\
+			& = \frac{0.325}{0.325+0.1575} = 0.674\\
+			p(real\ drug) & = p(recover;real\ drug) + p(not\ recover;real\ drug)\\
+			& = 0.325+ 0.1925 = 0.5175
+		\end{align}
+		Because $p(recover|real\ drug)<p(recover|placebo)$,  taking the drug will not help a patient to recover from the disease based on this information. The proportion of test subjects who
+		were given the real drug is 51.75\%.
+
+		\subparagraph{2} 
+			\subparagraph{a} $p(X1=1) = 0.65, p(X1=0) = 0.35,p(X2=1)=0.41,p(X2=0) = 0.59$. Because $p(X1=1;X2=1) = 0.28 \not= p(X1=1)p(X2=1)$, $X1$ and $X2$ are not independent of each other.
+
+			\subparagraph{b} For the positive class: $p(X1=1|+) = 0.8, p(X1=0|+) = 0.2,p(X2=1|+)=0.5,p(X2=0|+) = 0.5$.
+			Because
+			\begin{align}
+				p(X1=1;X2 = 1|+) & = 0.4 = p(X1=1|+)p(X2=1|+)\\
+				p(X1=0;X2 = 1|+) & = 0.1 = p(X1=0|+)p(X2=1|+)\\
+				p(X1=1;X2 = 0|+) & = 0.4 = p(X1=1|+)p(X2=0|+)\\
+				p(X1=0;X2 = 0|+) & = 0.1 = p(X1=0|+)p(X2=0|+),\\
+			\end{align}
+			$p(X1;X2) = p(X1)p(X2)$ for any value of $X1$ and $X2$. So $X1$ and $X2$ are conditionally independent of each other for the positive class.
+
+			For the negative class: $p(X1=1|-) = 0.5, p(X1=0|-) = 0.5,p(X2=1|-)=0.32,p(X2=0|-) = 0.68$.
+			Because
+			\begin{align}
+				p(X1=1;X2 = 1|-) & = 0.16 = p(X1=1|-)p(X2=1|-)\\
+				p(X1=0;X2 = 1|-) & = 0.16 = p(X1=0|-)p(X2=1|-)\\
+				p(X1=1;X2 = 0|-) & = 0.34 = p(X1=1|-)p(X2=0|-)\\
+				p(X1=0;X2 = 0|-) & = 0.34 = p(X1=0|-)p(X2=0|-),\\
+			\end{align}
+			$p(X1;X2) = p(X1)p(X2)$ for any value of $X1$ and $X2$. So $X1$ and $X2$ are conditionally independent of each other for the negative class. In conclusion, $X1$ and $X2$ are conditionally independent of each other given the classes.
+
+		\subparagraph{c}
+		\begin{align}
+			& p(X1=1|+) = 0.8 \\
+			& p(X1=1|-) = 0.5 \\
+			& p(X2=1|+)=0.5 \\
+			& p(X2=1|-)=0.32 \\
+			& p(X3=1|+)=0.40\\
+			& p(X3=1|-)=0.16
+		\end{align}
+
+		\subparagraph{d}
+		\begin{align}
+			p(X1=1;X2=1;X3=1|+) & = p(X1=1|+)p(X2=1|+)p(X3=1|+)\\
+			& = 0.8*0.5*0.4 = 0.16\\
+			p(X1=1;X2=1;X3=1|-) & = p(X1=1|-)p(X2=1|-)p(X3=1|-)\\
+			& = 0.5*0.32*0.16 = 0.0256\\
+			p(X1=1;X2=0;X3=0|+) & = p(X1=1|+)p(X2=0|+)p(X3=0|+)\\
+			& = 0.8*0.5*0.6 = 0.24\\
+			p(X1=1;X2=0;X3=0|-) & = p(X1=1|-)p(X2=0|-)p(X3=0|-)\\
+			& = 0.5*0.68*0.84 = 0.2856\\
+			p(X1=0;X2=1;X3=0|+) & = p(X1=0|+)p(X2=1|+)p(X3=0|+)\\
+			& = 0.2*0.5*0.6 = 0.06\\
+			p(X1=0;X2=1;X3=0|-) & = p(X1=0|-)p(X2=1|-)p(X3=0|-)\\
+			& = 0.5*0.32*0.84=0.1344\\
+			p(X1=0;X2=0;X3=0|+) & = p(X1=0|+)p(X2=0|+)p(X3=0|+)\\
+			& = 0.2*0.5*0.6 = 0.06\\
+			p(X1=0;X2=0;X3=0|-) & = p(X1=0|-)p(X2=0|-)p(X3=0|-)\\
+			& = 0.5*0.68*0.84=0.2856\\
+		\end{align}
+
+		As a result, the prediction table is:
+		\begin{equation}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			X1 & X2 & X3 & prediction\\
+			\hline
+			1 & 1&1 & +\\
+			1&0&0& - \\
+			0&1&0 & -\\
+			0&0&0 &-\\
+			\hline
+		\end{tabular}
+		\end{equation}
+		And the training error is $\frac{8+20+5+5}{100}$ = 38\%.
+
+		\subparagraph{3}
+		$p(C;B) = p(B)p(C|B) = p(B)p(C)$, because $p(C|B) = p(C)$, so $C\perp B$ is true.
+		\begin{equation}
+			p(D;B|A) = p(D|A;B)p(B|A)=p(D|A)p(B|A),
+		\end{equation}
+		because $p(D|A;B) = p(D|A)$, so $D\perp B|A$ is true.
+		\begin{equation}
+			p(C;E|B) = p(C|E;B)p(E|B) = p(C|B)p(E|B)
+		\end{equation}
+		because $p(C|E;B) = p(C|B)$, so $C\perp E|B$ is true.
+
+		\subparagraph{4} $p(C=0|A=1,B=1,D=1)= \frac{p(C=0)p(A=1,B=1,D=1|C=0)}{p(A=1,B=1,D=1)}$, and $p(C=1|A=1,B=1,D=1)= \frac{p(C=1)p(A=1,B=1,D=1|C=1)}{p(A=1,B=1,D=1)}$.
+		\begin{align}
+			p(C=0)& = p(C=0|A=1)p(A=1)+p(C=0|A=0)p(A=0)\\
+			 & = [1-p(C=1|A=1)]p(A=1)+[1-p(C=1|A=0)][1-p(A=1)]\\
+			 & = 0.3*0.5+0.6*0.5 = 0.45\\
+			p(A=1,B=1,D=1|C=0) &= p(A=1)p(B=1)p(D=1|C=0)\\
+			& = 0.5*0.6*0.4 = 0.12\\
+			p(C=1)& = p(C=1|A=1)p(A=1)+p(C=1|A=0)p(A=0)\\
+			 & = 0.7*0.5+0.4*0.5 = 0.55\\
+			p(A=1,B=1,D=1|C=1) &= p(A=1)p(B=1)p(D=1|C=1)\\
+			& = 0.5*0.6*0.3 = 0.09
+		\end{align}
+
+		$p(C=0)p(A=1,B=1,D=1|C=0) = 0.054 >p(C=1)p(A=1,B=1,D=1|C=1) = 0.0495$, so $C=0$ is the more likely value.
+
+	\paragraph{3}
+		\subparagraph{1}It needs $O(d)$ to compute distance to one examples, so $O(nd)$ is needed to computed distances to all examples. Furthermore, $O(nk)$ is needed to find the $k$ closest examples. In conclusion, the computational complexity is $O(nd+nk)$.
+
+		\subparagraph{2}According to the triangle inequality, we have:
+		\begin{equation}
+			\forall i,d(\mathbf{x},\mathbf{x}_c)-d(\mathbf{x}_c,\mathbf{x}_i) \leq d(\mathbf{x},\mathbf{x}_i) \leq d(\mathbf{x},\mathbf{x}_c)+d(\mathbf{x}_c,\mathbf{x}_i)
+		\end{equation}
+		And $\forall i, d(\mathbf{x}_c,\mathbf{x}_i) \leq r$, so $d(\mathbf{x},\mathbf{x}_c)-d(\mathbf{x}_c,\mathbf{x}_i)\geq d(\mathbf{x},\mathbf{x}_c)-r$, and $d(\mathbf{x},\mathbf{x}_c)+d(\mathbf{x}_c,\mathbf{x}_i)\leq d(\mathbf{x},\mathbf{x}_c)+r$. As a result,
+		\begin{equation}
+			\forall i,d(\mathbf{x},\mathbf{x}_c)-r \leq d(\mathbf{x},\mathbf{x}_i) \leq d(\mathbf{x},\mathbf{x}_c)+r
+		\end{equation}
+		So $l_c = d(\mathbf{x},\mathbf{x}_c)-r$ and $u_c = d(\mathbf{x},\mathbf{x}_c)+r$.
+
+		\subparagraph{3}
+		\begin{align}
+			u_c &<l_a\\
+			d(\mathbf{x},\mathbf{x}_c)+r &< d(\mathbf{x},\mathbf{x}_a)-r\\
+			d(\mathbf{x},\mathbf{x}_a) - d(\mathbf{x},\mathbf{x}_c) &> 2r
+		\end{align}
+
+		\subparagraph{4} Algorithm 1 shows the basic idea of the speedup algorithm. $r$ can not be too small or too big, which can't reduce the computational complexity. If $r$ is too small, the number of balls will be too many, even each ball only contains 1 training samples. Then find enough ball containing $k$ samples equals to find $k$ nearest samples in the original k-NN algorithm. If $r$ is too big, there will be few balls, even only one. Then no balls can satisfy the condition, all training samples will be taken into account, equaling to the original algorithm. As a result, set $s$ balls and each ball contains about $s$ samples is acceptable, while $s = [\sqrt{n}]$. In this situation, $r$ of most of balls will not be too small or too big. These balls can be placed by k-means algorithm, and the $r$ of each ball should contain all samples in this ball but not big more. If the condition is not satisfied, all training samples have to be calculated.
+ 		\begin{algorithm}
+			\caption{Speedup k-NN algorithm}
+			\begin{algorithmic}[1]
+			\REQUIRE $n$ training samples $\mathbf{x}_1$ to $\mathbf{x}_n$ with labels $y_1$ to $y_n$, a query object $\mathbf{x}$, number $k$.
+			\ENSURE the label of $\mathbf{x}$
+			\STATE Set $s = [\sqrt{n}]$, which is the number of balls.
+			\STATE Use k-means algorithm to cluster $s$ class with $s$ centers. Each training sample can be assigned to a class.
+			\STATE Calculate distances of all centers to the query object $\mathbf{x}$ and order these centers by distances ascending, set as $\tilde{\mathbf{x}}_1$ to $\tilde{\mathbf{x}}_s$.
+			\FOR {i = 1 to s}
+			\STATE For class $i$, calculate the distance of all training samples in class $i$ to its center $\tilde{\mathbf{x}}_i$ . Set $r_i$ equals to the longest distance.
+			\ENDFOR  
+			\STATE // Construct $s$ balls to cover training samples.
+			\STATE Set $m=0$, $n = 0$
+			\WHILE{$n<k$}
+			\STATE $m = m+1$
+			\STATE  Counter the number of training samples in the ball with center $\tilde{\mathbf{x}}_m$, set as $c$.
+			\STATE $n = n+c$
+			\ENDWHILE
+			\STATE // Find the nearest balls which can contain enough $k$ samples.
+			\STATE $j = 0$
+			\FOR {i = m+1 to s}
+			\IF{$d(\tilde{\mathbf{x}}_i,\mathbf{x})-d(\tilde{\mathbf{x}}_m,\mathbf{x}) > r_i + r_m$}
+			\STATE $m = i-1, j =1$
+			\STATE break
+			\ENDIF
+			\ENDFOR
+			\IF{$j=0$}
+			\STATE $m = s$
+			\ENDIF
+			\STATE // Find balls satisfying the condition. If j=0, it means no balls can satisfying the condition, so all balls need to be calculated.
+			\STATE Focus on the balls with center $\tilde{\mathbf{x}}_1$ to $\tilde{\mathbf{x}}_m$, use k-NN algorithm to get the result, the label $y$.
+			\RETURN The label $y$
+			\end{algorithmic}
+			\end{algorithm}
+
+	\paragraph{4} 
+		\subparagraph{1} The coverage of rule will be increase or stay the same, because the rule is more precise and can only narrow the range. However, if all patients satisfy CholesterolLevel $>$ 245, the coverage will stay the same. The accuracy can change in either direction.
+
+		 If $p(HeartDisease=Severe|BloodPressure > 150,CholesterolLevel > 245)>p( HeartDisease=Severe|Blo$\\ $odPressure > 150,CholesterolLevel \leq 245)$, the accuracy will increase; If $p( HeartDisease=Severe|BloodPressur$\\ $e > 150,CholesterolLevel > 245) = p( HeartDisease=Severe|BloodPressure > 150,CholesterolLevel \leq 245)$, the accuracy will stay the same; If $p( HeartDisease=Severe|BloodPressure > 150,CholesterolLevel > 245)<p( HeartDisease=Severe|BloodPressure > 150,CholesterolLevel \leq 245)$, the accuracy will decrease.
+
+		 \subparagraph{2} The coverage of rule will be increase or stay the same, because the rule is more precise and can only narrow the range. However, if no patients satisfy 150 $<$ BloodPressure $\leq$ 200, the coverage will stay the same. The accuracy can change in either direction. If $p(HeartDisease=Severe|BloodPressure > 200) >p(HeartDisease=Severe|BloodPressure > 150)$, the accuracy will increase; If $p(HeartDisease=Severe|BloodPressure > 200) = p(HeartDisease=Severe|BloodPressure > 150)$, the accuracy will stay the same; If $p(HeartDisease=Severe|Bl$\\ $oodPressure > 200) < p(HeartDisease=Severe|BloodPressure > 150)$, the accuracy will decrease.
+
+		 \subparagraph{3} The coverage of rule will stay the same, because the rule isn't changed and the number of patients satisfying this rule can't be changed. The accuracy is increase or stay the same, because the result is more broad and can only expand the range. However, if no patients belong to HeartDisease $=$ Mild, the accuracy will stay the same.
+
+		 \subparagraph{4}The coverage of rule will decrease or stay the same. Because for a patient record with 
+		 BloodPressure $>$ 150, it may match several some patient visit records with BloodPressure $\leq$ 150; But for a patient record with BloodPressure $\leq$ 150, it will not match any record with BloodPressure $>$ 150. As a result, $p(BloodPressure > 150|patient\ training\ sample) \geq p(BloodPressure > 150| patient\ visit\ training\ sample)$. 
+
+		 The accuracy can change in either direction. Considering the following three situations: Firstly, every patient has 10 visits whose BloodPressure $>$ 150. If their HeartDisease $\not=$ Severe, all of their visits' ChiefComplaint$\not=$HeartRelated. If their HeartDisease $=$ Severe, only 3 of their visits' ChiefComplaint $=$HeartRelated. In this case the accuracy will decrease. Secondly, every patient has 3 visits whose BloodPressure $>$ 150. If their HeartDisease $\not=$ Severe, all of their visits' ChiefComplaint$\not=$HeartRelated. If their HeartDisease $=$ Severe, all of their visits' ChiefComplaint $=$HeartRelated. In this case the accuracy will not change. Thirdly, every patient has 3 visits whose BloodPressure $>$ 150. If their HeartDisease $\not=$ Severe, one or two of their visits' ChiefComplaint$\not=$HeartRelated. If their HeartDisease $=$ Severe, all of their visits' ChiefComplaint $=$HeartRelated. In this case the accuracy will increase.
+
+
+	\paragraph{5}
+	Accuracy $=\frac{TP+TN}{TP+FN+FP+TN} = \frac{98+143}{98+20+37+143} = 80.9\%$\\[1ex]
+
+	Precision(p) $ =\frac{TP}{TP+FP}= \frac{98}{98+37} = 72.6\%$\\[1ex]
+
+	Recall(r) $ =\frac{TP}{TP+FN}=83.1\% $\\[1ex]
+
+	F-measure $ = \frac{2rp}{r+p} =77.5\% $\\[1ex]
+
+	Cost $ = -1*98 +100*20+1*37+0*143 = 1939$\\[1ex]
+
+	Sensitivity = TP Rate $ = \frac{TP}{TP+FN}=83.1\% $\\[1ex]
+
+	Specificity = $1 - $ FP Rate $ = 1-\frac{FP}{FP+TN} = 79.4\%$\\[1ex]
+
+	False Positive Rate = $1-$ Specificity $ = 20.6\%$
+
+	\paragraph{6}
+	The reason for this observation is: The first step use the whole set rather than the training set. When determining a subset of useful features, the test set is also taken into account. It equals to use the train set to train a model and use the train set to test the model. What we got is training error rather than test error.
+
+	It's not a correct application, an improved alternative is proposed:
+
+	1. Use stratified CV for splitting the whole set into the training set and test set. For example, if using a five-fold cross validation, there will be 20 positive class and 20 negative class samples in the training set, and 5 positive class and 5 negative class samples in the test set.
+
+	2.Determine a subset of useful features based on the training set so that they are highly correlated with the class labels.
+
+	3.Restricting attention to this feature subset, implement a classifier (multivariate).
+
+	4.Determining the parameters of the model (using training set) and also to find the error of in prediction given by the fixed model (using test set).
+
+	5.Repeating 1~4 to finish the whole CV, and calculate the overall error.
+
+
+\end{document} 
