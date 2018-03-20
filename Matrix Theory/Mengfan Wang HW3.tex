@@ -27,11 +27,9 @@
 
 		In conclusion, $Ker(\mathbf{X}^T\mathbf{X}) = Ker(\mathbf{X})$.
 
-		\subparagraph{b}Firstly, we will show $rank(\mathbf{A}) = rank(\mathbf{A}^T)$ for all matrices. 
+		\subparagraph{b} From part 1 we have $Ker(\mathbf{X}^T\mathbf{X}) = Ker(\mathbf{X})$, so $nullity(\mathbf{X}^T\mathbf{X}) = nullity(\mathbf{X})$. Because $\mathbf{X}$ is a transformation from $\mathbb{R}^n$ to $\mathbb{R}^m$ and $\mathbf{X}^T\mathbf{X}$ is a transformation from $\mathbb{R}^n$ to $\mathbb{R}^n$, we have $nullity(\mathbf{X}^T\mathbf{X})+rank(\mathbf{X}^T\mathbf{X}) = nullity(\mathbf{X}) + rank(\mathbf{X}) = n $. Therefore, $rank(\mathbf{X}^T\mathbf{X}) = rank(\mathbf{X})$.
 
-   		Suppose $\mathbf{A} \in \mathbb{R}^{m\times n}$ and has rank $p$. If $p=0$, it's obvious that $rank(\mathbf{A}) = rank(\mathbf{A}^T) = 0$. Otherwise, $\mathbf{A}$ can be factored as $\mathbf{A} = \mathbf{XY}^T$, so $\mathbf{A}^T = \mathbf{YX}^T$. Suppose $\mathbf{A}^T = [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]$ and $\mathbf{Y} = [\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}]$, while $\mathbf{a}$ and $\mathbf{y}$ are column vectors. Then $ [\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]$ can be represented by a linear combination of $[\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}]$ with coefficients $\mathbf{X}^t$. In other words, $span([\mathbf{a}_1\ \mathbf{a}_2 \cdots \mathbf{a_m}]) \subset span([\mathbf{y}_1\ \mathbf{y}_2 \cdots \mathbf{y_p}])$, so $rank(\mathbf{A}^T) \leq rank(\mathbf{Y}) = p = rank(\mathbf{A})$. It's same to $\mathbf{B} = \mathbf{A}^T$: $rank(\mathbf{B}^T) = rank(\mathbf{A}) \leq rank(\mathbf{B}) = rank(\mathbf{A}^T)$. The only solution is $rank(\mathbf{A}^T) = rank(\mathbf{A})$.
-
-   		So, $rank(\mathbf{XX}^T) = rank((\mathbf{X}^T\mathbf{X})^T) = rank(\mathbf{X}^T\mathbf{X})$.
+   		Similarly, $rank(\mathbf{XX}^T) = rank(\mathbf{X}^T) = rank(\mathbf{X})$. So, $rank(\mathbf{XX}^T) = rank(\mathbf{X}^T\mathbf{X})$.
 
 	\paragraph{2}
 		\subparagraph{a}$\forall \mathbf{x} \in \mathbb{R}^{n}$, $\exists \mathbf{w} = \mathbf{Qx} \in Ran(\mathbf{Q})$. Because $Ran(\mathbf{P}) = Ran(\mathbf{Q})$, $\exists \mathbf{z}$ that $\mathbf{w} = \mathbf{Pz} = \mathbf{PPz} = \mathbf{Pw}$. So, $\mathbf{PQx} = \mathbf{Pw} = \mathbf{w} = \mathbf{Qx}$. Therefore, $(\mathbf{PQ}-\mathbf{Q})\mathbf{x} = \mathbf{0}\  \forall \mathbf{x} \in \mathbb{R}^n$. As a result, $\mathbf{PQ} = \mathbf{Q}$.
@@ -90,12 +88,13 @@
 			\mathbf{B}_R\mathbf{A}\mathbf{B}_R & = \mathbf{A}^T\mathbf{B}_R^T\mathbf{B}_R\\
 			\mathbf{B}_R & = \mathbf{A}^T\mathbf{B}_R^T\mathbf{B}_R\\
 			\mathbf{A}\mathbf{A}^T\mathbf{B}_R^T\mathbf{B}_R & = \mathbf{I}\\
-			\mathbf{B}_R^T\mathbf{B}_R & = (\mathbf{A}\mathbf{A}^T)^{-1}
+			\mathbf{B}_R^T\mathbf{B}_R & = (\mathbf{A}\mathbf{A}^T)^{-1}\\
+			\mathbf{B}_R & = \mathbf{A}^T\mathbf{B}_R^T\mathbf{B}_R = \mathbf{A}^T(\mathbf{A}\mathbf{A}^T)^{-1}
 		\end{align}
-		Because $\mathbf{A}\mathbf{A}^T$ is the Gram matrix of $\mathbf{A}^T$, and the column vectors of $\mathbf{A}^T$ is independent because $\mathbf{A}$ has right inverse. So $\mathbf{A}\mathbf{A}^T$ is invertible. As a result, while $(\widetilde{\mathbf{B}_R}^T \widetilde{\mathbf{B}_R} ) = (\mathbf{A}\mathbf{A}^T)^{-1}$, $(\widetilde{\mathbf{Q}} = \mathbf{I} - \widetilde{\mathbf{B}_R}\mathbf{A}) $  is an orthogonal projector onto $Ker(\mathbf{A})$.
+		Because $\mathbf{A}\mathbf{A}^T$ is the Gram matrix of $\mathbf{A}^T$, and the column vectors of $\mathbf{A}^T$ is independent because $\mathbf{A}$ has right inverse. So $\mathbf{A}\mathbf{A}^T$ is invertible. As a result, while $ \widetilde{\mathbf{B}_R}  = \mathbf{A}^T(\mathbf{A}\mathbf{A}^T)^{-1}$, $\widetilde{\mathbf{Q}} = \mathbf{I} - \widetilde{\mathbf{B}_R}\mathbf{A} $  is an orthogonal projector onto $Ker(\mathbf{A})$.
  
 	\paragraph{4}
-		\subparagraph{a} In my opinion. $\mathbf{A}$ should in $\mathbb{R}^{m\times m}$ and $\mathbf{B}$ should in $\mathbb{R}^{n\times n}$ to make $P(\mathbf{Z}) = \mathbf{AZB}$ be meaningful.
+		\subparagraph{a} 
 
 		Firstly, I'm going to show $tr(\mathbf{AB}) = tr(\mathbf{BA})$ while $\mathbf{A}=[a_{ij}], \mathbf{B} = [b_{ij}] \in \mathbb{R}^{n\times n}$:
 		\begin{equation}
@@ -110,9 +109,47 @@
 
 		So $P^*(\mathbf{Z}) = \mathbf{A}^T\mathbf{Z}\mathbf{B}^T$.
 
-		\subparagraph{b}If $P(\mathbf{Z})$ is the solution operator for the BAP, it need to satisfy the three conditions: $Ran(P) =\mathcal{W}, P(P(\mathbf{Z})) = P(\mathbf{Z}), P^* = P$.
+		\subparagraph{b} Suppose $rank(\mathcal{M}) = a$, the column vectors of $\hat{\mathbf{M}} \in \mathbb{R}^{m\times a}$ is one basis of $\mathcal{M}$.
 
-		The first condition, $Ran(P) =\mathcal{W}$, is true when $Ran(\mathbf{A}) = \mathcal{M}$ and $Ker(\mathbf{B}) = \mathcal{N}$. Proof: $\forall \mathbf{X} \in Ran(P), \exists \mathbf{Z} \in \mathbb{R}^{m\times n}, \mathbf{X} = P(\mathbf{Z}) = \mathbf{AZB}$. So $Ran(\mathbf{X}) = Ran(\mathbf{AZB}) \subset Ran(\mathbf{A}) = \mathcal{M}$, because column vectors of $\mathbf{AZB}$ can be represented by a linear combination of column vectors of $\mathbf{A}$. And $Ker(\mathbf{X}) = Ker(\mathbf{AZB}) \supset Ker(\mathbf{B}) = \mathcal{N}$. Because if $\mathbf{z} \in Ker(\mathbf{B})$ so that $\mathbf{Bz} = \mathbf{0}$, $\mathbf{AZBz = 0}$ too.
+		Suppose the column vectors of $\tilde{\mathbf{N}}$  is one basis of $\mathcal{N}$, and the column vectors of $\hat{\mathbf{N}} \in \mathbb{R}^{n\times b}$ is a basis of $\{\mathbf{x}|\mathbf{x}^T\tilde{\mathbf{N}} = \mathbf{0}\ \forall \mathbf{x}\in \mathbb{R}^{n}\}$, while $\hat{\mathbf{N}}^T \tilde{\mathbf{N}} = \mathbf{0}$. We have $Ker(\hat{\mathbf{N}}^T) = \mathcal{N}$, because for any vectors in $\mathcal{N}$ can be represented as $\mathbf{x} = \tilde{\mathbf{N}}\mathbf{y}$, and $\hat{\mathbf{N}}^T\mathbf{x} = \hat{\mathbf{N}}^T \tilde{\mathbf{N}}\mathbf{y} = \mathbf{0}$.
+
+		Apply Gram-Schmidt process to $\hat{\mathbf{M}}$ and $\hat{\mathbf{N}}$ to get $\mathbf{M}$ and $\mathbf{N}$, whose column vectors are the orthonormal basis of $\mathcal{M}$ and $\mathcal{N}$. Thus, we have $\mathbf{M}^T\mathbf{M} = \mathbf{I}$ and $\mathbf{N}^T\mathbf{N} = \mathbf{I}$. Now show the conclusion: When $\mathbf{A = MM}^T$ and $\mathbf{B=NN}^T$, $\mathbf{P(Z)}$ is the solution operator for the best approximation problem.
+
+		Proof: If $\mathbf{P(Z)}$ is the solution operator for the best approximation problem, three conditions need to be satisfied: $\mathbf{P}^2(\mathbf{Z}) = \mathbf{P(Z)}$, $\mathbf{P^*(Z)} = \mathbf{P(Z)}$, and $Ran(\mathbf{P}) = \mathcal{W}$.
+
+		(1) \begin{align}
+			\mathbf{P}^2(\mathbf{Z}) & = \mathbf{MM}^T(\mathbf{MM}^T\mathbf{ZNN}^T)\mathbf{NN}^T\\
+			& = \mathbf{MM}^T\mathbf{ZNN}^T\\
+			& = \mathbf{P(Z)}
+		\end{align}
+
+		(2) From part a we can know $P^*(\mathbf{Z}) = \mathbf{A}^T\mathbf{Z}\mathbf{B}^T = (\mathbf{MM}^T)^T\mathbf{Z}(\mathbf{NN}^T)^T=\mathbf{MM}^T\mathbf{ZNN}^T = \mathbf{P(Z)} $.
+
+		(3) Suppose $\mathbf{M} = [\mathbf{m}_1\ \mathbf{m}_2\ \dots\ \mathbf{m}_a]$ and $\mathbf{N} = [\mathbf{n}_1\ \mathbf{n}_2\ \dots\ \mathbf{n}_b]$. Firstly, we need to prove $\{\mathbf{X}|\mathbf{X} = \mathbf{m}_i\mathbf{n}_j^T,\ 1\leq i \leq a\ and\ 1\leq j\leq b \}$ is a basis of $\mathcal{W}$.
+
+		\quad (3.1)$\{\mathbf{X}|\mathbf{X} = \mathbf{m}_i\mathbf{n}_j^T\}$ is linearly independent. Because $\{\mathbf{m}_1,\mathbf{m}_2,\dots,\mathbf{m}_a\}$ is a basis of $\mathcal{M}$ and $\{\mathbf{n}_1,\mathbf{n}_2,\dots,\mathbf{n}_b\}$ is a basis of $\mathcal{N}$, we have: The only solution of $\sum\limits_{i=1}^a \alpha_i\mathbf{m}_i = \mathbf{0}$ is $\alpha_i = 0$ for all $i$ and the only solution of $\sum\limits_{i=1}^b \beta_i\mathbf{n}_i = \mathbf{0}$ is $\beta_i = 0$ for all $i$. As a result, the solution of $(\sum\limits_{i=1}^a \alpha_i\mathbf{m}_i)(\sum\limits_{j=1}^b \beta_j\mathbf{n}_j^T) = \mathbf{0}$ is $\alpha_i = 0$ for all $i$ or $\beta_j = 0$ for all $j$. If existing some $b_j \not= 0$: The only solution of $(\sum\limits_{i=1}^a \alpha_i\mathbf{m}_i)(\sum\limits_{j=1}^b \beta_j\mathbf{n}_j^T) = \sum\limits_{i=1}^a \mathbf{m}_i(\alpha_i\sum\limits_{j=1}^b \beta_j\mathbf{n}_j^T) = \mathbf{0}$ is $\alpha_i=0$ for all $i$ because $(\sum\limits_{j=1}^b \beta_j\mathbf{n}_j^T) \not = \mathbf{0}$ and vice versa. So the only solution of $(\sum\limits_{i=1}^a \alpha_i\mathbf{m}_i)(\sum\limits_{j=1}^b \beta_j\mathbf{n}_j^T)  = \sum\limits_{i=1}^a\sum\limits_{j=1}^b \alpha_i \beta_j\mathbf{m}_i\mathbf{n}_j^T$ is $\alpha_i \beta_j = 0$ for all $i,j$. $\{\mathbf{X}|\mathbf{X} = \mathbf{m}_i\mathbf{n}_j^T\}$ is linearly independent.
+
+		\quad (3.2) $span(\{\mathbf{X}|\mathbf{X} = \mathbf{m}_i\mathbf{n}_j^T\}) = \mathcal{W}$. $\forall \hat{\mathbf{X}} \in span(\{\mathbf{X}|\mathbf{X} = \mathbf{m}_i\mathbf{n}_j^T\})  $ can be represented as a linear combination of the bases: 
+		\begin{align}	
+		\hat{\mathbf{X}} & = \sum\limits_{i=1}^a\sum\limits_{j=1}^b \lambda_{ij}\mathbf{m}_i\mathbf{n}_j^T\\
+		& =  \sum\limits_{i=1}^a\sum\limits_{j=1}^b \lambda_{ij}\mathbf{Me}_i(\mathbf{Ne}_j)^T\\
+		& = \mathbf{M}(\sum\limits_{i=1}^a\sum\limits_{j=1}^b \lambda_{ij}\mathbf{e}_i\mathbf{e}_j^T)\mathbf{N}^T
+		\end{align}
+		So, $Ran(\hat{\mathbf{X}}) = Ran(\mathbf{M}(\sum\limits_{i=1}^a\sum\limits_{j=1}^b \lambda_{ij}\mathbf{e}_i\mathbf{e}_j^T)\mathbf{N}^T) \subset Ran(\mathbf{M})= Ran(\mathbf{MM}^T) = \mathcal{M}$. And $\forall \mathbf{z} \in \mathcal{N} = Ker(\mathbf{NN}^T) = Ker(\mathbf{N}^T)$, $\hat{\mathbf{X}}\mathbf{z} = \mathbf{M}(\sum\limits_{i=1}^a\sum\limits_{j=1}^b \lambda_{ij}\mathbf{e}_i\mathbf{e}_j^T)\mathbf{N}^T=\mathbf{0}$. Therefore, $\mathcal{N}\subset Ker(\hat{\mathbf{X}}) $. So $span(\{\mathbf{X}|\mathbf{X} = \mathbf{m}_i\mathbf{n}_j^T\}) = \mathcal{W}$.
+
+	As a result, $\{\mathbf{X}|\mathbf{X} = \mathbf{m}_i\mathbf{n}_j^T \}$ is a basis of $\mathcal{W}$. Now show $\mathcal{W} =  Ran(\mathbf{P})$.
+
+	(3.3) $\forall \hat{\mathbf{X}} \in \mathcal{W}$, it can be represented as $\hat{\mathbf{X}} = \mathbf{M}(\sum\limits_{i=1}^a\sum\limits_{j=1}^b \lambda_{ij}\mathbf{e}_i\mathbf{e}_j^T)\mathbf{N}^T $.
+	\begin{align}
+		\mathbf{P(\hat{\mathbf{X}})} & =  \mathbf{MM}^T\mathbf{M}(\sum\limits_{i=1}^a\sum\limits_{j=1}^b \lambda_{ij}\mathbf{e}_i\mathbf{e}_j^T)\mathbf{N}^T\mathbf{NN^T}\\
+		& = \mathbf{M}(\sum\limits_{i=1}^a\sum\limits_{j=1}^b \lambda_{ij}\mathbf{e}_i\mathbf{e}_j^T)\mathbf{N}^T\\
+		& = \hat{\mathbf{X}}
+	\end{align}
+	So $\hat{\mathbf{X}} \in Ran(\mathbf{P})$ and $\mathcal{W} \subset Ran(\mathbf{P})$.
+
+	(3.4) If $\mathbf{X} \in  Ran(\mathbf{P})$, there must exist $\mathbf{Z}$ so that $\mathbf{P(Z)} = \mathbf{MM}^T\mathbf{ZNN}^T$. So, $Ran(\mathbf{X}) = Ran(\mathbf{MM}^T\mathbf{ZNN}^T)\subset Ran(\mathbf{M}) = \mathcal{M}$. And $\forall \mathbf{z} \in \mathcal{N}$ we have $\mathbf{N}^T\mathbf{z} = \mathbf{0}$, so $\mathbf{Xz} = \mathbf{MM}^T\mathbf{ZNN}^T\mathbf{z} = \mathbf{0}$. Therefore, $Ran(\mathbf{P}) \subset \mathcal{W}$. So $Ran(\mathbf{P}) =\mathcal{W}$.
+
+	In conclusion, when $\mathbf{A = MM}^T$ and $\mathbf{B=NN}^T$, $\mathbf{P(Z)}$ is the solution operator for the best approximation problem.
 
 	\paragraph{5} Suppose this matrix $\mathbf{A} = \mathbf{QR} = [\mathbf{a}_1\ \mathbf{a}_2\ \mathbf{a}_3]$, while $\mathbf{Q} = [\mathbf{q}_1\ \mathbf{q}_2\ \mathbf{q}_3]$ is orthonormal, $\mathbf{a}$ and $\mathbf{q}$ are column vectors. Applying the Gram-Schmidt process to $\{\mathbf{a}_1\ \mathbf{a}_2\ \mathbf{a}_3\}$:
 	\begin{align}
@@ -156,11 +193,46 @@
 
 
 	\paragraph{7}
-		\subparagraph{a}
+		\subparagraph{a} Because $\mathbf{Q}$ has orthonormal columns, $\mathbf{Q}^T\mathbf{Q}$ is the Gram matrix of its columns and equals to $\mathbf{I}$. And $\mathbf{Q}$ is invertible, so can be full-rank factorized as $\mathbf{Q = QI}$. Then:
+		\begin{align}
+			\mathbf{Q}^\dagger & = \mathbf{I}(\mathbf{I}^T\mathbf{I})^{-1}(\mathbf{Q}^T\mathbf{Q})^{-1}\mathbf{Q}^T\\
+			& = \mathbf{Q}^T
+		\end{align}
 
-		\subparagraph{b}
-
+		\subparagraph{b} Define the standard dot product as the inner product. Suppose $rank( \mathbf{P}) = p$, $ \mathbf{P}$ can be factorized as $ \mathbf{P} =  \mathbf{X} \mathbf{Y}^T$. Because $\mathbf{P}$ is an orthogonal projection, we have $\mathbf{P}^T = \mathbf{P}$. So, $\mathcal{S} = Ran(\mathbf{P})  = Ran(\mathbf{XY}^T) = Ran(\mathbf{X}) = Ran(\mathbf{YX}^T) = Ran(\mathbf{Y})$. Then:
+		\begin{align}
+			\mathbf{P} & = \mathbf{YX}^T\\
+			\mathbf{PX} & = \mathbf{YX}^T\mathbf{X}\\
+			\mathbf{Y} & = \mathbf{PX}(\mathbf{X}^T\mathbf{X})^{-1}
+		\end{align}
+		Because $\mathbf{Y} \subset Ran(\mathbf{Y}) = \mathcal{S}$, and $ \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \subset Ran(\mathbf{X}) = \mathcal{S}$, $\mathbf{Y}  = \mathbf{PX}(\mathbf{X}^T\mathbf{X})^{-1}  = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}$. Then: 
+		\begin{align}
+			\mathbf{P}^\dagger & = \mathbf{Y}(\mathbf{Y}^T\mathbf{Y})^{-1}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\\
+			& = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}[(\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1})^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}]^{-1}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\\
+			& = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}(\mathbf{X}^T\mathbf{X})(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\\
+			& = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\\
+			& = \mathbf{YX}^T\\
+			& = \mathbf{P}
+		\end{align}
+		As a result, $\mathbf{P}^\dagger = \mathbf{P}$.
+ 
 		\subparagraph{c}
-
+		\begin{align}
+			\mathbf{A}& = \mathbf{LU} = \left[ \begin{array}{ccc} 1&0&0\\2&1&0\\1&1&1\\ \end{array}\right] \left[ \begin{array}{ccc} 2&1&0\\0&1&1\\0&0&0\\\end{array}\right]\\
+			& = \mathbf{XY}^T =  \left[ \begin{array}{cc} 1&0\\2&1\\1&1\\ \end{array}\right]\left[ \begin{array}{ccc} 2&1&0\\0&1&1\\\end{array}\right]
+		\end{align}
+		And,
+		\begin{equation}
+			(\mathbf{X}^T\mathbf{X})^{-1} = \left[ \begin{array}{cc}6&3\\3&2\\ \end{array}\right]^{-1} =  \left[ \begin{array}{ccc}2/3&-1\\ -1&2\\ \end{array}\right]	
+		\end{equation}
+		\begin{equation}
+			(\mathbf{Y}^T\mathbf{Y})^{-1} = \left[ \begin{array}{cc}5&1\\1&2\\ \end{array}\right]^{-1} =  \left[ \begin{array}{ccc}2/9&-1/9\\ -1/9&5/9\\ \end{array}\right]
+		\end{equation}
+		So, 
+		\begin{align}
+			\mathbf{A}^\dagger & = \mathbf{Y}(\mathbf{Y}^T\mathbf{Y})^{-1}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\\
+			& = \left[ \begin{array}{ccc} 14/27& 4/27&-10/27\\ -10/27&1/27&11/27\\-17/27  &-1/27 &16/27\\     \end{array}\right]
+		\end{align}
 
 \end{document}
+ \left[ \begin{array}{ccc} \end{array}\right]
