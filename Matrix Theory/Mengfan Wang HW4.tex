@@ -1,0 +1,133 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsfonts,amssymb} %空心字符
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang} 
+	\title{Matrix Theory Homework 4} 
+\begin{document}
+	\maketitle 
+	\paragraph{1} 
+		\subparagraph{a} Suppose the SVD of $\mathbf{A}$ is $\mathbf{A} = \mathbf{U \Sigma V}^T$, while $\mathbf{U} \in \mathbb{R}^{m\times m}$, $\mathbf{V} \in \mathbb{R}^{n \times n} $ are unitary. $\mathbf{\Sigma} = diag(\sigma_1,\sigma_2, \dots \sigma_r, \dots \sigma_p)$, while $\sigma_1\geq \sigma_2 \geq \dots \sigma_r > 0 = \sigma_{r+1} \dots = \sigma_p$, $ p = min(m,n)$ and $r = rank(\mathbf{A})$.
+
+		We have $\|\mathbf{A}\|_2 = \max \frac{\|\mathbf{Ax}\|}{\|\mathbf{x}\|} = \sigma_1$, and $\|\mathbf{A}\|_F = \|\mathbf{U \Sigma V}^T\|_F = \|\mathbf{\Sigma}\|_F = \sqrt{\sum\limits_{i=1}^{p}\sigma_i^2} = \sqrt{\sum\limits_{i=1}^{r}\sigma_i^2}$. Then:
+		\begin{align}
+			\sigma_1^2 & \leq \sum\limits_{i=1}^{p}\sigma_i^2 = \sum\limits_{i=1}^{r}\sigma_i^2  \leq r \sigma_1^2\\
+			\|\mathbf{A}\|_2^2 & \leq \|\mathbf{A}\|_F^2 \leq r\|\mathbf{A}\|_2^2\\
+			\|\mathbf{A}\|_2 & \leq \|\mathbf{A}\|_F \leq \sqrt{rank(\mathbf{A})} \|\mathbf{A}\|_2
+		\end{align}
+
+	\subparagraph{b}  Suppose the SVD of $\mathbf{A}$ is $\mathbf{A} = \mathbf{U \Sigma V}^T$, while $\mathbf{U} = [\mathbf{u}_1\ \mathbf{u}_2\ \dots\ \mathbf{u}_m]$, and $\mathbf{V} = [\mathbf{v}_1\ \mathbf{v}_2\ \dots\ \mathbf{v}_n]$.
+	Because $rank(\mathbf{A}) = 1$, $\Sigma = diag(\sigma_1,0,0\dots 0)$. Then:
+	\begin{align}
+		\mathbf{A} & = \mathbf{U \Sigma V}^T\\
+		& = [\mathbf{u}_1\ \mathbf{u}_2\ \dots\ \mathbf{u}_m]\left[\begin{array}{cc} \sigma_1 & \mathbf{0}\\ \mathbf{0} & \mathbf{0} \end{array}\right]\left[\begin{array}{c} \mathbf{v}_1^T \\ \mathbf{v}_2^T \\ \vdots \\\mathbf{v}_n^T \end{array}\right]\\
+		& = \sigma_1 \mathbf{u}_1 \mathbf{v}_1^T
+	\end{align}
+	Because $\mathbf{U}$ and $\mathbf{V}$ are unitary, $\|\mathbf{u}_1\| = \|\mathbf{v}_1\| =1$.
+
+	$\|\mathbf{A}\|_2 = \sigma_1$, and  $\|\mathbf{A}\|_F = \|\mathbf{U \Sigma V}^T\|_F = \|\mathbf{\Sigma}\|_F = \sqrt{\sum\limits_{i=1}^{p}\sigma_i^2} = \sigma_1 $. Suppose $\mathbf{u} = \sigma_1 \mathbf{u}_1$, and $\mathbf{v} = \mathbf{v}_1$, $\mathbf{A =uv}^T$, while $\|\mathbf{u}\|\|\mathbf{v}\| = \sigma_1\|\mathbf{u}_1\|\|\mathbf{v}_1\|  = \sigma_1$.
+
+	As a result, exists $\mathbf{u,v}$ so that $\mathbf{A =uv}^T$ and $\|\mathbf{A}\|_2 = \|\mathbf{A}\|_F =\|\mathbf{u}\|\|\mathbf{v}\| $.
+
+	\paragraph{2} $rank(\hat{\mathbf{E}}) \leq min[rank(\mathbf{b-A\hat{x}}),rank(\hat{\mathbf{x}}^T)] = 1$. There are two situations:
+
+	The first one, $rank(\hat{\mathbf{E}}) = 0$. It means $\hat{\mathbf{E}} = \mathbf{0}$ and $\|\hat{\mathbf{E}}\|_2 = 0$. Obviously, $\hat{\mathbf{E}}$ has the smallest spectral norm.
+
+	The second one, $rank(\hat{\mathbf{E}}) = 1$. From Question 1.(b) we have:
+	\begin{align}
+		\|\hat{\mathbf{E}}\|_2 & = \|\frac{(\mathbf{b-A\hat{x}})\mathbf{\hat{x}}^T}{\mathbf{\hat{x}}^T\hat{\mathbf{x}}}\|_2\\
+		& = \frac{\|\mathbf{b-A\hat{x}}\|\|\mathbf{\hat{x}}\|}{\|\mathbf{\hat{x}}^T\hat{\mathbf{x}}\|}\\
+		& = \frac{\|\mathbf{b-A\hat{x}}\|}{\|\hat{\mathbf{x}}\|}
+	\end{align}
+	And for any $\mathbf{E}$ satisfies the equation, $\mathbf{E\hat{x}} = \mathbf{b-A\hat{x}} $. The definition of $\|\mathbf{E}\|_2$ is:
+	\begin{equation}
+		\|\mathbf{E}\|_2 = \max_{\mathbf{x}\in \mathbb{R}^n}\frac{\|\mathbf{Ex}\|}{\|\mathbf{x}\|}
+	\end{equation}
+	So, $\forall \mathbf{\hat{x}}\in  \mathbb{R}^n$:
+	\begin{align}
+		\|\mathbf{E\hat{x}}\| \leq & \|\mathbf{E}\|_2\|\mathbf{\hat{x}}\|\\
+		\|\mathbf{b-A\hat{x}}\| \leq & \|\mathbf{E}\|_2\|\mathbf{\hat{x}}\|\\
+		\frac{\|\mathbf{b-A\hat{x}}\|}{\|\hat{\mathbf{x}}\|}  \leq & \|\mathbf{E}\|_2\\
+		\|\mathbf{\hat{E}}\|_2 \leq	& \|\mathbf{E}\|_2
+	\end{align}
+	In conclusion, $\mathbf{\hat{E}}$ has the smallest spectral norm.
+
+
+	\paragraph{3}
+	 \subparagraph{a} Suppose the SVD of $\mathbf{A}$ is $\mathbf{A} = \mathbf{U \Sigma V}^T$. Therefore, $\mathbf{A}^{\dagger} = \mathbf{V}_r\mathbf{\Sigma}_r^{-1}\mathbf{U}^T_r =\mathbf{V}\left[\begin{array}{cc} \mathbf{\Sigma}_r^{-1} & \mathbf{0}\\ \mathbf{0} & \mathbf{0} \end{array}\right] \mathbf{U}^T $, supposing $\mathbf{\Lambda} = \left[\begin{array}{cc} \mathbf{\Sigma}_r^{-1} & \mathbf{0}\\ \mathbf{0} & \mathbf{0} \end{array}\right] \in \mathbb{R}^{n\times m}$, $\mathbf{V}_r$ and $\mathbf{U}_r$ are the former $r$ columns of $\mathbf{V}$ and $\mathbf{U}$ , and $\mathbf{\Sigma}_r = diag(\sigma_1, \sigma_2, \dots \sigma_r)$. Then:
+
+	 \begin{align}
+	 	\mathbf{B}(\delta) & = (\mathbf{A}^T\mathbf{A}+\delta^2\mathbf{I})^{-1}\mathbf{A}^T\\
+	 	& = (\mathbf{V \Sigma U}^T\mathbf{U \Sigma V}^T + \delta^2\mathbf{I})^{-1}\mathbf{V \Sigma U}^T\\
+	 	& = (\mathbf{V \Sigma}^2 \mathbf{V}^T + \mathbf{V} \delta^2\mathbf{IV}^T)^{-1}\mathbf{V \Sigma U}^T\\
+	 	& = (\mathbf{V}(\mathbf{\Sigma}^2+\delta^2\mathbf{I})\mathbf{V}^T)^{-1}\mathbf{V \Sigma U}^T\\
+	 	& = \mathbf{V}(\mathbf{\Sigma}^2+\delta^2\mathbf{I})^{-1}\mathbf{\Sigma U}^T\\
+	 \end{align}
+		 Suppose $\mathbf{\Gamma} =(\mathbf{\Sigma}^2+\delta^2\mathbf{I})^{-1}\mathbf{\Sigma}$, which is a diagonal matrix. Therefore, $\mathbf{\Gamma} = diag(\gamma_1,\gamma_2,\dots \gamma_p)$, while $\gamma_i = \frac{\sigma_i}{\sigma_i^2+\delta^2}$ (Notice that $\sigma_{r+1} = \sigma_{r+2} = \dots \sigma_p = 0$). 
+
+		 For $\forall \mathbf{b}\in Ker(\mathbf{A}^{\dagger})$, we have $\mathbf{A}^{\dagger}\mathbf{b} = \mathbf{V \Lambda U}^T\mathbf{b} = \mathbf{0}$. Because $\|\mathbf{V \Lambda U}^T\mathbf{b}\| = \|\mathbf{\Lambda U}^T\mathbf{b}\| = \|\mathbf{0}\|$, $\mathbf{\Lambda U}^T\mathbf{b} = \mathbf{0}$, thus the former $r$ entries of $\mathbf{U}^T\mathbf{b}$ must be zero. Therefore, $\mathbf{\Gamma U}^T\mathbf{b} = \mathbf{0}$, and $\mathbf{V\Gamma U}^T\mathbf{b} = \mathbf{0}$, which represents $\mathbf{b} \in Ker(\mathbf{B(\delta)})$. If $\mathbf{b} \in  Ker(\mathbf{B(\delta)}) $, it can be proved that $\mathbf{b}\in Ker(\mathbf{A}^{\dagger})$ in a similarly way. In conclusion, $ Ker(\mathbf{A}^{\dagger}) =  Ker(\mathbf{B(\delta)})$.
+
+		\subparagraph{b} $(\delta\|\mathbf{A}^\dagger\|_2)^2 = (\delta\|\mathbf{\Gamma}\|_2)^2 = \frac{\delta^2}{\sigma_r^2}$. And we have:
+		\begin{align}
+			\frac{\|\mathbf{B}(\delta)\mathbf{b}-\hat{\mathbf{x}}\|}{\|\mathbf{\hat{x}}\|} & = \frac{\|\mathbf{V \Gamma U}^T\mathbf{b}-\mathbf{V \Lambda U}^T\mathbf{b}\|}{\|\mathbf{V \Lambda U}^T\mathbf{b}\|}\\
+			& = \frac{\|\mathbf{(\Gamma- \Lambda)U}^T\mathbf{b}\|}{\|\mathbf{\Lambda U}^T\mathbf{b}\|}\\
+			& = \frac{\|\mathbf{(\Gamma \Sigma- \left[\begin{array}{cc} \mathbf{I}_r & \mathbf{0}\\ \mathbf{0} & \mathbf{0} \end{array}\right])\Lambda}\mathbf{U}^T\mathbf{b}\|}{\|\mathbf{\Lambda U}^T\mathbf{b}\|}\\
+			& \leq	\|\mathbf{\Gamma \Sigma- \left[\begin{array}{cc} \mathbf{I}_r & \mathbf{0}\\ \mathbf{0} & \mathbf{0} \end{array}\right]}\|_2
+		\end{align}
+		Notice that $\mathbf{\Gamma \Sigma \Lambda = \Gamma}$ because all of them are diagonal matrices and only the former $r$ diagonal entries are nonzero. The $i_{th}$ diagonal entry of $\mathbf{\Gamma \Sigma -\left[\begin{array}{cc} \mathbf{I}_r & \mathbf{0}\\ \mathbf{0} & \mathbf{0} \end{array}\right]}$ is $\frac{\sigma_i^2}{\sigma_i^2+\delta^2}-1 = -\frac{\delta^2}{\sigma_i^2+ \delta^2}$ ($1\leq i \leq r$) or $0\ (i>r)$. Thus, $\|\mathbf{\Gamma \Sigma- \left[\begin{array}{cc} \mathbf{I}_r & \mathbf{0}\\ \mathbf{0} & \mathbf{0} \end{array}\right]}\|_2 = \max \frac{\delta^2}{\sigma_i^2+ \delta^2} = \frac{\delta^2}{\sigma_r^2+ \delta^2} \leq \frac{\delta^2}{\sigma_r^2} = (\delta\|\mathbf{A}^\dagger\|_2)^2 $. $\frac{\|\mathbf{B}(\delta)\mathbf{b}-\hat{\mathbf{x}}\|}{\|\mathbf{\hat{x}}\|} \leq (\delta\|\mathbf{A}^\dagger\|_2)^2$ is proved.
+
+		\subparagraph{c} \begin{align}
+			\|\mathbf{B}(\delta)-\mathbf{A}^\dagger\|_2 & =\|\mathbf{V \Gamma U}^T-\mathbf{V \Lambda U}^T\|_2\\
+			& = \|\mathbf{V(\Gamma- \Lambda)U}^T\|_2\\
+			& = \|\mathbf{\Gamma -\Lambda}\|_2
+		\end{align}
+		The $i_{th}$ diagonal entry of $\mathbf{\Gamma- \Lambda}$ is $\frac{\sigma_i}{\sigma_i^2+\delta^2} - \frac{1}{\sigma_i} = -\frac{\delta^2}{\sigma_i(\sigma_i^2+\delta^2)} \ (1\leq i \leq r)$ or $0\ (i>r)$. Thus, $\|\mathbf{\Gamma - \Lambda}\|_2 = \max \frac{\delta^2}{\sigma_i(\sigma_i^2+\delta^2)} = \frac{\delta^2}{\sigma_r(\sigma_r^2+\delta^2)} \leq \frac{\delta^2}{\sigma_r^3} =\delta^2\|\mathbf{A}^\dagger\|_2^3$. So $\|\mathbf{B}(\delta)-\mathbf{A}^\dagger\|_2 \leq \delta^2\|\mathbf{A}^\dagger\|_2^3 $ .
+
+	\paragraph{4}
+	\subparagraph{a}
+	 Firstly, suppose $\mathbf{z}_j$ is one column of an unitary matrix $\mathbf{Z} \in \mathbb{R}^{n\times n}$, we have:
+	\begin{equation}
+		\|\mathbf{z}_j\|^2 = \sum\limits_{i=1}^{n}z_{ij}^2 = 1 \label{q4.1}
+	\end{equation}
+	\begin{equation}
+		 |z_{ij}|\leq 1\ \forall i \in \{1,2,\dots,n\}\
+	\end{equation}
+	It proves that the absolute value of any entries of an unitary matrix cannot be more than 1 (otherwise, $\mathbf{Z}^T\mathbf{Z} \not= \mathbf{I}$).
+
+	So, $trace(\mathbf{Z}) = \sum\limits_{i=1}^{n}z_{ii} \leq \sum\limits_{i=1}^{n}|z_{ii}| \leq n$. If $\mathbf{Z=I}$, obviously, $trace(\mathbf{Z}) = n$ which is the maximum value. On the other hand, if $\mathbf{Z \not= I}$, it means at least one off-diagonal entry of $\mathbf{Z}$ is nonzero.  Because $\mathbf{Z}$ is unitary, according to Eq.\ref{q4.1}, at least one diagonal entry (in the same column) is strictly smaller than 1. So, $trace(\mathbf{Z}) = \sum\limits_{i=1}^{n}z_{ii} \leq \sum\limits_{i=1}^{n}|z_{ii}| < n$. Therefore, $\mathbf{Z=I}$ is the uniquely solution.
+
+	\subparagraph{b} Firstly, I'll show \begin{equation}
+		\max_{\substack{\mathbf{Z}\in \mathbb{R}^{m\times m}\\ \mathbf{Z} unitray}} trace(\mathbf{Z \Sigma}) = trace(\mathbf{\Sigma})	\label{q4}
+	\end{equation}
+	only when $\mathbf{Z = I}$ for any given $\mathbf{\Sigma} = diag(\sigma_1,\sigma_2,\dots,\sigma_m) \in \mathbb{R}^{m \times m}$, and $\sigma_1 \geq 0, \sigma_2 \geq 0, \dots, \sigma_m \geq 0$. Suppose $\mathbf{Z} = [\mathbf{z}_1\ \mathbf{z}_2\ \dots\ \mathbf{z}_m] = [z_{ij}]$:
+	\begin{align}
+		trace(\mathbf{Z \Sigma}) & = trace([\sigma_1\mathbf{z}_1\ \sigma_2\mathbf{z}_2\ \dots\ \sigma_m\mathbf{z}_m])\\
+		& = \sum\limits_{i=1}^{m}\sigma_iz_{ii}\\
+		& \leq \sum\limits_{i=1}^{m}\sigma_i|z_{ii}|\\
+		& \leq \sum\limits_{i=1}^{m}\sigma_i\\
+		& = trace(\mathbf{\Sigma})
+	\end{align}
+	If $\mathbf{Z \not= I}$, it can be proved $trace(\mathbf{Z \Sigma}) < \mathbf{\Sigma}$ in a similarly way of part a.
+
+	Then, for given $\mathbf{A,B}$, we have:
+	\begin{align}
+		\|\mathbf{A-WB}\|_F & = trace[(\mathbf{A-WB})^T(\mathbf{A-WB})]\\
+		& = trace(\mathbf{A}^T\mathbf{A} - \mathbf{B}^T\mathbf{W}^T\mathbf{A}- \mathbf{A}^T\mathbf{WB}+\mathbf{B}^T\mathbf{B})\\
+		& = trace(\mathbf{A}^T\mathbf{A}+ \mathbf{B}^T\mathbf{B}) - 2trace(\mathbf{A}^T\mathbf{WB})
+	\end{align}
+	Because $trace(\mathbf{A}^T\mathbf{A}+ \mathbf{B}^T\mathbf{B})$ is a constant value, $\min \|\mathbf{A-WB}\|_F$ equals to $\max\ trace(\mathbf{A}^T\mathbf{WB})$. Suppose the SVD of $\mathbf{AB}^T$ is $\mathbf{AB}^T = \mathbf{U \Sigma V}^T$, we have:
+	\begin{align}
+		\max trace(\mathbf{A}^T\mathbf{WB}) & = \max trace(\mathbf{W(AB}^T)^T)\\
+		& = \max trace(\mathbf{WV \Sigma U}^T)\\
+		& = \max trace(\mathbf{WVU}^T\mathbf{\Sigma}) = \max trace(\mathbf{WU}^T\mathbf{V \Sigma})
+	\end{align}
+	$\mathbf{WVU}^T$ and $\mathbf{WU}^T\mathbf{V}$ are both unitary. Therefore, $\mathbf{WVU}^T = \mathbf{I}$ or $ \mathbf{WU}^T\mathbf{V} = \mathbf{I}$ can get the maximum value. As a result, to minimize $\|\mathbf{A-WB}\|_F$, $\mathbf{W}_* = \mathbf{UV}^T$ or $\mathbf{W}_* = \mathbf{V}^T\mathbf{U}$.
+
+
+\end{document}
