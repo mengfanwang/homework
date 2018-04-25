@@ -1,0 +1,185 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage{listings}
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}%matlab
+\usepackage{algorithm} % 伪代码	
+\usepackage{algorithmic}  %伪代码
+\renewcommand{\algorithmicrequire}{\textbf{Input:}} 
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang PID:mengfanw} 
+	\title{Data Analytics Homework 5} 
+\begin{document}
+	\maketitle 
+	\paragraph{1}
+		\subparagraph{1.a} The worst instance needs to be taken into account, that for all initialize centroids, only one choice can get the optimal solution. There are $\binom{100}{10} = 17,310,309,456,440$ choices, and to ensure there is a 50\% chance an optimal k-means solution can be found, half of all choices are needed to be tried. Then, we need to repeat $17,310,309,456,440/2 = 8,655,154,728,220$ times.
+
+		\subparagraph{1.b} Because the number of choices is $\binom{200}{10} = 22,451,004,309,013,280$, which is much bigger than before, it will diminish my chance of finding the optimal solution.
+
+		\subparagraph{1.c} The chance can change in either direction. For example, if the number of clusters increases to 11, the number of choices is $\binom{100}{11} = 141,629,804,643,600$, which increases, and the chance of finding the optimal solution is diminished. If the number of clusters increases to 95, the number of choices is $\binom{100}{95} = 75,287,520$, which decreases, and the chance of finding the optimal solution is increased. When the number of clusters equals to 50 (half of the number of points), the chance of finding the optimal solution is minimum. 
+ 
+		\subparagraph{2.a} The first iteration: data points will be assigned to $\{0.1\},\{0.2,0.4\},\{0.5,0.6,0.8,0.9\}$. The location of centroids are $0.1,0.3,0.7$.\\
+		The second iteration: data points will be assigned to $\{0.1,0.2\},\{0.4,0.5\},\{0.6,0.8,0.9\}$ (according to "first best" rules). The location of centroids are $0.15,0.45,0.77$.\\
+		The third iteration: data points will be assigned to $\{0.1,0.2\},\{0.4,0.5,0.6\},\{0.8,0.9\}$. The location of centroids are $0.15,0.5,0.85$.
+
+		\subparagraph{2.b} 
+		\begin{equation}
+			SSE = \sum\limits_{i=1}^{K} \sum\limits_{x\in C_i} dist^2(m_i,x) = 0.05^2+0.05^2 + 0.1^2+0+0.1^2 +0.05^2+0.05^2 = 0.03
+		\end{equation}
+
+		\subparagraph{2.c}
+		The fist iteration: data points will be assigned to $A=\{0.1,0.2,0.4,0.5\},B=\{0.6,0.8,0.9\}$. The location of centroids are $0.3,0.77$. Then the algorithm stopped because the result converged.\\
+		\begin{align}
+			SSE_A =  \sum\limits_{x\in A} dist^2(m_A,x) = 0.2^2+0.1^2+0.1^2+0.2^2 = 0.1\\
+			SSE_B =  \sum\limits_{x\in B} dist^2(m_B,x) = 0.17^2+0.03^2+0.13^2= 0.0467\\
+		\end{align}
+		Choose the cluster A and split it further into 2 sub-clusters with initial centroids $0.1,0.5$. Data points will be assigned to $\{0.1,0.2\},\{0.4,0.5\}$. The location of centroids are $0.15,0.45$. Then the algorithm stopped because the result converged.\\
+		As a result, the solution is $\{0.1,0.2\},\{0.4,0.5\},\{0.6,0.8,0.9\}$.
+
+		\subparagraph{2.d} When using k-means clustering, it need 3 iterations with 3 clusters. When using bisecting k-means, it need 2 iterations with 2 clusters. So, bisecting k-means is more effective for the given dataset. However, k-means clustering got a better result with less SSE value.
+
+	\paragraph{2} For the single link hierarchical clustering: $p1$ and $p5$ are clustered firstly, because they have the minimum distance 0.1127. Then $p3$ is clustered to $\{p1,p5\}$ because the distance between $p1$ and $p3$ is minimum. Then  $p4$ is clustered to $\{p1,p3,p5\}$ because the distance between $p4$ and $p3$ is minimum. $p2$ is clustered to all other points at last. Fig 1 shows the dendrogram of single link hierarchical clustering.
+	\begin{figure}[H]
+				\centering
+				\subfigure{
+					\begin{minipage}{8cm}
+					\centering 
+					\includegraphics[height=8cm]{2-1.jpg}
+					\end{minipage}
+					}
+				\caption{The dendrogram of single link hierarchical clustering.  }
+\end{figure}
+
+	For the complete link hierarchical clustering: $p1$ and $p5$ are clustered firstly, because they have the minimum distance 0.1127. Then $p3$ and $p4$ are clustered, because the distance between $p3$ and $p4$ is smaller than $max(d(p3,p1),d(p3,p5))$ and $max(d(p4,p1),d(p4,p5))$. Then $\{p1,p5\}$ and $\{p3,p4\}$ are clustered and  $p2$ is clustered to all other points at last. Fig 2 shows the dendrogram of complete link hierarchical clustering.
+	\begin{figure}[H]
+				\centering
+				\subfigure{
+					\begin{minipage}{8cm}
+					\centering 
+					\includegraphics[height=8cm]{2-2.jpg}
+					\end{minipage}
+					}
+				\caption{The dendrogram of complete link hierarchical clustering.  }
+\end{figure}
+
+	\paragraph{3} 
+		\subparagraph{1} Core points are: a to l, q to t, and x. 17 points totally.\\
+		Computation: The number of neighborhoods (including
+		the point itself) within a radius Eps is:
+		a:4 b:6 c:4 d:6 e:9 f:6 g:6 h:9 i:6 j:4 k:6 l:5 m:3 n:3 o:3 p:3 q:5 r:4 s:4 t:5 u:2 v:3 w:3 x:5 y:3 z:3. Only points with the number of neighborhoods$>3$ are core points.
+
+		\subparagraph{2} Border points are: m, p, u, v, w, y, z. 7 points totally.
+		Computation: For points with the number of neighborhoods$\leq 3$: m is the neighborhood of l; p is the neighborhood of q; u is the neighborhood of t; v,w,y,z are the neighborhoods of x. So they are border points.
+
+		\subparagraph{3} Noise points are: n, o.
+
+		\subparagraph{4} 3 clusters. a to m, p to u, and v to z.
+
+
+	\paragraph{4}
+		\subparagraph{1} Because there are no measures (such as distance), and we can't classify the dataset into $k$ clusters based on the decision tree sometimes, while $k$ is a given certain number. For example, if there are 8 examples and the decision tree is a height-3 full binary tree, which means every parent has two children. If we want to classify the data set into 5 clusters, there should have 3 clusters containing 2 samples and 2 clusters containing only 1 sample. However, we can't decide to split which depth-2 node into 2 clusters, and this approach doesn't work.
+
+		\subparagraph{2} I should trust my colleague. Suppose the number of attributes is $k$, the dimension of binary vectors is $n$, and two binary examples $\mathbf{a}$ and $\mathbf{b}$, there are totally $p$ positions where the entries of $\mathbf{a}$ and $\mathbf{b}$ are both 1 in this position (It means the two examples has $p$ same attributes). Obviously, we have $p\leq k\leq 2n$. The distance of $\mathbf{a}$ and $\mathbf{b}$ is:
+		\begin{equation}
+			dist(\mathbf{a},\mathbf{b}) = \sum\limits^n_{i=1}(a_i-b_i)^2 = 2(k-p)
+		\end{equation}
+		And the cos similarity of $\mathbf{a}$ and $\mathbf{b}$ is:
+		\begin{align}
+			cos(\mathbf{a},\mathbf{b}) =  \frac{\sum\limits^n_{i=1}a_ib_i}{\|\mathbf{a}\|\|\mathbf{b}\|} = \frac{p}{k}
+		\end{align}
+		When applying apply the single-link hierarchical clustering, we want to find the minimum distance or the maximum cos similarity. However, the two measures are equal in this case, because what we find is the maximum $p$ in fact.
+
+		\subparagraph{3} When a attribute is "N/A", the corresponding binarized vector is also "N/A". And the results of any operations containing "N/A" are also "N/A". As a result, if some data contains missing values, the measures of them and other data are always "N/A", no matter what kind of measure method is used. Then they will be clustered together or deleted, which influence the final result badly. To handle this problem, the solution is setting all entires of the binarized vector to 0 if the corresponding attribute is "N/A". Then the measures can be calculated again.
+
+		\subparagraph{4} For a given $k$, define $D(k)$ is the distance where $k$ clusters are merged to $k-1$ clusters, then we have $D(k)\leq d(k-1) \leq D(k-1) $, and $D(k+1)\leq d(k) \leq D(k)$. Therefore, $D(k)-D(k)\leq d(k-1)-d(k)\leq D(k+1)-D(k-1)$. So the minimum values for the gap is 0, and the maximum values for the gap is $D(k+1)-D(k-1)$. For this dataset, the Euclidean distances are limited, which can only be integers between 0 to $2k$ ($k$ is the number of attributes). When the number of instances is much larger than the number of attributes, many clusters may be merged together in the same distance. It means $D(m-1) = D(m) = D(m+1) = \dots$ for some $m$. As a result, the solution of maximum gap, $argmax_k D(k+1)-D(k-1)$, may be not unique. If there exists more than one $k$ to achieve the maximum gap, we can't decide to choose which one. As a result, this method may not help me to determine the right number of clusters.
+
+
+	\paragraph{5}
+		\paragraph{1} If the clusters are pure, the confusion matrix is diagonal. 
+		\begin{align}
+			e & = \sum_i \frac{n_{i+}}{N}e_i\\
+			& = \sum_i \frac{n_{i+}}{N} (-\sum_j\frac{n_{ij}}{n_{i+}}\log\frac{n_{ij}}{n_{i+}})\\
+			& = \sum_i \frac{n_{i+}}{N} 0\\
+			& = 0\\
+			p & = \sum_i \frac{n_{i+}}{N}p_i\\
+			& = \sum_i \frac{n_{i+}}{N} \max_j\frac{n_{ij}}{n_{j+}}\\
+			& = \sum_i \frac{n_{i+}}{N} \\
+			& = 1\\
+			NMI & = \frac{2\sum_{i,j}\frac{n_{ij}}{N}\log\frac{n_{ij}N}{n_{i+}n_{+j}}}{-\sum_i\frac{n_{i+}}{N}\log\frac{n_{i+}}{N}-\sum_j\frac{n_{+j}}{N}\log\frac{n_{+j}}{N}}\\
+			& = \frac{2\sum_{i}\frac{n_{ii}}{N}\log\frac{N}{n_{ii}}}{-2\sum_i\frac{n_{ii}}{N}\log\frac{n_{ii}}{N}}\\
+			& = 1
+		\end{align}
+
+		\subparagraph{2} 
+		\begin{align}
+			e_1 & = \sum_i \frac{n_{i+}}{N}e_i\\
+			& = \sum_i \frac{n_{i+}}{N} (-\sum_j\frac{n_{ij}}{n_{i+}}\log\frac{n_{ij}}{n_{i+}})\\
+			& = 0.6*(0.390+0.528)+0.4*(0.5+0.311)\\
+			& = 0.875\\
+			e_2 & =  \sum_i \frac{n_{i+}}{N} (-\sum_j\frac{n_{ij}}{n_{i+}}\log\frac{n_{ij}}{n_{i+}})\\
+			& = 0.5*(0.360+0.521)+0.1*(0.5+0.5)+0.4*(0.5+0.311)\\
+			& = 0.8649
+		\end{align}
+		Solution 2 is better because it has a lower entropy.
+
+		\subparagraph{3}
+		\begin{align}
+			p_1 & = \sum_i \frac{n_{i+}}{N}p_i\\
+			& = \sum_i \frac{n_{i+}}{N} \max_j\frac{n_{ij}}{n_{j+}}\\
+			& = 0.6*0.667+0.4*0.75\\
+			& = 0.7\\
+			p_2 & = \sum_i \frac{n_{i+}}{N} \max_j\frac{n_{ij}}{n_{j+}}\\
+			& = 0.5*0.7 + 0.1* 0.5+ 0.4*0.75\\
+			& = 0.7
+		\end{align}
+		The two solutions are equally because they have the  same purity.
+
+		\subparagraph{4}
+		\begin{align}
+			NMI_1 & = \frac{2\sum_{i,j}\frac{n_{ij}}{N}\log\frac{n_{ij}N}{n_{i+}n_{+j}}}{-\sum_i\frac{n_{i+}}{N}\log\frac{n_{i+}}{N}-\sum_j\frac{n_{+j}}{N}\log\frac{n_{+j}}{N}}\\
+			& = \frac{2*(0.4*0.415-0.2*0.584-0.1*1+0.3*0.585)}{(0.442+0.529)+(0.5+0.5)}\\
+			& = 0.1265\\
+			NMI_2 & = \frac{2\sum_{i,j}\frac{n_{ij}}{N}\log\frac{n_{ij}N}{n_{i+}n_{+j}}}{-\sum_i\frac{n_{i+}}{N}\log\frac{n_{i+}}{N}-\sum_j\frac{n_{+j}}{N}\log\frac{n_{+j}}{N}}\\
+			& = \frac{2*(0.35*0.485-0.15*0.737+0+0-0.1*1+0.3*0.585)}{(0.5+0.332+0.529)+(0.5+0.5)}\\
+			& = 0.1141
+		\end{align}
+		Solution 1 is better because it has a higher NMI.
+
+		\subparagraph{5}
+		NMI is better. When using entropy measure, the classifier trends to have more clusters, which may cause overfitting; Purity measure can't show a classifier is overfitting or not; But NMI will penalize the classifier which has more clusters, and avoid overfitting effectively.
+
+	\paragraph{6}
+		\subparagraph{1} 17 instances were clustered incorrectly.
+
+		\subparagraph{2} 39 instances are in cluster 2. 3 of these instances were incorrectly clustered, which should belong to cluster 0 (Iris-versicolor).
+
+		\subparagraph{3} Iris-setosa has all instances clustered correctly, because there are no square points in this class, which represent incorrectly clustered instances.
+
+
+ 	\paragraph{7}
+ 		\subparagraph{1} The attribute is `legs'. I use the `NumericToNominal' filter in the `unsupervised\slash attribute' folder.
+
+ 		\subparagraph{2} By using confidence as the interestingness measure, the top 4 interesting rules are:
+
+ 		venomous=false, tail=true ==$>$ backbone=true
+
+ 		tail=true ==$>$ backbone=true 
+
+ 		backbone=true, tail=true ==$>$ venomous=false
+
+ 		backbone=true ==$>$ venomous=false  
+
+ 	 	\subparagraph{3} `venomous=false, tail=true ==$>$ backbone=true' is always true. Its confidence is 1.
+ 
+
+
+\end{document}

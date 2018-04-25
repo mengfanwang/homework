@@ -1,0 +1,185 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsfonts,amssymb} %空心字符
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang} 
+	\title{Matrix Theory Homework 5} 
+\begin{document}
+	\maketitle 
+	\paragraph{1} 
+	\subparagraph{a} Because $nullity(\mathbf{B}) = 0$, $\mathbf{B}$ has linearly independent columns, and $m\geq n$. Otherwise if $m<n$, there can't be $n$ independent vectors in $\mathbb{R}^m$. Suppose $\mathbf{A} = [\mathbf{a}_1\ \mathbf{a}_2\ \dots \mathbf{a}_n]$ and $\mathbf{B} = [\mathbf{b}_1\ \mathbf{b}_2\ \dots \mathbf{b}_n]$. The columns of $\left[\begin{array}{c} \mathbf{A} \\ \mathbf{B} \end{array}\right]$ are linearly independent, because if they are not linearly independent, there must exist coefficients so that:
+	\begin{align}
+		a_1\left(\begin{array}{c} \mathbf{a}_1 \\ \mathbf{b}_1 \end{array}\right) + a_2 \left(\begin{array}{c} \mathbf{a}_2 \\ \mathbf{b}_2 \end{array}\right) \dots a_3\left(\begin{array}{c} \mathbf{a}_3 \\ \mathbf{b}_3 \end{array}\right) = \mathbf{0}
+	\end{align}
+	And then $a_1\mathbf{b}_1+ a_2\mathbf{b}_2 \dots a_n\mathbf{b}_n=0$, which represents that the columns of $\mathbf{B}$ are not linearly independent and causes a contradiction. Therefore $rank(\left[\begin{array}{c} \mathbf{A} \\ \mathbf{B} \end{array}\right]) = n$. And $rank(\left[\begin{array}{c} \mathbf{A} \\ \mathbf{B} \end{array}\right]) \leq rank(\mathbf{R})$, so $rank(\mathbf{R})=n$. As a result, $\mathbf{R}$ is invertible. 
+
+
+	We have $\mathbf{A} = \mathbf{Q}_1\mathbf{R}$ and $\mathbf{B} = \mathbf{Q}_2\mathbf{R}$. Now prove $Ran(\mathbf{A}) = Ran(\mathbf{Q}_1) $ firstly. $\forall \mathbf{z} \in Ran(\mathbf{A})$, $\exists \mathbf{x}$ so that $\mathbf{z} = \mathbf{Ax}$. Therefore, $\mathbf{z} = \mathbf{Q}_1\mathbf{Rx}$, and $\mathbf{z}\in Ran(\mathbf{Q}_1)$. As a result, $Ran(\mathbf{A}) \subset Ran(\mathbf{Q}_1)$. 
+
+	We have $rank(\mathbf{A}) \leq min[rank(\mathbf{Q}_1),rank(\mathbf{R})] \leq rank(\mathbf{Q}_1) $. Because $\mathbf{R}$ is invertible, we have $\mathbf{Q}_1 = \mathbf{AR}^{-1}$. Therefore, $rank(\mathbf{Q}_1) \leq rank(\mathbf{A}) $. And the only solution is $rank(\mathbf{A}) = rank(\mathbf{Q}_1) $. Notice that $Ran(\mathbf{A}) $ is a subspace of $Ran(\mathbf{Q}_1)$, but they have the same dimension, so $Ran(\mathbf{A}) =Ran(\mathbf{Q}_1)$.
+
+	$Ran(\mathbf{B}) =Ran(\mathbf{Q}_2)$ can be proved in a similarly way.
+
+	\subparagraph{b} The CS decomposition of $\mathbf{Q}$ is:
+	\begin{equation}
+		\left[\begin{array}{c} \mathbf{Q}_1 \\ \mathbf{Q}_2 \end{array}\right] = \left[\begin{array}{cc} \mathbf{U}_1 & \mathbf{0}\\ \mathbf{0} & \mathbf{U}_2 \end{array}\right]\left[\begin{array}{c} \mathbf{\Gamma} \\ \mathbf{\Sigma} \end{array}\right] \mathbf{V}^T
+	\end{equation}
+	So we have $\mathbf{Q}_1 = \mathbf{U}_1\mathbf{\Gamma V}^T$ and $\mathbf{Q}_2 = \mathbf{U}_2\mathbf{\Sigma V}^T$. Then $\mathbf{A=Q}_1\mathbf{R} = \mathbf{U}_1\mathbf{\Gamma V}^T\mathbf{R}$ and $\mathbf{B}^\dagger =  (\mathbf{U}_2\mathbf{\Sigma V}^T\mathbf{R})^\dagger = \mathbf{R}^{-1} (\mathbf{U}_2\mathbf{\Sigma V}^T)^\dagger$. Suppose $\mathbf{\Sigma} = diag(\sigma_1,\sigma_2,\dots \sigma_n) \in \mathbb{R}^{m\times n}$. Because $rank(\mathbf{\Sigma}) = rank(\mathbf{Q}_2) =rank(\mathbf{B})=n$, all diagonal entries of $\mathbf{\Sigma}$ is nonzero. And the left inverse of $\mathbf{\Sigma}$ is $\mathbf{\Sigma}_{LR} = diag(1/\sigma_1,1/\sigma_2,\dots 1/\sigma_n) \in \mathbb{R}^{n\times m}$. Then we have $(\mathbf{U}_2\mathbf{\Sigma V}^T)^\dagger = \mathbf{V \Sigma}_{LR}\mathbf{U}_2^T$.
+	So, $\mathbf{AB}^\dagger = \mathbf{U}_1\mathbf{\Gamma V}^T\mathbf{RR}^{-1}\mathbf{V \Sigma}_{LR}\mathbf{U}_2^T = \mathbf{U}_1\mathbf{\Gamma \Sigma}_{LR}\mathbf{U}_2^T$. $\mathbf{U}_1$ and $\mathbf{U}_2$ are unitary matrices and $\mathbf{\Gamma \Sigma}_{LR}$ is a diagonal matrix. By reordering the columns of these matrices, we can get the SVD decomposition of $\mathbf{AB}^\dagger$.
+
+	\paragraph{2}
+		\subparagraph{a} 
+		\begin{align}
+			\delta(\mathcal{U,V}) & = \max_{\mathbf{u}\in \mathcal{U}} \min_{\mathbf{v}\in\mathcal{V}} \frac{\|\mathbf{u-v}\|}{\|\mathbf{u}\|}\\
+			& =  \max_{\mathbf{u}\in \mathcal{U}} \frac{1}{\|\mathbf{u}\|} \min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{u-v}\|
+		\end{align}
+		Notice that $\min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{u-v}\|$ for a given $\mathbf{u}$ is the BAP problem, and the solution is $\mathbf{v^*}$ that $\mathbf{u-v^*} \in \mathcal{V}^\perp$.
+
+		$\forall \mathbf{u}\in \mathcal{U}$, we have $\frac{1}{\|\mathbf{u}\|} \min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{u-v}\| \leq 1$. If $\frac{1}{\|\mathbf{u}\|} \min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{u-v}\| > 1$, which represents $\|\mathbf{u-v}^*\| > \|\mathbf{u}\|$. We can always find another $\mathbf{v'=0} \in \mathcal{V}$ that $\|\mathbf{u-v'}\| = \|\mathbf{u}\| < \|\mathbf{u-v}^*\|$. It means $\mathbf{v}^*$ can't minimize $\|\mathbf{u-v}\|$ and causes a contradiction.
+
+		Suppose $dim\ \mathcal{U} = p$, one of its bases are $\mathbf{u}_1,\mathbf{u}_2,\dots \mathbf{u}_p$, and one bases of $\mathcal{U}^\perp$ are $\mathbf{u}_{p+1},\mathbf{u}_{p+2},\dots \mathbf{u}_{n}$. Suppose $dim\ \mathcal{V} = r$, one of its bases are $\mathbf{v}_1,\mathbf{v}_2,\dots \mathbf{v}_r$. Construct a subspace $\mathcal{M}= span\{\mathbf{u}_{p+1},\mathbf{u}_{p+2},\dots \mathbf{u}_{n},\mathbf{v}_1,\mathbf{v}_2,\dots \mathbf{v}_r\}$. Because $dim\ \mathcal{U} = p>dim\ \mathcal{V} = r$, $dim\ \mathcal{M} \leq dim\ \mathcal{U}^\perp+dim\ \mathcal{V} = (n-p)+r < n$. Therefore, we can always find a vector $\tilde{\mathbf{u}}$ which is orthogonal to $\mathcal{M}$. (For example, find a orthonormal bases of $\mathbb{R}^n$ which contains the bases of $\mathcal{M}$, and other bases are orthogonal to $\mathcal{M}$). Notice that $\tilde{\mathbf{u}}\in \mathcal{U\cap V^\perp}$.
+
+		As a result, if $dim\ \mathcal{U} >dim\ \mathcal{V}$, we can find a vector $\tilde{\mathbf{u}}\in \mathcal{U}$ which is orthogonal to $\mathcal{V}$. For this vector, $\frac{1}{\|\mathbf{\tilde{u}}\|}\min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{\tilde{u}-v}\| = \frac{1}{\|\mathbf{\tilde{u}}\|}\|\mathbf{\tilde{u}-0}\|=1$. Because this value is always smaller than or equal to 1, as we discussed before, $ \max_{\mathbf{u}\in \mathcal{U}} \min_{\mathbf{v}\in\mathcal{V}} \frac{\|\mathbf{u-v}\|}{\|\mathbf{u}\|}= 1$ is proved. 
+
+		\subparagraph{b} If $\delta(\mathcal{U,V}) =0 $, it means  $\forall\mathbf{u}\in \mathcal{U}$, the solution of BAP problem $\mathbf{v}^*$ satisfies $\mathbf{u=v}^*$. Therefore, $\forall\mathbf{u}\in \mathcal{U}$ we can find $\mathbf{v}^* = \mathbf{u} \in\mathcal{V}$. So $\mathcal{U\subset V}$.
+
+		If $\mathcal{U\subset V}$, $\forall\mathbf{u}\in \mathcal{U}$ we can find $\mathbf{v}^* = \mathbf{u} \in\mathcal{V}$ which minimize $\frac{\|\mathbf{u-v}\|}{\|\mathbf{u}\|}$. Therefore, $\delta(\mathcal{U,V})=0$.
+
+		\subparagraph{c}Firstly, we have $\frac{\|\mathbf{x}\|}{\|\mathbf{P}_\mathcal{U}\mathbf{x}\|}\geq 1$.  Because $\mathbf{P}_\mathcal{U}$ is the orthogonal projector, we have $\mathbf{P}_\mathcal{U}=\mathbf{P}_\mathcal{U}^*$ and $\mathbf{P}_\mathcal{U}^2 = \mathbf{P}_\mathcal{U}$. Therefore, $\|\mathbf{P}_\mathcal{U}\mathbf{x}\|^2 = <\mathbf{P}_\mathcal{U}\mathbf{x},\mathbf{P}_\mathcal{U}\mathbf{x}> = <\mathbf{x},\mathbf{P}_\mathcal{U}^*\mathbf{P}_\mathcal{U}\mathbf{x}> = <\mathbf{x}, \mathbf{P}_\mathcal{U}^2\mathbf{x}> = <\mathbf{x},\mathbf{P}_\mathcal{U}\mathbf{x}> \leq \|\mathbf{x}\|\|\mathbf{P}_\mathcal{U}\mathbf{x}\|$. So $\frac{\|\mathbf{x}\|}{\|\mathbf{P}_\mathcal{U}\mathbf{x}\|}\geq 1$.
+
+		 For the BAP problem $\min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{u-v}\|$, we have $v^* = \mathbf{P}_\mathcal{V}\mathbf{u}$ solve this problem. So:
+		\begin{align}
+			\delta(\mathcal{U,V}) 
+			& =  \max_{\mathbf{u}\in \mathcal{U}} \frac{1}{\|\mathbf{u}\|} \min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{u-v}\|\\
+			& = \max_{\mathbf{u}\in \mathcal{U}} \frac{\|\mathbf{u}-\mathbf{P}_\mathcal{V}\mathbf{u}\|}{\|\mathbf{u}\|}\label{2.1} \\
+			& = \max_{\substack{\mathbf{u}\in \mathcal{U}\\\mathbf{x}\in \mathbb{R}^n}} \frac{\|(\mathbf{I}-\mathbf{P}_\mathcal{V})\mathbf{u}\|}{\frac{\|\mathbf{x}\|}{\|\mathbf{P}_\mathcal{U}\mathbf{x}\|}\|\mathbf{u}\|} \label{2.2} \\
+			& = \max_{\mathbf{x}\in \mathbb{R}^n} \frac{\|(\mathbf{I}-\mathbf{P}_\mathcal{V})\mathbf{P}_\mathcal{U}\mathbf{x}\|}{\|\mathbf{x}\|} \\
+			& = \|(\mathbf{I}-\mathbf{P}_\mathcal{V})\mathbf{P}_\mathcal{U}\|_2
+		\end{align}
+			
+
+		\subparagraph{d}
+		Suppose $\mathcal{V}'$ is a subspace of $\mathcal{V}$ having the same dimension as $\mathcal{U}$. Then we have:
+		\begin{align}
+			\min_{\mathbf{v}\in\mathcal{V'}}\|\mathbf{u-v}\| &\geq \min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{u-v}\| \\
+			 \max_{\mathbf{u}\in \mathcal{U}} \frac{1}{\|\mathbf{u}\|} \min_{\mathbf{v}\in\mathcal{V'}}\|\mathbf{u-v}\| &\geq  \max_{\mathbf{u}\in \mathcal{U}} \frac{1}{\|\mathbf{u}\|} \min_{\mathbf{v}\in\mathcal{V}}\|\mathbf{u-v}\|\\
+			 \delta(\mathcal{U,V'}) & \geq \delta(\mathcal{U,V})  
+		\end{align}
+		
+		 So,\begin{equation}
+		 	\delta(\mathcal{U,V}) = \min_{\substack{\mathcal{V'}\subset \mathcal{V}\\ dim\ \mathcal{V'} = dim\ \mathcal{U}}} \delta(\mathcal{U,V'}) 
+		 \end{equation}
+		 Suppose the columns of $\mathbf{U}$ is the orthonormal bases of $\mathcal{U}$ and the columns of $\mathbf{V}$ is the orthonormal bases of $\mathcal{V'}$. Then we have $\mathbf{P}_\mathcal{U}= \mathbf{UU}^T$ and $\mathbf{P}_\mathcal{V'} =\mathbf{VV}^T$. Complete $\mathbf{U}$ and $\mathbf{V}$ to the orthonormal bases of $\mathbb{R}^n$, $[\mathbf{U\ \hat{U}}]$ and $[\mathbf{V\ \hat{V}}]$.
+		 \begin{align}
+		 	\delta(\mathcal{U,V'}) & = \|(\mathbf{I}-\mathbf{P}_\mathcal{V'})\mathbf{P}_\mathcal{U}\|_2\\
+		 	& = \|(\mathbf{I-VV}^T)\mathbf{UU^T}\|_2\\
+		 	& = \|\left[\begin{array}{c} \mathbf{V}^T \\ \mathbf{\hat{V}}^T \end{array}\right](\mathbf{I-VV}^T)\mathbf{UU^T}[\mathbf{U} \ \hat{\mathbf{U}}]\|_2\\
+		 	& = \| \left[\begin{array}{cc} \mathbf{V}^T(\mathbf{I-VV}^T)\mathbf{UU^T}\mathbf{U} & \mathbf{V}^T(\mathbf{I-VV}^T)\mathbf{UU^T}\mathbf{\hat{U}} \\\mathbf{\hat{V}}^T(\mathbf{I-VV}^T)\mathbf{UU^T}\mathbf{U} & \mathbf{\hat{V}}^T(\mathbf{I-VV}^T)\mathbf{UU^T}\mathbf{\hat{U}} \end{array}\right]\|_2\\
+		 	& = \|\left[\begin{array}{cc} \mathbf{0} & \mathbf{0} \\ \mathbf{\hat{V}}^T\mathbf{U} & \mathbf{0} \end{array}\right] \|_2\\
+		 	& = \max_{\mathbf{z}_1,\mathbf{z}_2}\frac{\|\left[\begin{array}{cc} \mathbf{0} & \mathbf{0} \\ \mathbf{\hat{V}}^T\mathbf{U} & \mathbf{0} \end{array}\right]\left[\begin{array}{c} \mathbf{z}_1 \\ \mathbf{z}_2 \end{array}\right] \|}{\|\left[\begin{array}{c} \mathbf{z}_1 \\ \mathbf{z}_2 \end{array}\right] \|}\\
+		 	& = \max_{\mathbf{z}_1} \frac{\|\mathbf{\hat{V}}^T\mathbf{Uz}_1\|}{\|\mathbf{z}_1\|}\\
+		 	& = \|\mathbf{\hat{V}}^T\mathbf{U}\|_2
+		 \end{align}
+
+		 On the other hand, suppose an unitary matrix $\mathbf{Q} = \left[\begin{array}{c} \mathbf{V}^T \\ \mathbf{\hat{V}}^T \end{array}\right][\mathbf{U} \ \hat{\mathbf{U}}] = \left[\begin{array}{cc} \mathbf{V}^T\mathbf{U} &\mathbf{V}^T\mathbf{\hat{U}} \\ \mathbf{\hat{V}}^T\mathbf{U} & \mathbf{\hat{V}}^T\mathbf{\hat{U}}  \end{array}\right]$. The CS decomposition of $\mathbf{Q}$ is:
+		 \begin{equation}
+		 	\mathbf{Q} = \left[\begin{array}{cc} \mathbf{V}^T\mathbf{U} &\mathbf{V}^T\mathbf{\hat{U}} \\ \mathbf{\hat{V}}^T\mathbf{U} & \mathbf{\hat{V}}^T\mathbf{\hat{U}}  \end{array}\right] = \left[\begin{array}{cc} \mathbf{M}_1 & \mathbf{0} \\ \mathbf{0} & \mathbf{M}_2 \end{array}\right] \left[\begin{array}{ccc} \mathbf{\Gamma} & \mathbf{\Sigma}&\mathbf{0} \\ \mathbf{\Sigma} & -\mathbf{\Gamma} &\mathbf{0}\\\mathbf{0}&\mathbf{0}&\mathbf{I}\end{array}\right] \left[\begin{array}{cc} \mathbf{N}_1^T & \mathbf{0} \\ \mathbf{0} & \mathbf{N}_2^T \end{array}\right],
+		 \end{equation}
+		 while $\mathbf{M}_1,\mathbf{M_2},\mathbf{N}_1,\mathbf{N}_2$ are unitary matrices and $\mathbf{\Gamma},\mathbf{\Sigma}$ are diagonal matrices. Then we have $\mathbf{\hat{V}}^T\mathbf{U}=\mathbf{M}_2\left[\begin{array}{c} \mathbf{\Sigma} \\ \mathbf{0} \end{array}\right]\mathbf{N}_1^T$. Therefore, $\delta(\mathcal{U,V'}) = \|\mathbf{M}_2\left[\begin{array}{c} \mathbf{\Sigma} \\ \mathbf{0} \end{array}\right]\mathbf{N}_1^T\|_2 = \|\mathbf{\Sigma}\|_2 = \max sin(\theta_{v'})$. $\theta_{v'}$ are the canonical angles between $\mathcal{U}$ and $\mathcal{V'}$. Notice that if the maximum canonical angle of two subspaces is smaller, the two subspaces are regarded nearer. So,
+		 \begin{equation}
+		 	\delta(\mathcal{U,V}) = \min_{\substack{\mathcal{V'}\subset \mathcal{V}\\ dim\ \mathcal{V'} = dim\ \mathcal{U}}} \delta(\mathcal{U,V'}) = \min_{\substack{\mathcal{V'}\subset \mathcal{V}\\ dim\ \mathcal{V'} = dim\ \mathcal{U}}} max(\theta_{v'})
+		 \end{equation}
+		 In other words, if $\mathcal{V}_k$ is the nearest subspace of $\mathcal{V}$ for $\mathcal{U}$, which satisfies $max(\theta_{k}) = \min\limits_{\substack{\mathcal{V'}\subset \mathcal{V}\\ dim\ \mathcal{V'} = dim\ \mathcal{U}}} max(\theta_{v'})$, while $\{\theta_k\}$ denote the canonical angles between $\mathcal{U}$ and $\mathcal{V}_k$. Then, $\delta(\mathcal{U,V}) = max(\theta_{k})$.
+
+
+	\paragraph{3} Choose $\mathbf{v} = \left[\begin{array}{c} 1 \\ 0 \end{array}\right]$ and construct the Krylov sequence: 
+	\begin{align}
+		\mathbf{Av} & =  \left[\begin{array}{cc} 4&-5 \\ 2&-3 \end{array}\right]\left[\begin{array}{c} 1 \\ 0 \end{array}\right] = \left[\begin{array}{c} 4 \\ 2 \end{array}\right]\\
+		\mathbf{A}^2\mathbf{v} & =  \left[\begin{array}{cc} 4&-5 \\ 2&-3 \end{array}\right]^2\left[\begin{array}{c} 1 \\ 0 \end{array}\right] =\left[\begin{array}{c} 6 \\ 2 \end{array}\right]
+	\end{align}
+	Solve $a_0\mathbf{v}+a_1\mathbf{Av}+a_2\mathbf{A}^2\mathbf{v=0} $:
+	\begin{equation}
+		 \left[\begin{array}{ccc} 1&4&6 \\ 0&2&2 \end{array}\right]\left[\begin{array}{c} a_0 \\ a_1\\a_2 \end{array}\right] = \left[\begin{array}{c} 0 \\ 0\\0 \end{array}\right]
+	\end{equation}
+	The solution is $\mathbf{a} = t\left[\begin{array}{c} 2 \\ 1\\-1 \end{array}\right]$. So, $P(z) = -z^2 + z +2$. The root of $P(z) = 0$ is 2 and -1. Take $\lambda = -1$ as the eigenvalue and find the corresponding eigenvector $\mathbf{u}$:
+	\begin{equation}
+	 	(\mathbf{A} - \lambda\mathbf{I})\mathbf{u} = \left[\begin{array}{cc} 5&-5 \\ 3&-3 \end{array}\right]\mathbf{u} = \mathbf{0} 
+	 \end{equation} 
+	 The solution is $\mathbf{u} = \left[\begin{array}{c} 1/\sqrt{2} \\ 1/\sqrt{2} \end{array}\right]$. And we can find a unitary matrix $\mathbf{U} = \left[\begin{array}{cc} 1/\sqrt{2}& -1/\sqrt{2}\\ 1/\sqrt{2} & 1/\sqrt{2} \end{array}\right]$.
+	 Finally, $\mathbf{T} = \mathbf{U}^*\mathbf{AU} = \left[\begin{array}{cc} -1& -7\\ 0 & 2 \end{array}\right]$. $\mathbf{A} = \mathbf{UTU}^*$ is a Schur decomposition of $\mathbf{A}$.
+
+	 \paragraph{4}
+	 \subparagraph{a} Suppose $P_*(z) = \sum_{k=0}^{m}a_kz^k$ is the minimal polynomial of $\mathbf{A}$, then we have:
+	 \begin{align}
+	 	a_0\mathbf{I}+a_1\mathbf{A}+a_2\mathbf{A}^2+\dots a_m\mathbf{A}^m & = 0\\
+	 	\mathbf{A}(a_1\mathbf{I}+a_2\mathbf{A}+a_3\mathbf{A}^2+\dots a_m\mathbf{A}^{m-1}) & = -a_0\mathbf{I}\\
+	 	-\frac{1}{a_0}(a_1\mathbf{I}+a_2\mathbf{A}+a_3\mathbf{A}^2+\dots a_m\mathbf{A}^{m-1}) & = \mathbf{A}^{-1}
+	 \end{align}
+	 So, $\mathbf{A}^{-1} = -\frac{1}{a_0}\sum_{k=1}^{m}a_k\mathbf{A}^{k-1}$.
+
+	 \subparagraph{b.1} Pick $\mathbf{v} = [1\ 0\ 0\ 0]^T$ as the starting vector. The corresponding Krylov sequence is:
+		\begin{align}
+			\mathbf{v} & = [1\ 0\ 0\ 0]^T\\
+			\mathbf{Av} & = [2\ 2\ -3\ 1]^T\\
+			\mathbf{A}^2\mathbf{v} & = [3\ 4\ -6\ 2]^T\\
+			\mathbf{A}^3\mathbf{v} & = [4\ 6\ -9\ 3]^T\\
+			\mathbf{A}^4\mathbf{v} & = [5\ 8\ -12\ 4]^T\\
+		\end{align}
+	$dim\ span\{\mathbf{v},\mathbf{Av},\mathbf{A}^2\mathbf{v},\mathbf{A}^3\mathbf{v},\mathbf{A}^4\mathbf{v}\} = 2$, so we can suppose $P_v(z) = a_0+a_1z+z^2$ is the minimal annihilating polynomial for $\mathbf{v}$, and the coefficients should satisfy:
+	\begin{equation}
+		\left[\begin{array}{ccc} 1&2&3\\ 0&2&4\\ 0&-3&-6 \\0&1&2\\  \end{array}\right] \left[\begin{array}{c} a_0 \\ a_1\\1 \end{array}\right] = \mathbf{0 }
+	\end{equation}
+	The solution is $a_0=1,a_1=-2$ and the minimal annihilating polynomial is $P_v(z) = 1-2z+z^2$ so that $P_v(\mathbf{A})\mathbf{v} = \mathbf{v}-2\mathbf{Av}+\mathbf{A}^2\mathbf{v=0}$.\\[1ex]
+
+	\subparagraph{b.2} This polynomial doesn't annihilate $\mathbf{A}$. For example, if we pick $\mathbf{v'} = [0\ 1\ 0\ 0]^T$, then we have  $P_v(\mathbf{A})\mathbf{v'} = \mathbf{v'}-2\mathbf{Av'}+\mathbf{A}^2\mathbf{v'} = [2\ 0\ -2\ -2]^T$. Therefore, not for all $\mathbf{v}$ we have $P_v(\mathbf{A})\mathbf{v}=\mathbf{0}$, which is not annihilating polynomial for $\mathbf{A}$.
+
+	To find the eigenvalues of $\mathbf{A}$ with their ascent, we need to find the minimal polynomial of $\mathbf{A}$. Suppose $P_*(z)$ is  the minimal polynomial of $\mathbf{A}$, then $P_v(z)$ must be a factor of $P_*(z)$, otherwise $P_*(\mathbf{A})\mathbf{v} \not= \mathbf{0}$. Choose $\mathbf{v'} = [0\ 1\ 0\ 0]^T$ as the start vector and repeat methods of part b.1 to get the minimal annihilating polynomial for $\mathbf{v'}$, $P_{v'}(z) = 1-z-z^2+z^3 = (z-1)^2(z+1)$. $P_{v'}(z)$ is a factor of $P_*(z)$, and $P_{v'}(\mathbf{A}) = \mathbf{I -A-A}^2+\mathbf{A}^3=\mathbf{0}$, which annihilates $\mathbf{A}$. For the factor of $P_{v'}(z)$, $(z-1)^2$ and $(z-1)(z+1)$, we can always find a vector to prove they can't annihilates $\mathbf{A}$ ($\mathbf{v'}$ is enough). As a result, $P_{v'}(z) = P_*(z)$, which is the minimal polynomial of $\mathbf{A}$. So the eigenvalues of $\mathbf{A}$ is 1, with the ascent 2, and -1, with the ascent 1.
+
+	\subparagraph{b.3} 
+	From part a, we know $q(\mathbf{A}) = -\frac{1}{a_0}\sum_{k=1}^{3}a_k\mathbf{A}^{k-1} = -\mathbf{A}^2+\mathbf{A}+\mathbf{I}$. 
+
+
+	\paragraph{5} In my points of view, ``$\mathbf{A}$ has distinct eigenvalues'' means $\mathbf{A}$ has $n$ distinct eigenvalues. If the number of distinct eigenvalues of $\mathbf{A}$ is smaller than $n$, some of them can be regarded as duplicated eigenvalues and are not distinct eigenvalues. 
+
+	Suppose the eigenvalues of $\mathbf{A}$ are $\lambda_1,\lambda_2,\dots \lambda_n$, and  the corresponding eigenvectors are $\mathbf{u}_1,\mathbf{u}_2,\dots\mathbf{u}_n$. Because eigenvalues are distinct,  $\mathbf{u}_1,\mathbf{u}_2,\dots\mathbf{u}_n$ are linearly independent, and form a basis of $\mathbb{C}^n$. For any eigenvalue $\lambda_i$, we have 
+	\begin{align}
+		\mathbf{Au}_i & = \lambda_i\mathbf{u}_i\\
+		\mathbf{BAu}_i & = \mathbf{B}\lambda_i\mathbf{u}_i\\
+		\mathbf{ABu}_i & = \lambda_i\mathbf{Bu}_i
+	\end{align}
+	So $\mathbf{Bu}_i$ is also an eigenvector of $\lambda_i$. Now prove $\mathbf{Bu}_i \in span\{\mathbf{u}_i\}$:
+
+	 $\mathbf{Bu}_i$ can always be represented by a linear combination of $\mathbf{u}_1,\mathbf{u}_2,\dots\mathbf{u}_n$, that is $\mathbf{Bu}_i = a_1\mathbf{u}_1+a_2\mathbf{u}_2+\dots+a_n\mathbf{u}_n$. Suppose $\mathbf{Bu}_i \notin span\{\mathbf{u}_i\}$, which means at least one coefficient except $a_i$ is not zero. Then we have:
+	 \begin{align}
+	 	\mathbf{ABu}_i & = \lambda_i\mathbf{Bu}_i\\
+	 	 \label{5.1} \mathbf{A}(a_1\mathbf{u}_1+a_2\mathbf{u}_2+\dots+a_n\mathbf{u}_n) & = \lambda_i( a_1\mathbf{u}_1+a_2\mathbf{u}_2+\dots+a_n\mathbf{u}_n)
+	 \end{align}
+	 On the other hand, we have: 
+	 \begin{equation}
+	 	\mathbf{A}(a_1\mathbf{u}_1+a_2\mathbf{u}_2+\dots+a_n\mathbf{u}_n) =  \lambda_1a_1\mathbf{u}_1+\lambda_2a_2\mathbf{u}_2+\dots+\lambda_na_n\mathbf{u}_n \label{5.2}
+	 \end{equation}
+	 Eq. \ref{5.1} - Eq.\ref{5.2}, we have:
+	 \begin{equation}
+	 	 (\lambda_i- \lambda_1 )a_1\mathbf{u}_1+(\lambda_i- \lambda_2)a_2\mathbf{u}_2+\dots+(\lambda_i- \lambda_n)a_n\mathbf{u}_n=0 \label{5.3}
+	 \end{equation}
+	 Because $\lambda_1 \not= \lambda_2 \not= \dots \lambda_n$, the coefficients of Eq.\ref{5.3} are not all zero, which represents $\mathbf{u}_1$ to $\mathbf{u}_n$ are not linear independent and causes a contradiction. As a result, $\mathbf{Bu}_i\in span\{\mathbf{u}_i\}$.
+
+	 So, there exists a scalar $\gamma$ that makes $\mathbf{Bu}_i = \gamma\mathbf{u}_i$. Therefore, $\mathbf{u}_i$ is the eigenvector of $\mathbf{B}$ and the corresponding eigenvalue is $\gamma$. In conclusion, $\mathbf{B}$ has the same eigenvectors as $\mathbf{A}$.
+
+	\paragraph{6} Suppose $\lambda$ is a nonzero eigenvalue of $\mathbf{AB}$ and the corresponding eigenvector is $\mathbf{u}$, we have 
+	\begin{align}
+		\mathbf{ABu} & =  \lambda \mathbf{u}\\
+		\mathbf{BA(Bu)} & =  \lambda \mathbf{(Bu)}
+	\end{align} 
+	Because $\lambda\mathbf{u}\not= \mathbf{0}$, $\mathbf{Bu}$ can't be $\mathbf{0}$. Therefore, $\mathbf{Bu}$ is an eigenvector of $\mathbf{BA}$ and the corresponding eigenvalue is $\lambda$. If $\gamma$ is a nonzero eigenvalue of $\mathbf{BA}$, it can be proved that $\gamma$ is an eigenvalue of $\mathbf{AB}$ in the same way. In conclusion, $\mathbf{BA}$ must have the same eigenvalues as $\mathbf{AB}$ except 0.
+
+
+
+
+\end{document}
