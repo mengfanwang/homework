@@ -1,0 +1,118 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=0.5cm}
+	\author{Mengfan Wang} 
+	\title{Stochastic Signal Systems Homework 1} 
+\begin{document}
+		\maketitle 
+	\paragraph{1} Because
+	\begin{align}
+	P[\{a,b,c,d,e\}] & = P[\{a,b,c\}] \cup P[\{c,d,e\}]\\
+	 & = P[\{a,b,c\}] + P[\{c,d,e\}] -P[\{c\}]\\
+	 & = 1.2 - P[\{c\}] = 1
+	\end{align}
+	So we have $P[\{c\}] = 0.2$.
+
+	\paragraph{2}The sample space is $S = \{BG,GB,GG\}$, while B means a boy and G means a girl. First character means the first child and the second character means the second child. When one of them is a girl, the probability that the other is also a girl is $P(\{GG\}|\{BG,GB,GG\}) = \frac{1}{3}$. 
+
+	\paragraph{3}
+	 	\subparagraph{a} $S = \{AM,A^cM,AM^c,A^cM^c\}$.
+	 	\subparagraph{b} $P[\{A\}] = P[\{AM,AM^c\}] = P[\{AM\}] + P[\{AM^c\}] = 0.3 + 0.2 = 0.5$.
+	 	\subparagraph{c} $P[\{M\}] = P[\{AM,A^cM\}] = P[\{AM\}] + P[\{A^cM\}] = 0.3 + 0.2 = 0.5$.
+	 	\subparagraph{d} $P[\{AM,A^cM,AM^c\}] = P[\{AM\}] + P[\{A^cM\}] + P[\{AM^c\}]$ = 0.7.
+
+	\paragraph{4} \begin{align}
+	P(success) & = 1 - P(Afail)*P(Bfail)*P(Cfail)\\
+	& = 1- (1-0.5)*(1-0.3)*(1-0.8)\\
+	& = 0.93
+	\end{align}
+
+	\paragraph{5}
+	The probability that A doesn't occur in n trails is $(1-p)^n$. So,
+	\begin{align}
+	 (1-p)^n  & > 1 - (1-p)^n \\
+	 (1- p)^n & > \frac{1}{2}\\
+	 1-p &> \frac{1}{\sqrt[n]{2}}\\
+	 p&<1-\frac{1}{\sqrt[n]{2}}
+	\end{align}
+
+	\paragraph{6}
+	 \begin{align}
+	 	P[A \cup C|B] & = \frac{P[(A\cup C)\cap B]}{P[B]}\\
+	 	& = \frac{P[(A\cap B)\cup (C\cap B)]}{P[B]}\\
+	 	& = \frac{P[(A\cap B)]+P[C\cap B] - P[A\cap C\cap B]}{P[B]}\\\
+	 	& = \frac{P[(A\cap B)]+P[C\cap B]}{P[B]}\\
+	 	& = P[A|B] + P[C|B]
+	 \end{align}
+	\paragraph{7} If $P[G|T] = P[T|G]$:
+	\begin{align}
+		\frac{P[G\cap T]}{P[T]} & = \frac{P[T\cap G]}{P[G]} \\
+		P[T] & = P[G]
+	\end{align}
+	If $P[G] = P[T]$:
+	\begin{align}
+		\frac{P[T\cap G]}{P[G]} & = \frac{P[G\cap T]}{P[T]} \\
+		P[T|G] & = P[G|T]
+	\end{align}
+
+	\paragraph{8} There are $4*5=20$ outcomes totally. Outcomes that the multiplication is greater than 10 contain\\ $\{3,4\},\{3,6\},\{3,8\},\{5,4\},\{5,6\},\{5,8\},\{7,2\},\{7,4\},\{7,6\},\{7,8\},\{9,2\},\{9,4\},\{9,6\},\{9,8\}$. In these outcomes, those whose addition is less than 15 contain $\{3,4\},\{3,6\},\{3,8\},\{5,4\},\{5,6\},\{5,8\},\{7,2\},\{7,4\},\{7,6\},\{9,2\},\{9,4\}$, 11 outcomes totally. So the probability is $\frac{11}{20}$.
+
+	\paragraph{9} \begin{align} 
+	P(A|black) & = \frac{P(black|A)P(A)}{P(black)}\\
+	& = \frac{\frac{n}{n+1}\frac{1}{2}}{\frac{1}{2}\frac{n}{n+1}+\frac{1}{2}\frac{1}{n+1}}\\
+	& = \frac{n}{n+1}
+	\end{align}
+
+	\paragraph{10} P(road flood) = P(road flood$|$sewer overflow,rain)P(sewer overflow$|$rain)P(rain)
+                       = 0.3*0.5*0.2 = 0.03
+
+    \paragraph{11} $P(A) = 1/3$, $P(B) = 1/2$, and $P(C) = 2/5$. Because $P(A\cap C) = 1/15 \not= P(A)P(C)$, the three events are not independent.
+
+    \paragraph{12} 
+     \subparagraph{a} P(toss1 = head$|$coin = 1) = 0.5; P(toss2 = head$|$coin = 1) = 0.5\\
+    	P(toss1 = tail$|$coin = 1) = 0.5; P(toss2 = tail$|$coin = 1) = 0.5\\
+     P(toss1 = head, toss2 = head$|$coin = 1) = 0.25 = P(toss1 = head$|$coin = 1) * P(toss2 = head$|$coin = 1)\\
+     P(toss1 = head, toss2 = tail$|$coin = 1) = 0.25 = P(toss1 = head$|$coin = 1) * P(toss2 = tail$|$coin = 1)\\
+     P(toss1 = tail, toss2 = head$|$coin = 1) = 0.25 = P(toss1 = tail$|$coin = 1) * P(toss2 = head$|$coin = 1)\\
+     P(toss1 = tail, toss2 = tail$|$coin = 1) = 0.25 = P(toss1 = tail$|$coin = 1) * P(toss2 = tail$|$coin = 1)\\
+     P(toss1 = head$|$coin = 2) = 0.8; P(toss2 = head$|$coin = 1) = 0.8\\
+     P(toss1 = tail$|$coin = 1) = 0.2; P(toss2 = tail$|$coin = 1) = 0.2\\
+     P(toss1 = head, toss2 = head$|$coin = 2) = 0.64 = P(toss1 = head$|$coin = 2) * P(toss2 = head$|$coin = 2)\\
+     P(toss1 = head, toss2 = tail$|$coin = 1) = 0.16 = P(toss1 = head$|$coin = 2) * P(toss2 = tail$|$coin = 2)\\
+     P(toss1 = tail, toss2 = head$|$coin = 1) = 0.16 = P(toss1 = tail$|$coin = 2) * P(toss2 = head$|$coin = 2)\\
+     P(toss1 = tail, toss2 = tail$|$coin = 1) = 0.04 = P(toss1 = tail$|$coin = 2) * P(toss2 = tail$|$coin = 2)\\
+     As a result, the two tosses are conditionally independent.
+
+     \subparagraph{b} P(toss1 = head) = P(toss1 = head$|$coin = 1)P(coin = 1) + P(toss1 = head$|$coin = 2)P(coin = 2) = 0.65\\
+	P(toss2 = head) = P(toss2 = head$|$coin = 1)P(coin = 1) + P(toss2 = head$|$coin = 2)P(coin = 2) = 0.65\\
+	P(toss1 = head, toss2 = head) = P(toss1 = head, toss2 = head$|$coin = 1)P(coin = 1) + P(toss1 = head, toss2 = head$|$coin = 2)P(coin = 2)= 0.445 $\not=$ P(toss1 = head)P(toss2 = head)\\
+	As a result, the two tosses are not independent.
+
+	\paragraph{13}
+	\subparagraph{a}
+	 \begin{align}
+	P(Input0|Output1) = \frac{P(Output1|Input0)P(Input0)}{P(Output1)} = \epsilon \\
+	P(Input1|Output1) = \frac{P(Output1|Input1)P(Input1)}{P(Output1)} = 1-\epsilon \\
+	P(Input2|Output1) = \frac{P(Output1|Input2)P(Input2)}{P(Output1)} = 0
+	\end{align}
+	So, when $\epsilon>0.5$, 0 is the more probable input symbol; when $\epsilon<0.5$, 1 is the more probable input symbol; when $\epsilon=0.5$, 0 and 1 have the same possibility.
+	\subparagraph{b}
+	The possibility of each symbol, no matter input or output, is 1/3. 
+	If the inputs and the outputs are independent, we should have:
+	\begin{align}
+	P(Input0,Output0) = \frac{1- \epsilon}{3} = P(Input0)P(Output0) = 1/9\\
+	P(Input0,Output1) = \frac{ \epsilon}{3} = P(Input0)P(Output1) = 1/9
+	\end{align}
+	So, $\epsilon$ have to be 1/3 and 2/3 at the same time, which is contradiction. As a result, there is no choice of $\epsilon$ which can make the inputs and outputs are independent. 
+
+     
+     
+
+
+\end{document}
