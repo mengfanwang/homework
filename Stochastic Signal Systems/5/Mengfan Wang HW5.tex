@@ -1,0 +1,214 @@
+\documentclass[22pt]{article} 
+\usepackage{geometry} 
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsfonts}
+\geometry{left=2.0cm,right=2.0cm,top=0.5cm,bottom=2cm}
+	\author{Mengfan Wang} 
+	\title{Stochastic Signal Systems Homework 5} 
+\begin{document}
+		\maketitle 
+	\paragraph{1}
+		$z \in (0,\infty)$. When $0<z \leq 1$:
+		\begin{align}
+		F_Z(z) & = \int_{0}^{a}\int_{0}^{zy}\frac{1}{a^2}dxdy\\
+		 & = \int_{0}^{a}\frac{zy}{a^2}dxdy\\
+		 & = \frac{z}{2}
+		\end{align}
+		When $z>1$:
+		\begin{align}
+			F_Z(z) & = \int_{0}^{z/a}\int_{0}^{zy}\frac{1}{a^2}dxdy + \int_{a/z}^{a}\int_{0}^{a}\frac{1}{a^2}dxdy\\
+			& = 1-\frac{1}{2z}
+		\end{align}
+		So, \begin{align}
+    f_Z(z) = \frac{d}{dz}F_Z(z) =
+				\begin{cases}
+				0 & z \leq 0\\
+				\frac{1}{2} & 0 < z \leq 1\\
+				\frac{1}{2z^2} &  z > 1
+				\end{cases}
+	\end{align}
+
+	\paragraph{2}
+		\subparagraph{a}
+		Because $X$ and $Y$ are independent, we have $f_Z(z|y) = f_X(x|y)|\frac{\partial x}{\partial z}| = f_X(z+y)$.
+		\begin{align}
+		f_Z(z) & = \int_{-\infty}^{\infty}f_Z(z|y)f_Y(y)dy\\
+		& = \int_{-\infty}^{\infty} e^{-(z+2y)}U(z+y)U(y) dy\\
+		\end{align}
+		When $z \geq 0$:
+		\begin{align}
+		f_Z(z)& = \int_{0}^{\infty} e^{-(z+2y)} dy\\
+		 & = \frac{1}{2}e^{-z}
+		\end{align}
+		When $z<0$:
+		\begin{align}
+		f_Z(z)& = \int_{-z}^{\infty} e^{-(z+2y)} dy\\
+		 & = \frac{1}{2}e^{z}
+		\end{align}
+		So, \begin{align}
+    f_Z(z) =  
+				\begin{cases}
+				\frac{1}{2}e^{z} & z < 0 \\
+				\frac{1}{2}e^{-z} &  z \geq 0
+				\end{cases}
+	\end{align}
+
+		\subparagraph{b}
+		$f_Z(z|y) = f_X(x|y)|\frac{\partial x}{\partial z}| = f_X(z/y)/y$.
+		\begin{align}
+		f_Z(z) & = \int_{-\infty}^{\infty}f_Z(z|y)f_Y(y)dy\\
+		& = \int_{-\infty}^{\infty}\frac{1}{y}e^{-(z/y+y)}U(z/y)U(y) dy\\
+		\end{align}
+		When $z <0$, $U(z/y) = 0$ for $ y > 0$.
+		When $z \geq 0$:
+		\begin{align}
+		f_Z(z)& = \int_{0}^{\infty} \frac{1}{y}e^{-(z/y+y)} dy\\
+		 & = 2K_0(2\sqrt{z}),
+		\end{align}
+		while $K_0$ is modified Bessel functions of the second kind. This step is calculated by MATLAB.
+		So, \begin{align}
+	    f_Z(z) =  
+					\begin{cases}
+					0 & z < 0 \\
+					2K_0(2\sqrt{z}) &  z \geq 0
+					\end{cases}
+		\end{align}
+
+		\paragraph{c}
+		\begin{align}
+		F_Z(z) & = P[X\leq z/ Y\leq z]\\
+		& = \int_{0}^{z} \int_{0}^{\infty} e^{-(x+y)} dxdy + \int_{0}^{\infty} \int_{0}^{z} e^{-(x+y)} dxdy - \int_{0}^{z} \int_{0}^{z} e^{-(x+y)} dxdy\\
+		& = 1-e^{-z} + 1 -e^{-z}-( 1- 2e^{-z} + e^{-2z})\\
+		& = 1-e^{-2z}
+		\end{align}
+		So, \begin{align}
+		f_Z(z) = \frac{d}{dz}F_Z(z) =
+				\begin{cases}
+				0 & z < 0\\
+				2e^{-2z} &  z \geq 0
+				\end{cases}
+	\end{align}
+
+	\paragraph{3}
+	By calculating the shadow area under $X+Y = z$, we have:
+	\begin{align}
+	F_Z(z)  =
+				\begin{cases}
+				O & z < -1\\
+				\frac{1}{2}- \frac{1}{2}z^2 &  -1 \leq z  < 0\\
+				\frac{1}{2} + \frac{1}{2}z^2 & 0\leq z < 1\\
+				1 &z>1
+				\end{cases}
+	\end{align}
+	So, \begin{align}
+			f_Z(z) = \frac{d}{dz}F_Z(z) =
+					\begin{cases}
+					-z & -1\leq z <0\\
+					z  &  0 \leq z \leq 1\\
+					0 & otherwise
+					\end{cases}
+		\end{align}
+
+	\paragraph{4}
+		\subparagraph{a}
+		$f_Z(z|y) = f_X(x|y)|\frac{\partial x}{\partial z}| = |\frac{y}{(1-z)^2}|f_X(\frac{yz}{1-z} )$.
+		\begin{align}
+		f_Z(z) & = \int_{-\infty}^{\infty}f_Z(z|y)f_Y(y)dy\\
+		& = \int_{-\infty}^{\infty}\frac{|y|}{(1-z)^2}f_X(\frac{yz}{1-z} )f_Y(y)dy\\
+		& = \int_{-\infty}^{\infty}\frac{|y|}{(1-z)^2}f_{X,Y}(\frac{yz}{1-z},y)dy
+		\end{align}
+
+		\subparagraph{b}
+		\begin{align}
+		f_Z(z) & = \int_{-\infty}^{\infty}\frac{|y|}{(1-z)^2}f_{X,Y}(\frac{yz}{1-z},y)dy\\
+		& = \int_{0}^{\infty}\frac{y}{(1-z)^2}e^{-\frac{y}{1-z}}U(\frac{yz}{1-z}) dy
+		\end{align}
+		Because $z \in(0,1)$, $U(\frac{yz}{1-z}) = 1$:
+		\begin{align}
+		f_Z(z) & =\int_{0}^{\infty}\frac{y}{(1-z)^2}e^{-\frac{y}{1-z}}dy\\
+		& =  -\frac{y}{1-z}e^{\frac{-y}{1-z}}|^\infty_0+\int_{0}^{\infty}\frac{1}{1-z}e^{\frac{-y}{1-z}}dy\\
+		& = 1
+		\end{align}
+
+	\paragraph{5}
+		\begin{align}
+		F_P(p) & = \int_{0}^{\sqrt{p}}\int_{0}^{1} 12ri(1-i) drdi + \int_{\sqrt{p}}^{1}\int_{0}^{p/i^2} 12ri(1-i)drdi\\
+		& = \int_{0}^{\sqrt{p}} 6i(1-i) di + \int_{\sqrt{p}}^{1} 6p^2i^{-3} -6p^2i^{-2} di\\
+		& = 3p^2+6p-8p^{\frac{3}{2}}
+		\end{align}
+		So, \begin{align}
+			f_P(p) = \frac{d}{dp}F_P(p) =
+					\begin{cases}
+					6p+6-12p^{\frac{1}{2}} & 0\leq p \leq 1\\
+					0 & otherwise
+					\end{cases}
+		\end{align}
+	\paragraph{6}
+		\subparagraph{a}
+		\begin{align}
+		F_Z(z) & = \int_{0}^{z}\int_{0}^{z}\lambda_1 \lambda_2e^{-(\lambda_1x+\lambda_2y)}dxdy\\
+		& = \int_{0}^{z}-\lambda_2e^{-(\lambda_1z+\lambda_2y)} + \lambda_2e^{-\lambda_2y}dy\\
+		& = e^{-(\lambda_1+\lambda_2)z}-e^{-\lambda_1z}-e^{-\lambda_2z} + 1
+		\end{align}
+		So,
+		\begin{align}
+		f_Z(z) & =  \frac{d}{dz}F_Z(z) = \lambda_1e^{-\lambda_1z} + \lambda_2e^{-\lambda_2z} - (\lambda_1+\lambda_2)e^{-(\lambda_1+\lambda_2)z}
+		\end{align}
+		The three terms are all exponentially distribution, so:
+		\begin{align}
+		E[Z] = \int_{0}^{\infty}zf_Z(z) dz = \frac{1}{\lambda_1} +  \frac{1}{\lambda_2} -  \frac{1}{\lambda_1+\lambda_2}
+		\end{align}
+
+		\subparagraph{b}
+		\begin{align}
+		F_W(w) & = P[X\leq w/ Y\leq w]\\
+		& = \int_{0}^{w} \int_{0}^{\infty} \lambda_1 \lambda_2e^{-(\lambda_1 x+ \lambda_2y)} dxdy + \int_{0}^{\infty} \lambda_1 \lambda_2e^{-(\lambda_1 x+ \lambda_2y)} dxdy - \int_{0}^{z} \int_{0}^{z} \lambda_1 \lambda_2e^{-(\lambda_1 x+ \lambda_2y)} dxdy\\
+		& = 1-e^{-\lambda_1 z} + 1 -e^{-\lambda_2 z}-( e^{-(\lambda_1+\lambda_2)z}-e^{-\lambda_1z}-e^{-\lambda_2z} + 1)\\
+		& = 1-e^{-(\lambda_1+\lambda_2)z}
+		\end{align}
+		So, \begin{align}
+		f_Z(z) = \frac{d}{dz}F_Z(z) =
+				\begin{cases}
+				0 & z < 0\\
+				(\lambda_1+\lambda_2)e^{-(\lambda_1+\lambda_2)z} &  z \geq 0
+				\end{cases}
+	\end{align}
+
+	\paragraph{7}
+	\subparagraph{a}
+	Suppose $X$ is the distance between the location of the ambulance and a terminal, $Y$ is the distance between the location of the accident and the same terminal. $Z$ is the distance between the ambulance and the accident. The we have:
+	\begin{align}
+	F_Z(z) & = P[|X-Y|<z] = \frac{L-(L-z)^2}{L^2} = \frac{2zL-z^2}{L^2}
+	\end{align}
+	So,
+	\begin{align}
+	f_Z(z) = \frac{d}{dz}F_Z(z)=
+	\begin{cases}
+				\frac{2L-2z}{L^2} & 0 \leq z \leq L\\
+				0 & otherwise
+				\end{cases} 
+	\end{align}
+
+	\subparagraph{b}
+	\begin{align}
+	E[Z] & = \int_{0}^{L} zf_Z(z) dz\\
+	& = \int_{0}^{L}\frac{2L-2z}{L^2} dz\\
+	& = \frac{1}{3}L
+	\end{align}
+	The average time is $E[Z]/v = \frac{L}{3v}$.
+
+	\paragraph{8}
+	\begin{align}
+	P[X\leq zY] & = \int_{0}^{\infty} f_Y(y)\int_{0}^{zy}f_X(x)dxdy\\
+	& = \int_{0}^{\infty} \frac{y}{\sigma_Y^2}e^{-\frac{y^2}{2 \sigma^2_Y}}(1-e^{-\frac{z^2y^2}{2 \sigma^2_X}})dy\\
+	& = \frac{4 \sigma^2_X \sigma^2_Y}{2 \sigma^2_Y(2z^2 \sigma^2_Y+2 \sigma^2_X)}e^{-\frac{z^2}{2 \sigma^2_X}+ \frac{1}{2 \sigma^2_Y}} - e^{\frac{-y^2}{2 \sigma_Y^2}}|^\infty_0\\
+	& = 1-\frac{\sigma^2_x}{z^2 \sigma^2_Y + \sigma_X^2}
+	\end{align}
+
+
+\end{document}
